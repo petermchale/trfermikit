@@ -59,7 +59,7 @@ trfermikit \
   --min-repeat-length ${min_repeat_length} \
   --functional-regions ${functional_regions} 
 
-# evaluate-trfermikit \
+# bash evaluate-calls/evaluate.sh \
 #   --trfermikit-output ${tr_fermikit_output} \
 #   --number-threads ${number_threads} \
 #   --reference ${reference} \

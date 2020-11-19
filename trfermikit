@@ -46,7 +46,7 @@ export PYTHONPATH="$PWD/utilities"
 
 mkdir --parents ${tr_fermikit_output} 
 
-bash filter-repeats.sh \
+bash filter-repeats/filter-repeats.sh \
   --tr_fermikit_output ${tr_fermikit_output} \
   --repeats ${repeats} \
   --min-repeat-length ${min_repeat_length} \
