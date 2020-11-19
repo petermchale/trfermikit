@@ -36,6 +36,12 @@ min_coverage=0
 max_coverage=200
 max_region_length=100000
 
+if [[ "${functional_regions}" == "none" ]]; then
+  overlapped_functional_regions=false
+else
+  overlapped_functional_regions=true
+fi
+
 jq \
   --null-input \
   --arg slop ${slop} \
@@ -44,13 +50,15 @@ jq \
   --arg min_repeat_length ${min_repeat_length} \
   --arg max_region_length ${max_region_length} \
   --arg functional_regions ${functional_regions} \
+  --arg overlapped_functional_regions ${overlapped_functional_regions} \
   '{ 
-    "slop around regions": $slop,
+    "slop": $slop,
     "minimum coverage": $min_coverage,
     "maximum coverage": $max_coverage,
-    min_repeat_length: $min_repeat_length,
-    max_region_length: $max_region_length,
-    functional_regions: $functional_regions
+    "minimum repeat length": $min_repeat_length,
+    "maximum region length": $max_region_length,
+    "overlapped functional regions": $overlapped_functional_regions,
+    "functional regions": $functional_regions
   }' \
   > ${tr_fermikit_output}/regions.json
 
