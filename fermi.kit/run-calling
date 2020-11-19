@@ -1,0 +1,126 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use Getopt::Std;
+
+my %opts = (t=>4);
+getopts("t:b:o:m", \%opts);
+
+die('Usage: run-calling [options] <indexed-ref> <unitigs.mag.gz>
+Options:
+  -o STR    prefix of output files [inferred from input]
+  -b STR    prefix for BWA index [same as <indexed-ref>]
+  -t INT    number of threads [4]
+  -m        use minimap2
+') if @ARGV < 2;
+
+# check path
+my $exepath = $0 =~/^\S+\/[^\/\s]+/? $0 : &which($0);
+my $root = $0 =~/^(\S+)\/[^\/\s]+/? $1 : undef;
+$root = $exepath =~/^(\S+)\/[^\/\s]+/? $1 : undef if !defined($root);
+die "ERROR: failed to locate the 'fermi.kit' directory\n" if !defined($root);
+
+# check reference sequence
+my $ref;
+if (-f $ARGV[0]) {
+	$ref = $ARGV[0];
+} elsif (-f "$ARGV[0].gz") {
+	$ref = "$ARGV[0].gz";
+}
+die("ERROR: can't find the reference sequences\n") unless defined($ref);
+
+# check BWA index
+my $idx = defined($opts{b})? $opts{b} : $ARGV[0];
+unless (defined $opts{m}) {
+	die("ERROR: failed to locate the BWA index. Please run '$root/bwa index -p $idx ref.fa'.\n")
+	  unless (-f "$idx.bwt" && -f "$idx.pac" && -f "$idx.sa" && -f "$idx.ann" && -f "$idx.amb");
+}
+
+# infer prefix
+my $prefix;
+if (defined $opts{o}) {
+	$prefix = $opts{o};
+} elsif ($ARGV[1] =~ /\.mag(\.gz?)$/) {
+	$prefix = $ARGV[1];
+	$prefix =~ s/\.mag(\.gz?)$//;
+}
+die("ERROR: failed to identify the prefix for output. Please specify -o.\n") unless defined($prefix);
+
+# construct command lines
+my $cmd = '';
+if (defined $opts{m}) {
+        # Peter McHale Jan 31 2020
+	# $cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && $root/minimap2 -ax asm10 -k23 -w11 -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $idx $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+        # -A INT   matching score [2]
+        # -B INT   mismatch penalty [4]
+        # -O INT[,INT] gap open penalty [4,24]
+        # -E INT[,INT] gap extension penalty; a k-long gap costs min{O1+k*E1,O2+k*E2} [2,1]
+        # require: E1>E2 and O1+E1<O2+E2
+        # --lj-min-ratio FLOAT Fraction of query sequence length required to bridge a long gap [0.5]. A smaller value helps to recover longer gaps, at the cost of more false gaps.
+        # asm10   Long assembly to reference mapping (-k19 -w19 -A1 -B9 -O16,41 -E2,1 -s200 -z200 -N50 --min-occ-floor=100).  
+        #         ~1% sequence divergence.
+        #         See "2.1.4 Estimating per-base sequence divergence" at https://academic.oup.com/bioinformatics/article/34/18/3094/4994778#121258101
+        # --seed INT Integer seed for randomizing equally best hits. Minimap2 hashes INT and read name when choosing between equally best hits. [11]
+        print STDERR "using minimap2\n";
+        # https://stackoverflow.com/a/22896/6674256 
+        my $mmi = $idx =~ s/\..*$/.mmi/r;
+        print STDERR "idx = $idx\n";
+        print STDERR "mmi = $mmi\n";
+        print STDERR "argv1 = $ARGV[1]\n"; 
+	$cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && /usr/bin/time --verbose minimap2 -ax asm10 -k23 -w11 -A10 -B12 -O6,26 -E1,0 -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+	# $cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && minimap2 -ax asm10 -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+} else {
+        # Peter McHale Jan 10 2020
+	# $cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && $root/bwa mem -t$opts{t} -x intractg $idx $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+        print STDERR "using bwa mem\n";
+	$cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && /usr/bin/time --verbose $root/bwa mem -L 50,50 -O 0,50 -w 500 -E 0 -B 50 -t$opts{t} $idx $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+}
+$cmd .= "[ ! -f $prefix.srt.bam ] && /usr/bin/time --verbose $root/htsbox samsort -S $prefix.unsrt.sam.gz > $prefix.srt.bam;\n";
+
+# Peter McHale 7 Feb 2020: "htsbox pileup -d" (which is part of the "-u" option) replaces depths of alleles (FORMAT.AD) with base quality scores 
+# What this amounts to is that support for REF allele is now something like -10*log10(probability of base errors in REF allele),
+# while support for ALT allele is now -10*log10(probability that observed alignments supporting ALT allele could have arisen in the absence of the hypothesized event)  
+# -Q INT     minimum base quality [0]
+# -q INT     minimum mapping quality [0]
+# -V FLOAT   ignore queries with per-base divergence >FLOAT [1]
+#            See "2.1.4 Estimating per-base sequence divergence" at https://academic.oup.com/bioinformatics/article/34/18/3094/4994778#121258101
+# -d         base quality as depth
+# -s INT     drop alleles with depth<INT [1]
+# -S INT     minimum supplementary alignment length [0]
+# -u         unitig calling mode (-d -V.01 -S300 -q20 -Q3 -s5)
+$cmd .= "/usr/bin/time --verbose $root/htsbox pileup -c -u -V1 -q1 -f $ref $prefix.srt.bam | gzip -1 > $prefix.raw.vcf.gz;\n";
+
+# deovlp chooses the best VCF record among overlapping records
+# anno adds generic depth-related INFO fields 
+$cmd .= "(/usr/bin/time --verbose $root/k8 $root/hapdip.js deovlp $prefix.raw.vcf.gz | /usr/bin/time --verbose $root/k8 $root/hapdip.js anno | gzip -1 > $prefix.tmp.vcf.gz) 2> $prefix.flt.vcf.log;\n";
+
+# Usage:   k8 hapdip.js filter [options] <anno.vcf>
+# Options: -a INT     min _AB at SNPs [30]
+#          -b INT     min _AB at INDELs [same as -a]
+#          -q FLOAT   min QUAL [30]
+#          -f FLOAT   max _FS [30]
+#          -d INT     min _DP [3]
+#          -F FLOAT   set meanDP to FLOAT [inferred]
+#          -c FLOAT   set max _DP to 'meanDP + FLOAT * sqrt(meanDP)' [4]
+#          -s INT     min _DS [1]
+#          -H         suppress the VCF header
+#          -D         drop filtered variants
+#          -A         only output lines matching /^(chr)?[0-9]+/
+# $cmd .= "($root/k8 $root/hapdip.js filter -q3 -a25 $prefix.tmp.vcf.gz | gzip -1 > $prefix.flt.vcf.gz) 2>> $prefix.flt.vcf.log; rm -f $prefix.tmp.vcf.gz;\n";
+$cmd .= "(/usr/bin/time --verbose $root/k8 $root/hapdip.js filter -q3 -a25 $prefix.tmp.vcf.gz | gzip -1 > $prefix.flt.vcf.gz) 2>> $prefix.flt.vcf.log;\n";
+
+$cmd .= "/usr/bin/time --verbose $root/htsbox abreak -cuf $ref $prefix.unsrt.sam.gz | gzip -1 > $prefix.sv.vcf.gz;\n";
+print $cmd;
+
+sub which
+{
+	my $file = shift;
+	my $path = (@_)? shift : $ENV{PATH};
+	return if (!defined($path));
+	foreach my $x (split(":", $path)) {
+		$x =~ s/\/$//;
+		return "$x/$file" if (-x "$x/$file");
+	}
+	return;
+}

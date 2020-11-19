@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+# https://devhints.io/bash#miscellaneous
+# put option-fetching before "set -o nounset" so that we can detect flags without arguments
+while [[ "$1" =~ ^- ]]; do 
+  case $1 in
+    --tr-fermikit-output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
+    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
+    --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
+    --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
+    --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
+    --number-threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
+    --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
+    --prefix ) shift; [[ ! $1 =~ ^- ]] && prefix=$1;;
+    --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
+    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+  esac 
+  shift
+done
+
+min_repeat_length=${min_repeat_length:-"0"}  
+functional_regions=${functional_regions:-"none"}
+
+set -o errexit
+set -o pipefail
+set -o nounset
+set -o noclobber
+
+set -o xtrace
+# Must use single quote to prevent variable expansion.
+# For example, if double quotes were used, ${LINENO} would take on the value of the current line,
+# instead of its value when PS4 is used later in the script
+# https://stackoverflow.com/a/6697845/6674256
+# ${FOO:+val}    val if $FOO is set
+# ${FOO[0]}   element #0 of the FOO array
+# https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+if [[ ${svtype} != "DEL" ]]; then
+  echo "Only discovery of SVs of type DEL are currently supported"
+  exit 1
+fi
+
+# https://stackoverflow.com/a/43476575/6674256
+export PYTHONPATH="$PWD/utilities"
+
+mkdir --parents ${tr_fermikit_output} 
+
+bash filter-repeats.sh \
+  --tr_fermikit_output ${tr_fermikit_output} \
+  --repeats ${repeats} \
+  --min-repeat-length ${min_repeat_length} \
+  --alignments ${alignments} \
+  --number-threads ${number_threads} \
+  --functional-regions ${functional_regions} \
+  --reference ${reference} 
+
+# bash make-calls.sh --alignments xxx --reference xxx 
+
+# bash filter-calls.sh \
+#   --tr_fermikit_output ${tr_fermikit_output} \
+#   --svtype ${svtype} \
+#   --prefix ${prefix} \
+#   --reference ${reference} \
+#   --number-threads ${number_threads}
+
