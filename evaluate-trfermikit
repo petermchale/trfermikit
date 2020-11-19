@@ -4,7 +4,7 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --tr-fermikit-output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
+    --trfermikit-output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
     --number_threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --population ) shift; [[ ! $1 =~ ^- ]] && population=$1;;

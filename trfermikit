@@ -4,7 +4,7 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --tr-fermikit-output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
+    --trfermikit-output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;

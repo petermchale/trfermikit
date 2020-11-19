@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 population="CHS"
 sample="HG00514"
 
@@ -11,13 +13,6 @@ alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_cr
 # *.bed.gz, *.bed.gz.tbi :
 functional_regions="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99" 
 
-# to facilitate a small-scale test of tool correctness and tool usage: 
-repeats_small="data/repeats.small"
-set +o pipefail
-zgrep --invert-match ^"#" ${repeats}.bed.gz | head -100 | bash utilities/sort_compress_index_regions.sh ${repeats_small}
-repeats=${repeats_small}
-set -o pipefail
-
 min_repeat_length="100"
 
 number_threads="16"
@@ -26,10 +21,17 @@ prefix="trfermikit"
 
 tr_fermikit_output="data/${sample}.${svtype}"
 
+# to facilitate a small-scale test of tool correctness and tool usage: 
+repeats_small="${tr_fermikit_output}/repeats.small"
+set +o pipefail
+zgrep --invert-match ^"#" ${repeats}.bed.gz | head -100 | bash utilities/sort_compress_index_regions.sh ${repeats_small}
+repeats=${repeats_small}
+set -o pipefail
+
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
-tr-fermikit \
-  --tr-fermikit-output ${tr_fermikit_output} \
+trfermikit \
+  --trfermikit-output ${tr_fermikit_output} \
   --repeats ${repeats} \
   --reference ${reference} \
   --number-threads ${number_threads} \
@@ -40,7 +42,7 @@ tr-fermikit \
 # --functional-regions ${functional_regions} 
 
 # evaluate-trfermikit \
-#   --tr-fermikit-output ${tr_fermikit_output} \
+#   --trfermikit-output ${tr_fermikit_output} \
 #   --number-threads ${number_threads} \
 #   --reference ${reference} \
 #   --population ${population} \
