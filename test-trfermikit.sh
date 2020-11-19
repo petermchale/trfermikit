@@ -28,6 +28,8 @@ zgrep --invert-match ^"#" ${repeats}.bed.gz | head -100 | bash utilities/sort_co
 repeats=${repeats_small}
 set -o pipefail
 
+export PATH="$PWD:$PATH"
+
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
 trfermikit \
