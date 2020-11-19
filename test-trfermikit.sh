@@ -57,8 +57,8 @@ trfermikit \
   --svtype ${svtype} \
   --prefix ${prefix} \
   --alignments ${alignments} \
-  --min-repeat-length ${min_repeat_length} 
-# --functional-regions ${functional_regions} 
+  --min-repeat-length ${min_repeat_length} \
+  --functional-regions ${functional_regions} 
 
 # evaluate-trfermikit \
 #   --trfermikit-output ${tr_fermikit_output} \
