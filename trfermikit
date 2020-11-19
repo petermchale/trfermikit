@@ -53,7 +53,8 @@ bash filter-repeats.sh \
   --alignments ${alignments} \
   --number-threads ${number_threads} \
   --functional-regions ${functional_regions} \
-  --reference ${reference} 
+  --reference ${reference} \
+  2> filter-repeats.log 
 
 # bash make-calls.sh --alignments xxx --reference xxx 
 
