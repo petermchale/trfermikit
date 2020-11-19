@@ -43,7 +43,8 @@ zgrep --invert-match ^"#" ${repeats}.bed.gz | head -100 | bash utilities/sort_co
 repeats=${repeats_small}
 set -o pipefail
 
-export PATH="$PWD:$PATH"
+# no need to export PATH since it is already in the environment: https://unix.stackexchange.com/a/26059/406037
+PATH="$PWD:$PATH"
 
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
