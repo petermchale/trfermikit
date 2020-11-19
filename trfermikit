@@ -54,7 +54,7 @@ bash filter-repeats.sh \
   --number-threads ${number_threads} \
   --functional-regions ${functional_regions} \
   --reference ${reference} \
-  2> filter-repeats.log 
+  2> ${tr_fermikit_output}/regions.log 
 
 # bash make-calls.sh --alignments xxx --reference xxx 
 
