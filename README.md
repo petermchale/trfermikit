@@ -1,3 +1,9 @@
+## Motivation 
+
+Most SVs missed by short-read callers lie in tandem repeats: 
+
+![](images/most_missing_SVs_lie_in_tandem_repeats.png)
+
 `trfermikit` finds SVs (currently only DELs) in a user-supplied set of tandem repeats. 
 
 ## Usage
