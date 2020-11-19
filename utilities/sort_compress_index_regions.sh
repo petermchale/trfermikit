@@ -15,6 +15,7 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 regions="$1"
+mkdir --parents dirname "${regions}"
 
 sort --version-sort -k1,1 -k2,2 /dev/stdin | bgzip --force --stdout > ${regions}.bed.gz
 tabix --force --preset bed ${regions}.bed.gz
