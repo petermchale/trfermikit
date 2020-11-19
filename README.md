@@ -29,10 +29,20 @@ htsbox pileup -V1 -q1
 
 An example of how to use `trfermikit` can be found in `test-trfermikit.sh`. 
 
+## Runtime
+
+If one confines the search to tandem repeats larger than 100bp in length,
+
+```
+trfermikit --min-repeat-length 100 [...]
+```
+
+then the pipeline takes < 1.5hr for a 70X genome
+
 ## Evaluation 
 
 `test-trfermikit.sh` also includes code to assess the performance of `trfermikit` 
-and `manta` (in both cases relative to a long-read benchmark callset).
+and `manta` (in both cases relative to a long-read benchmark callset). The results of that analysis can be found [here](evaluate-calls/evaluate.ipynb).
 
 ## TODO
 
