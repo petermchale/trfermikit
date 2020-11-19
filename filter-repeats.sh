@@ -45,9 +45,9 @@ jq \
   --arg max_region_length ${max_region_length} \
   --arg functional_regions ${functional_regions} \
   '{ 
-    slop: $slop,
-    min_coverage: $min_coverage,
-    max_coverage: $max_coverage,
+    slop around regions: $slop,
+    minimum coverage: $min_coverage,
+    maximum coverage: $max_coverage,
     min_repeat_length: $min_repeat_length,
     max_region_length: $max_region_length,
     functional_regions: $functional_regions
