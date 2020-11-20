@@ -63,7 +63,7 @@ jq \
   > ${output}/regions.json
 
 filter_repeats_by_length_and_function () {
-  bash filter-repeats/filter_by_length.sh \
+  bash make-regions/filter_by_length.sh \
     --repeats ${repeats} \
     --min-repeat-length ${min_repeat_length} \
     --max-region-length ${max_region_length} \
@@ -72,7 +72,7 @@ filter_repeats_by_length_and_function () {
   if [[ "${functional_regions}" == "none" ]]; then 
     cat
   else 
-    bash filter-repeats/filter_by_function.sh ${functional_regions}
+    bash make-regions/filter_by_function.sh ${functional_regions}
   fi 
 }
 
