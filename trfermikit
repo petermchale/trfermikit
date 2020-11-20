@@ -59,8 +59,8 @@ bash make-calls/make-calls.sh \
     --output ${output} \
     --alignments ${alignments} \
     --threads ${number_threads} \
-    --reference ${reference} 
-  # 2> ${output}/make-calls.log 
+    --reference ${reference} \
+  2> ${output}/make-calls.log 
 
 # bash filter-calls.sh \
 #     --output ${output} \
