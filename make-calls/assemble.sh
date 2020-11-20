@@ -20,9 +20,10 @@ K_MERGE=$3
 N_THREADS=$4 
 dependency=$5
 target=$6 
+make_calls=$7
 
 # these functions anticipate the error: 
-# fermi.pre.gz.log: fermi2: unitig.c:414: fm6_unitig: Assertion `e->mcnt[1] >= n_threads * 2' failed.
+# prefix.pre.gz.log: fermi2: unitig.c:414: fm6_unitig: Assertion `e->mcnt[1] >= n_threads * 2' failed.
 # return status of function is return status of last executed command in function
 
 turn_off_parallelization () {
@@ -30,18 +31,24 @@ turn_off_parallelization () {
 }
 
 filtered_fastq_empty () {
-  # Returns true when fermi.flt.fq.gz is empty 
-  # The file fermi.flt.fq.gz contains “trimmed” reads 
-  # obtained from the file fermi.ec.fq.gz by running “bfc -1”, c.f., 
+  # Returns true when prefix.flt.fq.gz is empty 
+  # The file prefix.flt.fq.gz contains “trimmed” reads 
+  # obtained from the file prefix.ec.fq.gz by running “bfc -1”, c.f., 
   # https://github.com/lh3/bfc/tree/a73dad248dc56d9d4d22eacbbbc51ac276045168#usage
 
   grep --quiet "\[M::main_ropebwt2\] symbol counts: ($, A, C, G, T, N) = (0, 0, 0, 0, 0, 0)" "${dependency}.log"
   # NOTE: [ and ] are special characters to grep
 }
 
-rm --force filtered_fastq_empty
+jq \
+  --null-input \
+  --arg filtered_fastq_empty $(filtered_fastq_empty) \
+  '{ 
+    "filtered fastq empty": $filtered_fastq_empty
+  }' \
+  > ${make_calls}.json
+
 if filtered_fastq_empty; then 
-  touch filtered_fastq_empty
   exit 1 # this causes make to exit 
 fi 
 

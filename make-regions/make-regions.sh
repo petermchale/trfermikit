@@ -60,7 +60,7 @@ jq \
     "overlapped functional regions": $overlapped_functional_regions,
     "functional regions": $functional_regions
   }' \
-  > ${output}/regions.json
+  > ${output}/make-regions.json
 
 filter_repeats_by_length_and_function () {
   bash make-regions/filter_by_length.sh \

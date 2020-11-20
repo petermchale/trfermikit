@@ -53,8 +53,10 @@ bgzip --force ${regions}.fq
 # https://github.com/lh3/fermikit
 # assemble reads from regions into unitigs (-s specifies the genome size and -l the read length)
 fermikit_prefix="${output}/fermikit"
+make_calls="${output}/make-calls"
 make-calls/fermi.kit/fermi2.pl unitig \
     -A ${assemble} \
+    -e ${make_calls} \
     -t ${number_threads} \
     -l150 \
     -p ${fermikit_prefix} \
@@ -64,7 +66,9 @@ make-calls/fermi.kit/fermi2.pl unitig \
 # execute shell commands to assemble short reads into unitigs
 make -f ${fermikit_prefix}.mak || true
 
-[[ ! -e ${output}/filtered_fastq_empty ]] || exit 1
+jq ."filtered fastq empty" ${make_calls}.json
+exit 1
+# [[ ! -e ${output}/filtered_fastq_empty ]] || exit 1
 
 # execute shell commands that align unitigs (with minimap2) and call variants
 # ... "-m" means "use minimap2" 
