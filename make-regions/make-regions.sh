@@ -9,7 +9,7 @@ while [[ "$1" =~ ^- ]]; do
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
-    --number-threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
+    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
