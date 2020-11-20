@@ -28,7 +28,7 @@ htsbox pileup -V1 -q1
 
 This, by itself, results in a large false-discovery rate. `trfermikit` mitigates this effect by throwing out calls supported only by "dirty" `fermikit` unitigs (essentially, those that have lots of small blocks when aligned to the reference). 
 
-## Usage
+## How done one use it?
 
 An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
