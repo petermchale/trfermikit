@@ -32,7 +32,7 @@ This, by itself, results in a large false-discovery rate. `trfermikit` mitigates
 
 An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
-## Runtime
+## How fast is it?
 
 If one confines the search to tandem repeats larger than 100bp in length:
 
