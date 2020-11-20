@@ -42,7 +42,7 @@ trfermikit --min-repeat-length 100 [...]
 
 then the pipeline takes < 1.5hr for a 70X genome
 
-## Evaluation 
+## How sensitive/accurate is it?
 
 We assessed the performance of `trfermikit` 
 and `manta`, in both cases relative to a long-read benchmark callset. Results can be found [here](evaluate-calls/evaluate.ipynb).
