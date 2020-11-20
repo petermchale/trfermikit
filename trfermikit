@@ -60,7 +60,7 @@ bash make-calls/make-calls.sh \
     --alignments ${alignments} \
     --threads ${number_threads} \
     --reference ${reference} \
-  2> ${output}/make-calls.log 
+  > ${output}/make-calls.log 2>&1
 
 # bash filter-calls.sh \
 #     --output ${output} \
