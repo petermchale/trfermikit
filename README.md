@@ -4,7 +4,7 @@ Most SVs missed by short-read callers lie in tandem repeats:
 
 ![](images/most_missing_SVs_lie_in_tandem_repeats.png)
 
-(based upon Supplementary Data 53 of [Chaisson et al 2019](https://www.nature.com/articles/s41467-018-08148-z) and private communication with Mark Chaisson) 
+(based upon Supplementary Data 53 of [Chaisson et al 2019](https://pubmed.ncbi.nlm.nih.gov/30992455) and private communication with Mark Chaisson) 
 
 `trfermikit` has been optimized to finds SVs (currently only DELs) in a user-supplied set of tandem repeats. 
 
