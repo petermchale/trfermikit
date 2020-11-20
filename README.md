@@ -18,12 +18,15 @@ Most SVs missed by short-read callers lie in tandem repeats:
 minimap2 -A10 -B12 -O6,26 -E1,0 [...]
 ```
 
-and optimizes the variant calling step as follows 
-(-V relates to "per-base divergence"; -q relates to mapping quality):
+and filters its variant calling step:
 
 ```
 htsbox pileup -V1 -q1
 ```
+
+(ignore “queries” with "per-base divergence" > 1, and ignore unitigs with “mapping quality” = 0). 
+
+This, by itself, results in a large false-discovery rate. `trfermikit` mitigates this effect by throwing out calls supported only by "dirty" `fermikit` unitigs (essentially, those that have lots of small blocks when aligned to the reference). 
 
 ## Usage
 
@@ -42,7 +45,7 @@ then the pipeline takes < 1.5hr for a 70X genome
 ## Evaluation 
 
 We assessed the performance of `trfermikit` 
-and `manta` (in both cases relative to a long-read benchmark callset). Results can be found [here](evaluate-calls/evaluate.ipynb).
+and `manta`, in both cases relative to a long-read benchmark callset. Results can be found [here](evaluate-calls/evaluate.ipynb).
 
 ## TODO
 
