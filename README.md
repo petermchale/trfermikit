@@ -22,7 +22,7 @@ by:
 
 * increasing the reward for single-base matches
 * increasing the penalty for single-base mismatches 
-* decreasing the gap-open penalties (the cost function of gap length is piecewise linear)
+* decreasing the gap-open penalties (there are two because the cost function of gap length is piecewise linear)
 * decreasing the gap-extension penalties 
 
 This, by itself, recovers a lot of events that a more stringent caller would throw out. 
