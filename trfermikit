@@ -52,8 +52,8 @@ bash make-regions/make-regions.sh \
     --alignments ${alignments} \
     --threads ${number_threads} \
     --functional-regions ${functional_regions} \
-    --reference ${reference} \
-  2> ${output}/make-regions.log 
+    --reference ${reference} 
+  # 2> ${output}/make-regions.log 
 
 bash make-calls/make-calls.sh \
     --output ${output} \
