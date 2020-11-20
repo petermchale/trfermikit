@@ -4,7 +4,7 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --tr_fermikit_output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
@@ -76,8 +76,8 @@ filter_repeats_by_length_and_function () {
   fi 
 }
 
-mkdir --parents "${tr_fermikit_output}/tmp" 
-mosdepth_prefix="${tr_fermikit_output}/tmp/mosdepth.coverage"
+mkdir --parents "${output}/tmp" 
+mosdepth_prefix="${output}/tmp/mosdepth.coverage"
 mosdepth \
   --no-per-base \
   --fast-mode \
@@ -91,6 +91,6 @@ bedtools slop -i ${mosdepth_prefix}.regions.bed.gz -g ${reference}.genome -b ${s
   | awk --assign min_coverage=${min_coverage} '$4 > min_coverage' \
   | awk --assign max_coverage=${max_coverage} '$4 < max_coverage' \
   | awk --assign OFS='\t' '{ print $1, $2, $3 }' \
-  | bash utilities/sort_compress_index_regions.sh "${tr_fermikit_output}/regions" \
-&& rm -rf "${tr_fermikit_output}/tmp"
+  | bash utilities/sort_compress_index_regions.sh "${output}/regions" \
+&& rm -rf "${output}/tmp"
 

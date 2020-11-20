@@ -7,8 +7,6 @@ while [[ "$1" =~ ^- ]]; do
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
-    --prefix ) shift; [[ ! $1 =~ ^- ]] && prefix=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
     *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
@@ -29,35 +27,52 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' 
 
-EXE_ASSEMBLE="${fermi_directory}/assemble.sh"
+assemble="make-calls/assemble.sh"
+regions="${output}/regions"
 
 # get short reads that were originally aligned to given regions
 
 # fetch regions by sweeping through cram (expected to be faster when number of regions > ~10,000) 
 # "bedtools intersect -sorted" uses the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input
-# time bedtools intersect -ubam -u -wa -a ${short_reads}.cram -b ${processed_regions}.bed -g ${reference}.genome -sorted | 
-#   samtools bam2fq > ${processed_regions}.fq
+# /usr/bin/time --verbose bedtools intersect \
+#     -ubam -u -wa -a ${alignments}.cram -b ${regions}.bed -g ${reference}.genome -sorted | 
+#   samtools bam2fq > ${regions}.fq
 
 # "random access" of reads (expected to be faster when number of regions < ~10,000)
-# "samtools view -M" uses the multi-region iterator (increases the speed, 
-# removes duplicates and outputs the reads as they are ordered in the file)
-/usr/bin/time --verbose samtools view -u -M --threads ${number_threads} -L ${processed_regions}.bed ${short_reads}.cram | 
-  samtools fastq > ${processed_regions}.fq 
+# "samtools view -M" uses the multi-region iterator 
+# (increases speed, removes duplicates and outputs the reads as they are ordered in the file)
+/usr/bin/time --verbose samtools view -u -M \
+    --threads ${number_threads} \
+    -L ${regions}.bed \
+    ${alignments}.cram | 
+  samtools fastq > ${regions}.fq 
 
-bgzip --force ${processed_regions}.fq 
+bgzip --force ${regions}.fq 
 
 # generate Makefile for unitig assembly
 # https://github.com/lh3/fermikit
-# assemble reads from region into unitigs (-s specifies the genome size and -l the read length)
-${fermi_directory}/fermi.kit/fermi2.pl unitig -A ${EXE_ASSEMBLE} -t ${number_threads} -l150 -p ${prefix} ${processed_regions}.fq.gz > ${prefix}.mak
+# assemble reads from regions into unitigs (-s specifies the genome size and -l the read length)
+fermikit_prefix="${output}/fermikit"
+make-calls/fermi.kit/fermi2.pl unitig \
+    -A ${assemble} \
+    -t ${number_threads} \
+    -l150 \
+    -p ${fermikit_prefix} \
+    ${regions}.fq.gz \
+  > ${fermikit_prefix}.mak
 
-# execute shell commands that do unitig assembly of short reads
-make -f ${prefix}.mak || true
+# execute shell commands to assemble short reads into unitigs
+make -f ${fermikit_prefix}.mak || true
 
-[[ ! -e filtered_fastq_empty ]] || exit 1
+[[ ! -e ${output}/filtered_fastq_empty ]] || exit 1
 
 # execute shell commands that align unitigs (with minimap2) and call variants
 # ... "-m" means "use minimap2" 
-# ... ${prefix}.mag.gz contains the (unaligned) unitigs
-${fermi_directory}/fermi.kit/run-calling -m -t ${number_threads} ${reference}.fa ${prefix}.mag.gz | bash -euxo pipefail
+# ... ${fermikit_prefix}.mag.gz contains the (unaligned) unitigs
+make-calls/fermi.kit/run-calling \
+    -m \
+    -t ${number_threads} \
+    ${reference}.fa \
+    ${fermikit_prefix}.mag.gz | 
+  bash -euxo pipefail
 

@@ -4,13 +4,12 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --trfermikit-output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --number_threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --population ) shift; [[ ! $1 =~ ^- ]] && population=$1;;
     --sample ) shift; [[ ! $1 =~ ^- ]] && sample=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
-    --prefix ) shift; [[ ! $1 =~ ^- ]] && prefix=$1;;
     *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -38,11 +37,11 @@ export PYTHONPATH="$PWD/utilities"
 
 #######################################################
 
-truvari_trfermikit="truvari-pacbio-${prefix}"
+truvari_trfermikit="truvari-pacbio-trfermikit"
 truvari_manta="truvari-pacbio-manta"
 
 pacbio_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/calls/ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/genotype/nstd152/${sample}.BIP-unified.filtered"
-tr_fermikit_calls="${tr_fermikit_output}/${prefix}.raw.decomposed.normalized.${svtype}"
+tr_fermikit_calls="${output}/trfermikit.raw.decomposed.normalized.${svtype}"
 manta_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/manta/standard_run/results/${population}/${sample}/results/variants/diploidSV"
 
 pacbio_calls_decomposed_normalized_svtype="${pacbio_calls}.decomposed.normalized.${svtype}"
@@ -69,7 +68,7 @@ pacbio_covered_regions () {
   local pacbio_covered_regions_on_h1_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/${sample}.h1.covered.sorted"
   local repeat_directory_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/repeats"
 
-  local regions_="${tr_fermikit_output}/regions"
+  local regions_="${output}/regions"
 
   cat ${regions_}.bed |
     bedtools intersect -a stdin -b ${pacbio_covered_regions_on_h0_}.bed -wa -u -f 1 |
@@ -100,17 +99,17 @@ truvari () {
 
 truvari \
   "${tr_fermikit_calls}" \
-  "${tr_fermikit_output}/${truvari_trfermikit}"
+  "${output}/${truvari_trfermikit}"
  
 truvari \
   "${tr_fermikit_calls}.unitigSupport" \
-  "${tr_fermikit_output}/${truvari_trfermikit}.unitigSupport"
+  "${output}/${truvari_trfermikit}.unitigSupport"
 
 truvari \
   "${tr_fermikit_calls}.unitigSupport.thinned" \
-  "${tr_fermikit_output}/${truvari_trfermikit}.unitigSupport.thinned"
+  "${output}/${truvari_trfermikit}.unitigSupport.thinned"
 
 truvari \
   "${manta_calls_decomposed_normalized_svtype}" \
-  "${tr_fermikit_output}/${truvari_manta}"
+  "${output}/${truvari_manta}"
 

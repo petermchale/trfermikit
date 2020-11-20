@@ -32,7 +32,6 @@ min_repeat_length="100"
 
 number_threads="16"
 svtype="DEL"
-prefix="trfermikit"
 
 output="data/${sample}.${svtype}"
 
@@ -54,7 +53,6 @@ trfermikit \
   --reference ${reference} \
   --threads ${number_threads} \
   --svtype ${svtype} \
-  --prefix ${prefix} \
   --alignments ${alignments} \
   --min-repeat-length ${min_repeat_length} \
   --functional-regions ${functional_regions} 
@@ -66,4 +64,3 @@ trfermikit \
 #   --population ${population} \
 #   --sample ${sample} \
 #   --svtype ${svtype} \
-#   --prefix ${prefix}
