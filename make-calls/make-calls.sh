@@ -53,6 +53,8 @@ bgzip --force ${regions}.fq
 # https://github.com/lh3/fermikit
 # assemble reads from regions into unitigs (-s specifies the genome size and -l the read length)
 fermikit_prefix="${output}/fermikit"
+bash utilities/info.sh "current directory is: $PWD"
+exit 1
 make-calls/fermi.kit/fermi2.pl unitig \
     -A ${assemble} \
     -t ${number_threads} \
