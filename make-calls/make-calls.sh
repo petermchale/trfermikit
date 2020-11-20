@@ -43,7 +43,7 @@ regions="${output}/regions"
 # (increases speed, removes duplicates and outputs the reads as they are ordered in the file)
 /usr/bin/time --verbose samtools view -u -M \
     --threads ${number_threads} \
-    -L ${regions}.bed \
+    -L ${regions}.bed.gz \
     ${alignments}.cram | 
   samtools fastq > ${regions}.fq 
 
