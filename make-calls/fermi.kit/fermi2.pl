@@ -137,7 +137,7 @@ Options: -p STR    output prefix [$opts{p}]
 	push(@lines, qq/\$(PREFIX).pre.gz:\$(PREFIX).flt.fmd/);
 	# push(@lines, qq/\t\$(EXE_FERMI2) assemble -l \$(K_UNITIG) -m \$(K_MERGE) -t \$(N_THREADS) \$< 2> \$@.log | gzip -1 > \$@/, "");
         # Peter McHale 13 Apr 2020 and 20 Nov 2020:
-	push(@lines, qq/\t\$(EXE_ASSEMBLE) \$(EXE_FERMI2) \$(K_UNITIG) \$(K_MERGE) \$(N_THREADS) \$< \$@/ \$(make_calls), "");
+	push(@lines, qq/\t\$(EXE_ASSEMBLE) \$(EXE_FERMI2) \$(K_UNITIG) \$(K_MERGE) \$(N_THREADS) \$< \$@ \$(make_calls)/, "");
 
 	push(@lines, qq/\$(PREFIX).mag.gz:\$(PREFIX).pre.gz/);
 	push(@lines, qq/\t\/usr\/bin\/time --verbose \$(EXE_FERMI2) simplify -CSo \$(K_CLEAN) -m \$(K_MERGE) -T \$(K_UNITIG) \$< 2> \$@.log | gzip -1 > \$@/, "");
