@@ -8,7 +8,7 @@ Most SVs missed by short-read callers lie in tandem repeats:
 
 `trfermikit` has been optimized to finds SVs (currently only DELs) in a user-supplied set of tandem repeats. 
 
-## How it works 
+## How does it work?
 
 `trfermikit` is based upon the [fermikit](https://github.com/lh3/fermikit) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome and then calls variants from the alignment.
 
