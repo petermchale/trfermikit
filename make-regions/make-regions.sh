@@ -60,7 +60,7 @@ jq \
     "overlapped functional regions": $overlapped_functional_regions,
     "functional regions": $functional_regions
   }' \
-  > ${tr_fermikit_output}/regions.json
+  > ${output}/regions.json
 
 filter_repeats_by_length_and_function () {
   bash filter-repeats/filter_by_length.sh \
