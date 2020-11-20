@@ -52,6 +52,7 @@ my $cmd = '';
 if (defined $opts{m}) {
         # Peter McHale Jan 31 2020
 	# $cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && $root/minimap2 -ax asm10 -k23 -w11 -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $idx $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+        # https://bioinformatics.stackexchange.com/questions/10594/what-do-the-symbols-mean-in-minimap2s-gap-cost-equation
         # -A INT   matching score [2]
         # -B INT   mismatch penalty [4]
         # -O INT[,INT] gap open penalty [4,24]
@@ -89,6 +90,7 @@ $cmd .= "[ ! -f $prefix.srt.bam ] && /usr/bin/time --verbose $root/htsbox samsor
 # -s INT     drop alleles with depth<INT [1]
 # -S INT     minimum supplementary alignment length [0]
 # -u         unitig calling mode (-d -V.01 -S300 -q20 -Q3 -s5)
+# $cmd .= "$root/htsbox pileup -cuf $ref $prefix.srt.bam | gzip -1 > $prefix.raw.vcf.gz;\n";
 $cmd .= "/usr/bin/time --verbose $root/htsbox pileup -c -u -V1 -q1 -f $ref $prefix.srt.bam | gzip -1 > $prefix.raw.vcf.gz;\n";
 
 # deovlp chooses the best VCF record among overlapping records

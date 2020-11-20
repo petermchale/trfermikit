@@ -34,10 +34,10 @@ number_threads="16"
 svtype="DEL"
 prefix="trfermikit"
 
-tr_fermikit_output="data/${sample}.${svtype}"
+output="data/${sample}.${svtype}"
 
 # to facilitate a small-scale test of tool correctness and tool usage: 
-repeats_small="${tr_fermikit_output}/repeats.small"
+repeats_small="${output}/repeats.small"
 set +o pipefail
 zgrep --invert-match ^"#" ${repeats}.bed.gz | head -100 | bash utilities/sort_compress_index_regions.sh ${repeats_small}
 repeats=${repeats_small}
@@ -49,10 +49,10 @@ PATH="$PWD:$PATH"
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
 trfermikit \
-  --trfermikit-output ${tr_fermikit_output} \
+  --output ${output} \
   --repeats ${repeats} \
   --reference ${reference} \
-  --number-threads ${number_threads} \
+  --threads ${number_threads} \
   --svtype ${svtype} \
   --prefix ${prefix} \
   --alignments ${alignments} \
@@ -60,8 +60,8 @@ trfermikit \
   --functional-regions ${functional_regions} 
 
 # bash evaluate-calls/evaluate.sh \
-#   --trfermikit-output ${tr_fermikit_output} \
-#   --number-threads ${number_threads} \
+#   --output ${output} \
+#   --threads ${number_threads} \
 #   --reference ${reference} \
 #   --population ${population} \
 #   --sample ${sample} \

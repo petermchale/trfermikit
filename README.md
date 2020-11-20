@@ -8,29 +8,25 @@ Most SVs missed by short-read callers lie in tandem repeats:
 
 `trfermikit` has been optimized to finds SVs (currently only DELs) in a user-supplied set of tandem repeats. 
 
+## `trfermikit` is more sensitive than `manta`
+
+We assessed the performance of `trfermikit` 
+and `manta`, in both cases relative to a long-read benchmark callset. Results can be found [here](evaluate-calls/evaluate.ipynb).
+
 ## How does it work?
 
-`trfermikit` is based upon the [fermikit](https://github.com/lh3/fermikit) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome and then calls variants from the alignment.
+`trfermikit` is based upon the [fermikit](https://pubmed.ncbi.nlm.nih.gov/26220959/) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome and then calls variants from the alignment.
 
-`trfermikit` biases the alignment step of the fermikit pipeline towards revealing deletions:
+`trfermikit` biases the minimap2 alignment step of the fermikit pipeline towards revealing deletions
+by:
 
-```
-minimap2 -A10 -B12 -O6,26 -E1,0 [...]
-```
+* increasing the reward for single-base matches
+* increasing the penalty for single-base mismatches 
+* decreasing the gap-open penalties (the cost function of gap length is piecewise linear)
+* decreasing the gap-extension penalties 
 
-and filters its variant calling step:
-
-```
-htsbox pileup -V1 -q1
-```
-
-(ignore “queries” with "per-base divergence" > 1, and ignore unitigs with “mapping quality” = 0). 
-
-This, by itself, results in a large false-discovery rate. `trfermikit` mitigates this effect by throwing out calls supported only by "dirty" `fermikit` unitigs (essentially, those that have lots of small blocks when aligned to the reference). 
-
-## How does one use it?
-
-An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
+This, by itself, recovers a lot of events that a more stringent caller would throw out. 
+The trade-off is a large false-discovery rate. `trfermikit` mitigates this effect by throwing out calls supported only by "dirty" `fermikit` unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero). 
 
 ## How fast is it?
 
@@ -42,10 +38,9 @@ trfermikit --min-repeat-length 100 [...]
 
 then the pipeline takes < 1.5hr for a 70X genome
 
-## How sensitive/accurate is it?
+## How does one use it?
 
-We assessed the performance of `trfermikit` 
-and `manta`, in both cases relative to a long-read benchmark callset. Results can be found [here](evaluate-calls/evaluate.ipynb).
+An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
 ## TODO
 

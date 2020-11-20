@@ -4,12 +4,12 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --trfermikit-output ) shift; [[ ! $1 =~ ^- ]] && tr_fermikit_output=$1;;
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
-    --number-threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
+    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --prefix ) shift; [[ ! $1 =~ ^- ]] && prefix=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
@@ -44,22 +44,28 @@ fi
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="$PWD/utilities"
 
-mkdir --parents ${tr_fermikit_output} 
+mkdir --parents ${output} 
 
-bash filter-repeats/filter-repeats.sh \
-  --tr_fermikit_output ${tr_fermikit_output} \
+bash make-regions/make-regions.sh \
+  --output ${output} \
   --repeats ${repeats} \
   --min-repeat-length ${min_repeat_length} \
   --alignments ${alignments} \
-  --number-threads ${number_threads} \
+  --threads ${number_threads} \
   --functional-regions ${functional_regions} \
   --reference ${reference} \
-  2> ${tr_fermikit_output}/regions.log 
+  2> ${output}/make-regions.log 
 
-# bash make-calls.sh --alignments xxx --reference xxx 
+bash make-calls/make-calls.sh \
+  --output ${output} \
+  --alignments ${alignments} \
+  --threads ${number_threads} \
+  --reference ${reference} \
+  --prefix ${prefix} \
+  2> ${output}/make-calls.log 
 
 # bash filter-calls.sh \
-#   --tr_fermikit_output ${tr_fermikit_output} \
+#   --output ${output} \
 #   --svtype ${svtype} \
 #   --prefix ${prefix} \
 #   --reference ${reference} \

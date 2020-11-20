@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+# https://devhints.io/bash#miscellaneous
+# put option-fetching before "set -o nounset" so that we can detect flags without arguments
+while [[ "$1" =~ ^- ]]; do 
+  case $1 in
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
+    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
+    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
+    --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
+    --prefix ) shift; [[ ! $1 =~ ^- ]] && prefix=$1;;
+    --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
+    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+  esac 
+  shift
+done
+
 set -o errexit
 set -o pipefail
 set -o nounset
@@ -14,17 +29,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' 
 
-prefix=$1
-short_reads=$2 
-reference=$3 
-svtype=$4
-number_threads=$5
-fermi_directory=$6 
-processed_regions=$7
-
 EXE_ASSEMBLE="${fermi_directory}/assemble.sh"
-
-rm --force *.bam *.bai *.gz *.tbi *.vcf *.log *.fmd *.mak *.fq *.sam
 
 # get short reads that were originally aligned to given regions
 
