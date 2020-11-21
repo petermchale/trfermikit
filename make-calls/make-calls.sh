@@ -27,7 +27,6 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' 
 
-assemble="make-calls/assemble.sh"
 regions="${output}/regions"
 
 # get short reads that were originally aligned to given regions
@@ -52,11 +51,12 @@ bgzip --force ${regions}.fq
 # generate Makefile for unitig assembly
 # https://github.com/lh3/fermikit
 # assemble reads from regions into unitigs (-s specifies the genome size and -l the read length)
+do_assembly="make-calls/assemble.sh"
 fermikit_prefix="${output}/fermikit"
-make_calls="${output}/make-calls"
+assembly_diagnostics="${fermikit_prefix}.assembly.diagnostics.json"
 make-calls/fermi.kit/fermi2.pl unitig \
-    -A ${assemble} \
-    -e ${make_calls} \
+    -A ${do_assembly} \
+    -e ${assembly_diagnostics} \
     -t ${number_threads} \
     -l150 \
     -p ${fermikit_prefix} \

@@ -20,7 +20,7 @@ K_MERGE=$3
 N_THREADS=$4 
 dependency=$5
 target=$6 
-make_calls=$7
+assembly_diagnostics=$7
 
 # these functions anticipate the error: 
 # prefix.pre.gz.log: fermi2: unitig.c:414: fm6_unitig: Assertion `e->mcnt[1] >= n_threads * 2' failed.
@@ -46,7 +46,7 @@ jq \
   '{ 
     "filtered fastq empty": $filtered_fastq_empty
   }' \
-  > ${make_calls}.json
+  > ${assembly_diagnostics}.json
 
 if filtered_fastq_empty; then 
   exit 1 # this causes make to exit 

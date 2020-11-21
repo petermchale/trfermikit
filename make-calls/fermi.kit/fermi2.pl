@@ -56,8 +56,10 @@ sub mag2fmr {
 
 sub unitig {
         # Peter McHale 13 Apr 2020 and 20 Nov 2020: added 'A' and 'e' option
-	my %opts = (e=>'', A=>'', t=>4, p=>'fmdef', l=>101, k=>-1, T=>61, o=>-1, m=>-1, s=>'100m');
-	getopts('A:t:p:k:f:r:c:l:m:s:T:2E', \%opts);
+	my %opts = (d=>'', A=>'', t=>4, p=>'fmdef', l=>101, k=>-1, T=>61, o=>-1, m=>-1, s=>'100m');
+        # Peter McHale 13 Apr 2020 and 20 Nov 2020: added 'A' and 'e' option
+	getopts('d:A:t:p:k:f:r:c:l:m:s:T:2E', \%opts);
+        # Peter McHale 13 Apr 2020 and 20 Nov 2020: added 'A' and 'e' option
 	die (qq/
 Usage:   fermi2.pl unitig [options] <in.fq>\n
 Options: -p STR    output prefix [$opts{p}]
@@ -71,6 +73,7 @@ Options: -p STR    output prefix [$opts{p}]
          -t INT    number of threads [$opts{t}]
          -E        don't apply error correction
          -A STR    path to custom assembly bash script
+         -d STR    path to a json file that will be used to store diagnostic information
 \n/) if (@ARGV == 0);
 
 	die("ERROR: fermi2 doesn't work well with reads shorter than 70bp.\n") if ($opts{l} < 70);
@@ -106,7 +109,7 @@ Options: -p STR    output prefix [$opts{p}]
         # Peter McHale 13 Apr 2020:
 	push(@lines, qq/EXE_ASSEMBLE=$opts{A}/, '');
         # Peter McHale 20 Nov 2020:
-	push(@lines, qq/make_calls=$opts{e}/, '');
+	push(@lines, qq/ASSEMBLY_DIAGNOSTICS=$opts{d}/, '');
 	push(@lines, qq/EXE_FERMI2=$opts{f}/, qq/EXE_ROPEBWT2=$opts{r}/);
 	push(@lines, qq/EXE_BFC=$opts{c}/, qq/GENOME_SIZE=$opts{s}/);
 	push(@lines, qq/K_EC1=$k_ec1/, qq/K_EC2=$k_ec2/) if defined($opts{2});
@@ -137,7 +140,7 @@ Options: -p STR    output prefix [$opts{p}]
 	push(@lines, qq/\$(PREFIX).pre.gz:\$(PREFIX).flt.fmd/);
 	# push(@lines, qq/\t\$(EXE_FERMI2) assemble -l \$(K_UNITIG) -m \$(K_MERGE) -t \$(N_THREADS) \$< 2> \$@.log | gzip -1 > \$@/, "");
         # Peter McHale 13 Apr 2020 and 20 Nov 2020:
-	push(@lines, qq/\t\$(EXE_ASSEMBLE) \$(EXE_FERMI2) \$(K_UNITIG) \$(K_MERGE) \$(N_THREADS) \$< \$@ \$(make_calls)/, "");
+	push(@lines, qq/\t\$(EXE_ASSEMBLE) \$(EXE_FERMI2) \$(K_UNITIG) \$(K_MERGE) \$(N_THREADS) \$< \$@ \$(ASSEMBLY_DIAGNOSTICS)/, "");
 
 	push(@lines, qq/\$(PREFIX).mag.gz:\$(PREFIX).pre.gz/);
 	push(@lines, qq/\t\/usr\/bin\/time --verbose \$(EXE_FERMI2) simplify -CSo \$(K_CLEAN) -m \$(K_MERGE) -T \$(K_UNITIG) \$< 2> \$@.log | gzip -1 > \$@/, "");
