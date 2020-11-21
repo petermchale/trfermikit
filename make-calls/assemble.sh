@@ -50,7 +50,7 @@ jq \
   '{ 
     "filtered fastq empty": $filtered_fastq_empty
   }' \
-  > ${assembly_diagnostics}.json
+  > ${assembly_diagnostics}
 
 if [[ $(filtered_fastq_empty) == "true" ]]; then 
   exit 1 # this causes make to exit 
