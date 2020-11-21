@@ -69,7 +69,9 @@ make -f ${fermikit_prefix}.mak || true
 filtered_fastq_empty () {
   echo $(jq --raw-output '."filtered fastq empty"' ${assembly_diagnostics})
 }
-filtered_fastq_empty
+if [[ filtered_fastq_empty == "false" ]]; then 
+  echo "test passed"
+fi
 exit 1
 # [[ ! -e ${output}/filtered_fastq_empty ]] || exit 1
 
