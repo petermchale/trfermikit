@@ -38,9 +38,9 @@ filtered_fastq_empty () {
 
   # NOTE: [ and ] are special characters to grep
   if grep --quiet "\[M::main_ropebwt2\] symbol counts: ($, A, C, G, T, N) = (0, 0, 0, 0, 0, 0)" "${dependency}.log"; then     
-    return "true"
+    echo "true"
   else 
-    return "false"    
+    echo "false"    
   fi
 }
 
