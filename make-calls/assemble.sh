@@ -36,8 +36,12 @@ filtered_fastq_empty () {
   # obtained from the file prefix.ec.fq.gz by running “bfc -1”, c.f., 
   # https://github.com/lh3/bfc/tree/a73dad248dc56d9d4d22eacbbbc51ac276045168#usage
 
-  grep --quiet "\[M::main_ropebwt2\] symbol counts: ($, A, C, G, T, N) = (0, 0, 0, 0, 0, 0)" "${dependency}.log"
   # NOTE: [ and ] are special characters to grep
+  if grep --quiet "\[M::main_ropebwt2\] symbol counts: ($, A, C, G, T, N) = (0, 0, 0, 0, 0, 0)" "${dependency}.log"; then     
+    return "true"
+  else 
+    return "false"    
+  fi
 }
 
 jq \
@@ -48,7 +52,7 @@ jq \
   }' \
   > ${assembly_diagnostics}.json
 
-if filtered_fastq_empty; then 
+if [[ $(filtered_fastq_empty) == "true" ]]; then 
   exit 1 # this causes make to exit 
 fi 
 
