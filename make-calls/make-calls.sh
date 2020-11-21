@@ -67,7 +67,7 @@ make-calls/fermi.kit/fermi2.pl unitig \
 make -f ${fermikit_prefix}.mak || true
 
 filtered_fastq_empty () {
-  echo $(jq '."filtered fastq empty"' ${assembly_diagnostics})
+  echo $(jq --raw-output '."filtered fastq empty"' ${assembly_diagnostics})
 }
 filtered_fastq_empty
 exit 1
