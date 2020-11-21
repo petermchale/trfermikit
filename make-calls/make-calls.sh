@@ -66,7 +66,7 @@ make-calls/fermi.kit/fermi2.pl unitig \
 # execute shell commands to assemble short reads into unitigs
 make -f ${fermikit_prefix}.mak || true
 
-jq .'filtered fastq empty' ${assembly_diagnostics}
+jq '."filtered fastq empty"' ${assembly_diagnostics}
 exit 1
 # [[ ! -e ${output}/filtered_fastq_empty ]] || exit 1
 
