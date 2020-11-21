@@ -56,7 +56,7 @@ fermikit_prefix="${output}/fermikit"
 assembly_diagnostics="${fermikit_prefix}.assembly.diagnostics.json"
 make-calls/fermi.kit/fermi2.pl unitig \
     -A ${do_assembly} \
-    -e ${assembly_diagnostics} \
+    -d ${assembly_diagnostics} \
     -t ${number_threads} \
     -l150 \
     -p ${fermikit_prefix} \
