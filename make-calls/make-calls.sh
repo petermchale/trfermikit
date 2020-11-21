@@ -74,8 +74,6 @@ if [[ $(filtered_fastq_empty) == "true" ]]; then
   exit 1
 fi
 
-exit 1
-
 # execute shell commands that align unitigs (with minimap2) and call variants
 # ... "-m" means "use minimap2" 
 # ... ${fermikit_prefix}.mag.gz contains the (unaligned) unitigs
