@@ -46,6 +46,10 @@ regions="${output}/regions"
     ${alignments}.cram | 
   samtools fastq > ${regions}.fq 
 
+# TODO: 
+rm --force ${regions}.fq 
+touch ${regions}.fq 
+
 bgzip --force ${regions}.fq 
 
 # generate Makefile for unitig assembly
@@ -69,11 +73,11 @@ make -f ${fermikit_prefix}.mak || true
 filtered_fastq_empty () {
   echo $(jq --raw-output '."filtered fastq empty"' ${assembly_diagnostics})
 }
-if [[ $(filtered_fastq_empty) == "false" ]]; then 
-  echo "test passed"
+if [[ $(filtered_fastq_empty) == "true" ]]; then 
+  exit 1
 fi
+
 exit 1
-# [[ ! -e ${output}/filtered_fastq_empty ]] || exit 1
 
 # execute shell commands that align unitigs (with minimap2) and call variants
 # ... "-m" means "use minimap2" 
