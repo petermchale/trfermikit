@@ -26,7 +26,12 @@ by:
 * decreasing the gap-extension penalties 
 
 This, by itself, recovers a lot of events that a more stringent caller would throw out. 
-The trade-off is a large false-discovery rate. `trfermikit` mitigates this effect by throwing out calls supported only by "dirty" `fermikit` unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero). 
+The trade-off is a large false-discovery rate. 
+
+`trfermikit` mitigates this effect by throwing out calls that:
+* are supported by "dirty" fermikit unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero)
+* occur in “clusters”
+
 
 ## How fast is it?
 
