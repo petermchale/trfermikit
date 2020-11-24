@@ -34,7 +34,8 @@ if (-f $ARGV[0]) {
 }
 print STDERR "ARGV = $ARGV\n";
 print STDERR "B = $opts{B}\n";
-print STDERR "opts = $opts\n";
+my $x = $opts;
+print STDERR "opts = $x\n";
 die("ERROR: can't find the reference sequences\n") unless defined($ref);
 
 # check BWA index
