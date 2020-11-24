@@ -33,6 +33,7 @@ single_base_match_reward="10"
 single_base_mismatch_penalty="12" 
 gap_open_penalties="6,26" # there are two because the cost function of gap length is piecewise linear
 gap_extension_penalties="1,0" # there are two because the cost function of gap length is piecewise linear
+minimum_unitig_mapping_quality="1" 
 
 jq \
   --null-input \
@@ -40,11 +41,13 @@ jq \
   --arg single_base_mismatch_penalty ${single_base_mismatch_penalty} \
   --arg gap_open_penalties ${gap_open_penalties} \
   --arg gap_extension_penalties ${gap_extension_penalties} \
+  --arg minimum_unitig_mapping_quality ${minimum_unitig_mapping_quality} \
   '{ 
     "single-base match reward": $single_base_match_reward,
     "single-base mismatch penalty": $single_base_mismatch_penalty,
     "gap-open penalties": $gap_open_penalties,
-    "gap-extension penalties": $gap_extension_penalties
+    "gap-extension penalties": $gap_extension_penalties,
+    "minimum unitig mapping quality": $minimum_unitig_mapping_quality
   }' \
   > ${output}/make-calls.json
 
@@ -103,6 +106,7 @@ make-calls/fermi.kit/run-calling \
     -B ${single_base_mismatch_penalty} \
     -O ${gap_open_penalties} \
     -E ${gap_extension_penalties} \
+    -q ${minimum_unitig_mapping_quality} \
     ${reference}.fa \
     ${fermikit_prefix}.mag.gz \
   | bash -euxo pipefail

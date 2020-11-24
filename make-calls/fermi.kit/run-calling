@@ -7,7 +7,7 @@ use Getopt::Std;
 my %opts = (t=>4);
 
 # Peter McHale Nov 2020 
-getopts("t:b:o:A:B:O:E:m", \%opts);
+getopts("t:b:o:A:B:O:E:q:m", \%opts);
 
 # Peter McHale Nov 2020
 die('Usage: run-calling [options] <indexed-ref> <unitigs.mag.gz>
@@ -20,6 +20,7 @@ Options:
   -B INT    mismatch penalty
   -O INT[,INT] gap open penalties
   -E INT[,INT] gap extension penalties
+  -q INT    minimum mapping quality 
 ') if @ARGV < 2;
 
 # Peter McHale Nov 2020
@@ -31,6 +32,7 @@ print STDERR "A = $opts{A}\n";
 print STDERR "B = $opts{B}\n";
 print STDERR "O = $opts{O}\n";
 print STDERR "E = $opts{E}\n";
+print STDERR "q = $opts{q}\n";
 print STDERR "ARGV[0] = $ARGV[0]\n";
 print STDERR "ARGV[1] = $ARGV[1]\n";
 
@@ -110,7 +112,7 @@ $cmd .= "[ ! -f $prefix.srt.bam ] && /usr/bin/time --verbose $root/htsbox samsor
 # -S INT     minimum supplementary alignment length [0]
 # -u         unitig calling mode (-d -V.01 -S300 -q20 -Q3 -s5)
 # $cmd .= "$root/htsbox pileup -cuf $ref $prefix.srt.bam | gzip -1 > $prefix.raw.vcf.gz;\n";
-$cmd .= "/usr/bin/time --verbose $root/htsbox pileup -c -u -V1 -q1 -f $ref $prefix.srt.bam | gzip -1 > $prefix.raw.vcf.gz;\n";
+$cmd .= "/usr/bin/time --verbose $root/htsbox pileup -c -u -V1 -q$opts{q} -f $ref $prefix.srt.bam | gzip -1 > $prefix.raw.vcf.gz;\n";
 
 # deovlp chooses the best VCF record among overlapping records
 # anno adds generic depth-related INFO fields 
