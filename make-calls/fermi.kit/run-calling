@@ -5,7 +5,7 @@ use warnings;
 use Getopt::Std;
 
 my %opts = (t=>4);
-getopts("t:b:o:m", \%opts);
+getopts("t:b:o:m:A:B:O:E", \%opts);
 
 die('Usage: run-calling [options] <indexed-ref> <unitigs.mag.gz>
 Options:
@@ -13,6 +13,10 @@ Options:
   -b STR    prefix for BWA index [same as <indexed-ref>]
   -t INT    number of threads [4]
   -m        use minimap2
+  -A INT    matching score
+  -B INT    mismatch penalty
+  -O INT[,INT] gap open penalties
+  -E INT[,INT] gap extension penalties
 ') if @ARGV < 2;
 
 # check path
@@ -69,7 +73,7 @@ if (defined $opts{m}) {
         print STDERR "idx = $idx\n";
         print STDERR "mmi = $mmi\n";
         print STDERR "argv1 = $ARGV[1]\n"; 
-	$cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && /usr/bin/time --verbose minimap2 -ax asm10 -k23 -w11 -A10 -B12 -O6,26 -E1,0 -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+	$cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && /usr/bin/time --verbose minimap2 -ax asm10 -k23 -w11 -A$opts{A} -B$opts{B} -O$opts{O} -E$opts{E} -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
 	# $cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && minimap2 -ax asm10 -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
 } else {
         # Peter McHale Jan 10 2020

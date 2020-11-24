@@ -29,6 +29,25 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 regions="${output}/regions"
 
+single_base_match_reward="10" 
+single_base_mismatch_penalty="12" 
+gap_open_penalties="6,26" # there are two because the cost function of gap length is piecewise linear
+gap_extension_penalties="1,0" # there are two because the cost function of gap length is piecewise linear
+
+jq \
+  --null-input \
+  --arg single_base_match_reward ${single_base_match_reward} \
+  --arg single_base_mismatch_penalty ${single_base_mismatch_penalty} \
+  --arg gap_open_penalties ${gap_open_penalties} \
+  --arg gap_extension_penalties ${gap_extension_penalties} \
+  '{ 
+    "single-base match reward": $single_base_match_reward,
+    "single-base mismatch penalty": $single_base_mismatch_penalty,
+    "gap-open penalties": $gap_open_penalties,
+    "gap-extension penalties": $gap_extension_penalties
+  }' \
+  > ${output}/make-calls.json
+
 # get short reads that were originally aligned to given regions
 
 # fetch regions by sweeping through cram (expected to be faster when number of regions > ~10,000) 
@@ -81,6 +100,10 @@ make-calls/fermi.kit/run-calling \
     -m \
     -t ${number_threads} \
     ${reference}.fa \
-    ${fermikit_prefix}.mag.gz | 
-  bash -euxo pipefail
+    ${fermikit_prefix}.mag.gz \
+    -A ${single_base_match_reward} \
+    -B ${single_base_mismatch_penalty} \
+    -O ${gap_open_penalties} \
+    -E ${gap_extension_penalties} \
+  | bash -euxo pipefail
 
