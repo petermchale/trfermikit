@@ -22,6 +22,18 @@ Options:
   -E INT[,INT] gap extension penalties
 ') if @ARGV < 2;
 
+# Peter McHale Nov 2020
+print STDERR "t = $opts{t}\n";
+print STDERR "b = $opts{b}\n";
+print STDERR "o = $opts{o}\n";
+print STDERR "m = $opts{m}\n";
+print STDERR "A = $opts{A}\n";
+print STDERR "B = $opts{B}\n";
+print STDERR "O = $opts{O}\n";
+print STDERR "E = $opts{E}\n";
+print STDERR "ARGV[0] = $ARGV[0]\n";
+print STDERR "ARGV[1] = $ARGV[1]\n";
+
 # check path
 my $exepath = $0 =~/^\S+\/[^\/\s]+/? $0 : &which($0);
 my $root = $0 =~/^(\S+)\/[^\/\s]+/? $1 : undef;
@@ -35,9 +47,6 @@ if (-f $ARGV[0]) {
 } elsif (-f "$ARGV[0].gz") {
 	$ref = "$ARGV[0].gz";
 }
-# Peter McHale Nov 2020
-print STDERR "ARGV[0] = $ARGV[0]\n";
-print STDERR "B = $opts{B}\n";
 die("ERROR: can't find the reference sequences\n") unless defined($ref);
 
 # check BWA index
