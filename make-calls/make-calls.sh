@@ -99,11 +99,11 @@ fi
 make-calls/fermi.kit/run-calling \
     -m \
     -t ${number_threads} \
-    ${reference}.fa \
-    ${fermikit_prefix}.mag.gz \
     -A ${single_base_match_reward} \
     -B ${single_base_mismatch_penalty} \
     -O ${gap_open_penalties} \
     -E ${gap_extension_penalties} \
+    ${reference}.fa \
+    ${fermikit_prefix}.mag.gz \
   | bash -euxo pipefail
 
