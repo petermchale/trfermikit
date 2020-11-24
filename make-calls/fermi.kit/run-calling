@@ -5,8 +5,11 @@ use warnings;
 use Getopt::Std;
 
 my %opts = (t=>4);
-getopts("t:b:o:m:A:B:O:E", \%opts);
 
+# Peter McHale Nov 2020 
+getopts("t:b:o:m:A:B:O:E:", \%opts);
+
+# Peter McHale Nov 2020
 die('Usage: run-calling [options] <indexed-ref> <unitigs.mag.gz>
 Options:
   -o STR    prefix of output files [inferred from input]
