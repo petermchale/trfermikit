@@ -7,7 +7,7 @@ use Getopt::Std;
 my %opts = (t=>4);
 
 # Peter McHale Nov 2020 
-getopts("t:b:o:m:A:B:O:E:", \%opts);
+getopts("t:b:o:A:B:O:E:m", \%opts);
 
 # Peter McHale Nov 2020
 die('Usage: run-calling [options] <indexed-ref> <unitigs.mag.gz>
