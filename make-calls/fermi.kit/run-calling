@@ -35,10 +35,9 @@ if (-f $ARGV[0]) {
 } elsif (-f "$ARGV[0].gz") {
 	$ref = "$ARGV[0].gz";
 }
+# Peter McHale Nov 2020
 print STDERR "ARGV = $ARGV\n";
-# print STDERR "B = $opts{B}\n";
-my $x = $opts;
-print STDERR "opts = $x\n";
+print STDERR "B = $opts{B}\n";
 die("ERROR: can't find the reference sequences\n") unless defined($ref);
 
 # check BWA index
