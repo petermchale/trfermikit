@@ -107,6 +107,7 @@ def filter_annotate_calls():
     print(vcf.raw_header, end='')
     for region in regions:
       info('type(region) = {}'.format(type(region)))
+      info('region = {}'.format(region))
       chromosome, start, end, _ = region.strip().split('\t') 
       region = '{}:{}-{}'.format(chromosome, start, end)
       info('region = {}'.format(region))
