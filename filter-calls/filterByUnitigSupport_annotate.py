@@ -39,13 +39,14 @@ def coordinates(variant):
     call_end = variant.POS + len(REF) - 1 # VCF 4.2
   return call_start, call_end
 
-def retainCall_reportConfidence(
-    unitigs, variant, region, block_length_threshold, mapping_quality_threshold
-  ): 
+def retainCall_reportConfidence(unitigs, variant, region, parameters): 
+  info(str(type(parameters['mapping quality threshold'])))
+  1/0
+
   call_start, call_end = coordinates(variant) 
  
   for unitig in unitigs.fetch(*parse(region)):
-    if unitig.mapping_quality <= mapping_quality_threshold:
+    if unitig.mapping_quality <= parameters['mapping quality threshold']:
       continue
     # https://pysam.readthedocs.io/en/latest/api.html#pysam.AlignedSegment.get_blocks
     blocks = unitig.get_blocks()
@@ -61,8 +62,8 @@ def retainCall_reportConfidence(
 #        block_immediately_downstream_of_call = blocks_downstream_of_call[0]
 #        condition_1 = length(block_immediately_upstream_of_call) > block_length_threshold
 #        condition_2 = length(block_immediately_downstream_of_call) > block_length_threshold
-        condition_1 = max_block_size_upstream_of_call > block_length_threshold
-        condition_2 = max_block_size_downstream_of_call > block_length_threshold
+        condition_1 = max_block_size_upstream_of_call > parameters['block length threshold']
+        condition_2 = max_block_size_downstream_of_call > parameters['block length threshold']
         # condition_3 = max_block_index_upstream_of_call == 0
         # condition_4 = max_block_index_downstream_of_call == len(blocks_downstream_of_call) - 1
         call_confidence = (max_block_size_upstream_of_call + max_block_size_downstream_of_call)/len(blocks)
@@ -98,9 +99,6 @@ def filter_annotate_calls():
 
   import json 
   parameters = json.load(open('{}.json'.format(args.parameters)))
-  info(str(parameters))
-  info(parameters['intra cluster distance threshold'])
-  1/0
 
   vcf = VCF(args.calls+'.vcf.gz')
   vcf.add_info_to_header({
@@ -115,9 +113,7 @@ def filter_annotate_calls():
       chromosome, start, end = region.strip().split('\t') 
       region = '{}:{}-{}'.format(chromosome, start, end)
       for variant in vcf(region): 
-        retain_call, call_confidence = retainCall_reportConfidence(
-          unitigs, variant, region, args.block_length_threshold, args.mapping_quality_threshold
-        )
+        retain_call, call_confidence = retainCall_reportConfidence(unitigs, variant, region, parameters)
         if retain_call:
           print(annotate(variant, call_confidence), end='') 
   vcf.close()
