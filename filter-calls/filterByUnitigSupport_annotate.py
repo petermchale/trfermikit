@@ -108,7 +108,7 @@ def filter_annotate_calls():
     for region in regions:
       info('type(region) = {}'.format(type(region)))
       info('region = {}'.format(region))
-      chromosome, start, end, _ = region.strip().split('\t') 
+      chromosome, start, end = region.strip().split('\t') 
       region = '{}:{}-{}'.format(chromosome, start, end)
       info('region = {}'.format(region))
       1/0
