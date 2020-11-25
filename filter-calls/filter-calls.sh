@@ -49,7 +49,8 @@ jq \
   }' \
   > ${output}/filter-calls.json
 
-gunzip --force --stdout ${calls}.vcf.gz | bash utilities/sort_compress_index_calls.sh ${calls}
+gunzip --force --stdout ${calls}.vcf.gz | 
+  bash utilities/sort_compress_index_calls.sh ${calls}
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
 bash filter-calls/decompose_normalize_findSVs.sh \

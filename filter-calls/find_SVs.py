@@ -39,11 +39,9 @@ def find_SVs():
   parser = argparse.ArgumentParser(description='')
   parser.add_argument('--calls', type=str, help='')
   parser.add_argument('--svtype', type=str, help='')
+  # https://docs.python.org/3/library/argparse.html#dest : 
   parser.add_argument('--sv-length-threshold', dest='sv_length_threshold', type=int, help='')
   args = parser.parse_args()
-
-  info('args.sv_length_threshold = {}'.format(args.sv_length_threshold))
-  sys.exit(1)
 
   variants = VCF('/dev/stdin') if args.calls == 'stdin' else VCF(args.calls)
   
