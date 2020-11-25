@@ -49,7 +49,7 @@ jq \
   }' \
   > ${output}/filter-calls.json
 
-gunzip ${calls}.vcf.gz \
+gunzip --force ${calls}.vcf.gz \
   && bash utilities/sort_compress_index_calls.sh ${calls}
 exit 1
 
