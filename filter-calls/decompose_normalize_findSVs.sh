@@ -8,7 +8,7 @@ while [[ "$1" =~ ^- ]]; do
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --number_threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --sv-length-threshold ) shift; [[ ! $1 =~ ^- ]] && sv_length_threshold=$1;;
+    --parameters ) shift; [[ ! $1 =~ ^- ]] && parameters=$1;;
     *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -40,7 +40,7 @@ bcftools norm --check-ref w --fasta-ref ${reference}.fa --multiallelics -any --t
   | python filter-calls/find_SVs.py \
     --calls stdin \
     --svtype ${svtype} \
-    --sv-length-threshold ${sv_length_threshold}
+    --parameters ${parameters}
 
 
 

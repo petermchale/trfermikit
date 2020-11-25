@@ -99,8 +99,6 @@ def filter_annotate_calls():
 
   import json 
   parameters = json.load(open('{}.json'.format(args.parameters)))
-  info('{}'.format(parameters['block length threshold']))
-  1/0
 
   vcf = VCF(args.calls+'.vcf.gz')
   vcf.add_info_to_header({

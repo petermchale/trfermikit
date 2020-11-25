@@ -58,7 +58,7 @@ bash filter-calls/decompose_normalize_findSVs.sh \
     --calls ${calls} \
     --reference ${reference} \
     --number_threads ${number_threads} \
-    --sv-length-threshold ${sv_length_threshold} \
+    --parameters ${parameters} \
   | bash utilities/sort_compress_index_calls.sh ${calls_decomposed_normalized_svtype}
 
 calls_unitigSupport="${calls_decomposed_normalized_svtype}.unitigSupport"

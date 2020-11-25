@@ -39,9 +39,11 @@ def find_SVs():
   parser = argparse.ArgumentParser(description='')
   parser.add_argument('--calls', type=str, help='')
   parser.add_argument('--svtype', type=str, help='')
-  # https://docs.python.org/3/library/argparse.html#dest : 
-  parser.add_argument('--sv-length-threshold', dest='sv_length_threshold', type=int, help='')
+  parser.add_argument('--parameters', type=str, help='')
   args = parser.parse_args()
+
+  import json 
+  parameters = json.load(open('{}.json'.format(args.parameters)))
 
   variants = VCF('/dev/stdin') if args.calls == 'stdin' else VCF(args.calls)
   
@@ -57,7 +59,11 @@ def find_SVs():
     if hom_ref(variant): 
       continue
 
-    if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= args.sv_length_threshold: 
+    sv_length_threshold = int(parameters['minimum SV size'])
+    info('{}'.format(sv_length_threshold))
+    1/0 
+    
+    if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= sv_length_threshold: 
       print(variant, end='')
  
   variants.close()
