@@ -62,8 +62,6 @@ bash make-calls/make-calls.sh \
     --reference ${reference} \
   > ${output}/make-calls.log 2>&1
 
-exit 1 
-
 bash filter-calls/filter-calls.sh \
     --output ${output} \
     --svtype ${svtype} \
