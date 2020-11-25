@@ -2,6 +2,7 @@ from cyvcf2 import VCF
 import sys 
 from color_text import error, info
 import color_traceback
+import argparse 
 
 def hom_ref(variant): 
   # http://brentp.github.io/cyvcf2/#cyvcf2
@@ -35,9 +36,18 @@ def get_svtype(variant):
     return 'DEL' if get_sv_length(variant) < 0 else 'INS'
 
 def find_SVs():
-  variants = VCF('/dev/stdin') if sys.argv[1] == 'stdin' else VCF(sys.argv[1])
+  parser = argparse.ArgumentParser(description='')
+  parser.add_argument('--calls', type=str, help='')
+  parser.add_argument('--svtype', type=str, help='')
+  parser.add_argument('--sv-length-threshold', dest='sv_length_threshold', type=int, help='')
+  args = parser.parse_args()
+
+  info('args.sv_length_threshold = {}'.format(args.sv_length_threshold))
+  sys.exit(1)
+
+  variants = VCF('/dev/stdin') if args.calls == 'stdin' else VCF(args.calls)
   
-  svtype = sys.argv[2]
+  svtype = args.svtype
   if svtype not in ['DEL', 'INS']:
     print('svtype', svtype, 'not permitted!', file=sys.stderr) 
     sys.exit(1) 
@@ -49,11 +59,7 @@ def find_SVs():
     if hom_ref(variant): 
       continue
 
-    # Chaisson defines an SV to be an event >50bp in size
-    # That is, only events >50bp are recorded in the pacbio callset
-    # Thus, discovered events <50bp may be flagged as FPs by truvari
-    sv_length_threshold = 50
-    if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= sv_length_threshold: 
+    if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= args.sv_length_threshold: 
       print(variant, end='')
  
   variants.close()

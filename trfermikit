@@ -45,27 +45,27 @@ export PYTHONPATH="$PWD/utilities"
 
 mkdir --parents ${output} 
 
-bash make-regions/make-regions.sh \
-    --output ${output} \
-    --repeats ${repeats} \
-    --min-repeat-length ${min_repeat_length} \
-    --alignments ${alignments} \
-    --threads ${number_threads} \
-    --functional-regions ${functional_regions} \
-    --reference ${reference} \
-  2> ${output}/make-regions.log 
+# bash make-regions/make-regions.sh \
+#     --output ${output} \
+#     --repeats ${repeats} \
+#     --min-repeat-length ${min_repeat_length} \
+#     --alignments ${alignments} \
+#     --threads ${number_threads} \
+#     --functional-regions ${functional_regions} \
+#     --reference ${reference} \
+#   2> ${output}/make-regions.log 
 
 bash make-calls/make-calls.sh \
     --output ${output} \
     --alignments ${alignments} \
     --threads ${number_threads} \
     --reference ${reference} 
-  # > ${output}/make-calls.log 2>&1
+  > ${output}/make-calls.log 2>&1
 
-# bash filter-calls.sh \
-#     --output ${output} \
-#     --svtype ${svtype} \
-#     --reference ${reference} \
-#     --threads ${number_threads}
+bash filter-calls/filter-calls.sh \
+    --output ${output} \
+    --svtype ${svtype} \
+    --reference ${reference} \
+    --threads ${number_threads}
 #  2> ${output}/filter-calls.log 
 

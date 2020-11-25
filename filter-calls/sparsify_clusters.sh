@@ -5,7 +5,7 @@
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
-    --slop ) shift; [[ ! $1 =~ ^- ]] && slop=$1;;
+    --cluster-distance ) shift; [[ ! $1 =~ ^- ]] && cluster_distance=$1;;
     *) bash ../utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -27,10 +27,10 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 sparsify_clusters () {
   local calls_=$1
-  local slop_=$2
+  local cluster_distance_=$2
   local cluster_column=11
   local confidence_column=12
-  bedtools cluster -i ${calls_}.vcf.gz -d ${slop_} \
+  bedtools cluster -i ${calls_}.vcf.gz -d ${cluster_distance_} \
     | python append_INFO_value_to_vcf_record.py "Confidence" \
     | sort -k${cluster_column},${cluster_column}n -k${confidence_column},${confidence_column}nr \
     | bedtools groupby -grp ${cluster_column} -opCols ${confidence_column} -ops max -full \
@@ -42,4 +42,4 @@ vcf_headers () {
   zgrep ^"#" ${calls_}.vcf.gz
 }
 
-(vcf_headers ${calls}; sparsify_clusters ${calls} ${slop})
+(vcf_headers ${calls}; sparsify_clusters ${calls} ${cluster_distance})

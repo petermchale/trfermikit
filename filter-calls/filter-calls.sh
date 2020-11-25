@@ -31,7 +31,23 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 calls="${output}/fermikit.raw"
 unitigs="${output}/fermikit.unsrt"
 regions="${output}/regions"
-slop=500
+
+cluster_distance="500"
+
+# Chaisson defines an SV to be an event >50bp in size
+# That is, only events >50bp are recorded in the pacbio callset
+# Thus, discovered events <50bp may be flagged as FPs by truvari
+sv_length_threshold="50"
+
+jq \
+  --null-input \
+  --arg cluster_distance ${cluster_distance} \
+  --arg sv_length_threshold ${sv_length_threshold} \
+  '{ 
+    "intra cluster distance threshold": $cluster_distance,
+    "minimum SV size": $sv_length_threshold
+  }' \
+  > ${output}/filter-calls.json
 
 cat ${calls}.vcf | bash utilities/sort_compress_index_calls.sh ${calls}
 
@@ -39,20 +55,21 @@ cat ${calls}.vcf | bash utilities/sort_compress_index_calls.sh ${calls}
 /usr/bin/time --verbose bash utilities/sort_compress_index_alignments.sh ${unitigs}
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
-bash utilities/decompose_normalize_findSVs.sh \
+bash filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${calls} \
     --reference ${reference} \
     --number_threads ${number_threads} \
+    --sv-length-threshold ${sv_length_threshold} \
   | bash utilities/sort_compress_index_calls.sh ${calls_decomposed_normalized_svtype}
 
 calls_unitigSupport="${calls_decomposed_normalized_svtype}.unitigSupport"
-python filters/filterByUnitigSupport_annotate.py \
+python filter-calls/filterByUnitigSupport_annotate.py \
     --alignments ${unitigs} \
     --regions ${regions} \
     --calls ${calls_decomposed_normalized_svtype} \
   | bash utilities/sort_compress_index_calls.sh "${calls_unitigSupport}"
 
 calls_thinned="${calls_unitigSupport}.thinned"
-bash filters/sparsify_clusters.sh --calls ${calls_unitigSupport} --slop ${slop} \
+bash filter-calls/sparsify_clusters.sh --calls ${calls_unitigSupport} --cluster-distance ${cluster_distance} \
   | bash utilities/sort_compress_index_calls.sh "${calls_thinned}"

@@ -8,6 +8,7 @@ while [[ "$1" =~ ^- ]]; do
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --number_threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
+    --sv-length-threshold ) shift; [[ ! $1 =~ ^- ]] && sv_length_threshold=$1;;
     *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -36,5 +37,10 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 # http://samtools.github.io/bcftools/bcftools.html
 # also see: http://www.cureffi.org/2014/04/24/converting-genetic-variants-to-their-minimal-representation/
 bcftools norm --check-ref w --fasta-ref ${reference}.fa --multiallelics -any --threads ${number_threads} ${calls}.vcf.gz \
-  | python find_SVs.py stdin ${svtype} 
+  | python filter-calls/find_SVs.py \
+    --calls stdin \
+    --svtype ${svtype} \
+    --sv-length-threshold ${sv_length_threshold}
+
+
 
