@@ -51,7 +51,6 @@ jq \
 
 gunzip --force ${calls}.vcf.gz 
 cat ${calls}.vcf | bash utilities/sort_compress_index_calls.sh ${calls}
-exit 1
 
 # /usr/bin/time won't work with bash functions, only bash scripts
 /usr/bin/time --verbose bash utilities/sort_compress_index_alignments.sh ${unitigs}
