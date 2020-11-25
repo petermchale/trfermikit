@@ -42,6 +42,7 @@ sv_length_threshold="5" # "50"
 block_length_threshold="25" # 50, 75
 mapping_quality_threshold="0"
 
+parameters=${output}/filter-calls
 jq \
   --null-input \
   --arg cluster_distance ${cluster_distance} \
@@ -54,7 +55,7 @@ jq \
     "block length threshold": $block_length_threshold,
     "mapping quality threshold": $mapping_quality_threshold
   }' \
-  > ${output}/filter-calls.json
+  > ${parameters}.json
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
 bash filter-calls/decompose_normalize_findSVs.sh \
@@ -70,8 +71,7 @@ python filter-calls/filterByUnitigSupport_annotate.py \
     --alignments ${unitigs} \
     --regions ${regions} \
     --calls ${calls_decomposed_normalized_svtype} \
-    --block-length-threshold ${block_length_threshold} \
-    --mapping-quality-threshold ${mapping_quality_threshold} \
+    --parameters ${parameters} \
   | bash utilities/sort_compress_index_calls.sh "${calls_unitigSupport}"
 
 calls_thinned="${calls_unitigSupport}.thinned"

@@ -93,10 +93,14 @@ def filter_annotate_calls():
   parser.add_argument('--alignments', type=str, help='')
   parser.add_argument('--regions', type=str, help='')
   parser.add_argument('--calls', type=str, help='')
-  # https://docs.python.org/3/library/argparse.html#dest :
-  parser.add_argument('--block-length-threshold', dest='block_length_threshold', type=int, help='')
-  parser.add_argument('--mapping-quality-threshold', dest='mapping_quality_threshold', type=int, help='')
+  parser.add_argument('--parameters', type=str, help='')
   args = parser.parse_args()
+
+  import json 
+  parameters = json.load(open('{}.json'.format(args.parameters)))
+  info(str(parameters))
+  info(parameters['intra cluster distance threshold'])
+  1/0
 
   vcf = VCF(args.calls+'.vcf.gz')
   vcf.add_info_to_header({
@@ -119,10 +123,4 @@ def filter_annotate_calls():
   vcf.close()
 
 if __name__ == "__main__":
-  import json 
-  parameters = json.load(open('data/HG00514.DEL/filter-calls.json'))
-  info(str(parameters))
-  info(parameters['intra cluster distance threshold'])
-  1/0
-
   filter_annotate_calls()
