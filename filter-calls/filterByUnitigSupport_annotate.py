@@ -106,6 +106,7 @@ def filter_annotate_calls():
   with pysam.AlignmentFile(args.alignments+'.bam', 'rb') as unitigs, gzip.open(args.regions+'.bed.gz', 'rb') as regions:
     print(vcf.raw_header, end='')
     for region in regions:
+      info('type(region) = {}'.format(type(region)))
       chromosome, start, end, _ = region.strip().split('\t') 
       region = '{}:{}-{}'.format(chromosome, start, end)
       info('region = {}'.format(region))
