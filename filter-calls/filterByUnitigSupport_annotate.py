@@ -106,10 +106,10 @@ def filter_annotate_calls():
   with pysam.AlignmentFile(args.alignments+'.bam', 'rb') as unitigs, gzip.open(args.regions+'.bed.gz', 'rb') as regions:
     print(vcf.raw_header, end='')
     for region in regions:
-      info('region = {}'.format(region))
-      1/0
       chromosome, start, end, _ = region.strip().split('\t') 
       region = '{}:{}-{}'.format(chromosome, start, end)
+      info('region = {}'.format(region))
+      1/0
       for variant in vcf(region): 
         retain_call, call_confidence = retainCall_reportConfidence(unitigs, variant, region)
         if retain_call:
