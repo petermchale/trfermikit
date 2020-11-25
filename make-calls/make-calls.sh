@@ -27,8 +27,6 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' 
 
-regions="${output}/regions"
-
 single_base_match_reward="10" 
 single_base_mismatch_penalty="12" 
 gap_open_penalties="6,26" # there are two because the cost function of gap length is piecewise linear
@@ -52,6 +50,7 @@ jq \
   > ${output}/make-calls.json
 
 # get short reads that were originally aligned to given regions
+regions="${output}/regions"
 
 # fetch regions by sweeping through cram (expected to be faster when number of regions > ~10,000) 
 # "bedtools intersect -sorted" uses the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input
@@ -110,4 +109,10 @@ make-calls/fermi.kit/run-calling \
     ${reference}.fa \
     ${fermikit_prefix}.mag.gz \
   | bash -euxo pipefail
+
+calls="${output}/fermikit.raw"
+gunzip --force ${calls}.vcf.gz 
+cat ${calls}.vcf | bash utilities/sort_compress_index_calls.sh ${calls}
+exit 1
+
 
