@@ -42,8 +42,6 @@ def coordinates(variant):
 def retainCall_reportConfidence(unitigs, variant, region, parameters): 
   mapping_quality_threshold = int(parameters['mapping quality threshold'])
   block_length_threshold = int(parameters['block length threshold'])
-  info('{}\t{}'.format(mapping_quality_threshold, block_length_threshold))
-  1/0
 
   call_start, call_end = coordinates(variant) 
  
@@ -64,8 +62,8 @@ def retainCall_reportConfidence(unitigs, variant, region, parameters):
 #        block_immediately_downstream_of_call = blocks_downstream_of_call[0]
 #        condition_1 = length(block_immediately_upstream_of_call) > block_length_threshold
 #        condition_2 = length(block_immediately_downstream_of_call) > block_length_threshold
-        condition_1 = max_block_size_upstream_of_call > parameters['block length threshold']
-        condition_2 = max_block_size_downstream_of_call > parameters['block length threshold']
+        condition_1 = max_block_size_upstream_of_call > block_length_threshold
+        condition_2 = max_block_size_downstream_of_call > block_length_threshold
         # condition_3 = max_block_index_upstream_of_call == 0
         # condition_4 = max_block_index_downstream_of_call == len(blocks_downstream_of_call) - 1
         call_confidence = (max_block_size_upstream_of_call + max_block_size_downstream_of_call)/len(blocks)
