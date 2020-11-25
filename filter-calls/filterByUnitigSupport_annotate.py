@@ -6,9 +6,6 @@ from color_text import error, info
 import argparse
 import gzip
 
-block_length_threshold = 25 # 50, 75
-mapping_quality_threshold = 0
-
 def parse(locus): 
   chromosome, start_end = locus.split(':')
   start, end = map(lambda s: int(s.replace(',', '')), start_end.split('-'))
@@ -42,7 +39,9 @@ def coordinates(variant):
     call_end = variant.POS + len(REF) - 1 # VCF 4.2
   return call_start, call_end
 
-def retainCall_reportConfidence(unitigs, variant, region): 
+def retainCall_reportConfidence(
+    unitigs, variant, region, block_length_threshold, mapping_quality_threshold
+  ): 
   call_start, call_end = coordinates(variant) 
  
   for unitig in unitigs.fetch(*parse(region)):
@@ -94,6 +93,9 @@ def filter_annotate_calls():
   parser.add_argument('--alignments', type=str, help='')
   parser.add_argument('--regions', type=str, help='')
   parser.add_argument('--calls', type=str, help='')
+  # https://docs.python.org/3/library/argparse.html#dest :
+  parser.add_argument('--block-length-threshold', dest='block_length_threshold', type=int, help='')
+  parser.add_argument('--mapping-quality-threshold', dest='mapping_quality_threshold', type=int, help='')
   args = parser.parse_args()
 
   vcf = VCF(args.calls+'.vcf.gz')
@@ -109,10 +111,17 @@ def filter_annotate_calls():
       chromosome, start, end = region.strip().split('\t') 
       region = '{}:{}-{}'.format(chromosome, start, end)
       for variant in vcf(region): 
-        retain_call, call_confidence = retainCall_reportConfidence(unitigs, variant, region)
+        retain_call, call_confidence = retainCall_reportConfidence(
+          unitigs, variant, region, args.block_length_threshold, args.mapping_quality_threshold
+        )
         if retain_call:
           print(annotate(variant, call_confidence), end='') 
   vcf.close()
 
 if __name__ == "__main__":
+  import json 
+  parameters = json.load('data/HG00514/filter-calls.json')
+  info(str(parameters))
+  1/0
+
   filter_annotate_calls()

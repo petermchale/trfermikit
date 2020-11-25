@@ -31,7 +31,7 @@ sparsify_clusters () {
   local cluster_column=11
   local confidence_column=12
   bedtools cluster -i ${calls_}.vcf.gz -d ${cluster_distance_} \
-    | python append_INFO_value_to_vcf_record.py "Confidence" \
+    | python filter-calls/append_INFO_value_to_vcf_record.py "Confidence" \
     | sort -k${cluster_column},${cluster_column}n -k${confidence_column},${confidence_column}nr \
     | bedtools groupby -grp ${cluster_column} -opCols ${confidence_column} -ops max -full \
     | cut -f1-$((cluster_column-1))

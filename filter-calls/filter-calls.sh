@@ -37,15 +37,22 @@ cluster_distance="500"
 # Chaisson defines an SV to be an event >50bp in size
 # That is, only events >50bp are recorded in the pacbio callset
 # Thus, discovered events <50bp may be flagged as FPs by truvari
-sv_length_threshold="50"
+sv_length_threshold="5" # "50"
+
+block_length_threshold="25" # 50, 75
+mapping_quality_threshold="0"
 
 jq \
   --null-input \
   --arg cluster_distance ${cluster_distance} \
   --arg sv_length_threshold ${sv_length_threshold} \
+  --arg block_length_threshold ${block_length_threshold} \
+  --arg mapping_quality_threshold ${mapping_quality_threshold} \
   '{ 
     "intra cluster distance threshold": $cluster_distance,
-    "minimum SV size": $sv_length_threshold
+    "minimum SV size": $sv_length_threshold,
+    "block length threshold": $block_length_threshold,
+    "mapping quality threshold": $mapping_quality_threshold
   }' \
   > ${output}/filter-calls.json
 
@@ -63,6 +70,8 @@ python filter-calls/filterByUnitigSupport_annotate.py \
     --alignments ${unitigs} \
     --regions ${regions} \
     --calls ${calls_decomposed_normalized_svtype} \
+    --block-length-threshold ${block_length_threshold} \
+    --mapping-quality-threshold ${mapping_quality_threshold} \
   | bash utilities/sort_compress_index_calls.sh "${calls_unitigSupport}"
 
 calls_thinned="${calls_unitigSupport}.thinned"
