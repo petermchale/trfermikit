@@ -29,7 +29,7 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 calls="${output}/fermikit.raw"
-unitigs="${output}/fermikit.unsrt"
+unitigs="${output}/fermikit.srt"
 regions="${output}/regions"
 
 cluster_distance="500"
@@ -51,9 +51,6 @@ jq \
 
 gunzip --force ${calls}.vcf.gz 
 cat ${calls}.vcf | bash utilities/sort_compress_index_calls.sh ${calls}
-
-# /usr/bin/time won't work with bash functions, only bash scripts
-/usr/bin/time --verbose bash utilities/sort_compress_index_alignments.sh ${unitigs}
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
 bash filter-calls/decompose_normalize_findSVs.sh \

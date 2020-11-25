@@ -100,6 +100,9 @@ if (defined $opts{m}) {
 }
 $cmd .= "[ ! -f $prefix.srt.bam ] && /usr/bin/time --verbose $root/htsbox samsort -S $prefix.unsrt.sam.gz > $prefix.srt.bam;\n";
 
+# Peter McHale Nov 2020 
+$cmd .= "samtools index ${prefix}.srt.bam;\n";
+
 # Peter McHale 7 Feb 2020: "htsbox pileup -d" (which is part of the "-u" option) replaces depths of alleles (FORMAT.AD) with base quality scores 
 # What this amounts to is that support for REF allele is now something like -10*log10(probability of base errors in REF allele),
 # while support for ALT allele is now -10*log10(probability that observed alignments supporting ALT allele could have arisen in the absence of the hypothesized event)  
