@@ -40,13 +40,15 @@ def coordinates(variant):
   return call_start, call_end
 
 def retainCall_reportConfidence(unitigs, variant, region, parameters): 
-  info(str(type(parameters['mapping quality threshold'])))
+  mapping_quality_threshold = int(parameters['mapping quality threshold'])
+  block_length_threshold = int(parameters['block length threshold'])
+  info('{}\t{}'.format(mapping_quality_threshold, block_length_threshold))
   1/0
 
   call_start, call_end = coordinates(variant) 
  
   for unitig in unitigs.fetch(*parse(region)):
-    if unitig.mapping_quality <= parameters['mapping quality threshold']:
+    if unitig.mapping_quality <= mapping_quality_threshold:
       continue
     # https://pysam.readthedocs.io/en/latest/api.html#pysam.AlignedSegment.get_blocks
     blocks = unitig.get_blocks()
