@@ -131,7 +131,7 @@ $cmd .= "(/usr/bin/time --verbose $root/k8 $root/hapdip.js deovlp $prefix.raw.vc
 #          -D         drop filtered variants
 #          -A         only output lines matching /^(chr)?[0-9]+/
 # $cmd .= "($root/k8 $root/hapdip.js filter -q3 -a25 $prefix.tmp.vcf.gz | gzip -1 > $prefix.flt.vcf.gz) 2>> $prefix.flt.vcf.log; rm -f $prefix.tmp.vcf.gz;\n";
-$cmd .= "(/usr/bin/time --verbose $root/k8 $root/hapdip.js filter -q3 -a25 $prefix.tmp.vcf.gz | gzip -1 > $prefix.flt.vcf.gz) 2>> $prefix.flt.vcf.log;\n";
+$cmd .= "(/usr/bin/time --verbose $root/k8 $root/hapdip.js filter -q3 -a25 $prefix.tmp.vcf.gz | gzip -1 > $prefix.flt.vcf.gz) 2>> $prefix.flt.vcf.log; rm -f $prefix.tmp.vcf.gz;\n";
 
 $cmd .= "/usr/bin/time --verbose $root/htsbox abreak -cuf $ref $prefix.unsrt.sam.gz | gzip -1 > $prefix.sv.vcf.gz;\n";
 print $cmd;
