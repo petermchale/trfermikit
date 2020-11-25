@@ -4,6 +4,7 @@ import sys
 import numpy as np 
 from color_text import error, info
 import argparse
+import gzip
 
 block_length_threshold = 25 # 50, 75
 mapping_quality_threshold = 0
@@ -102,9 +103,11 @@ def filter_annotate_calls():
     'Type': 'String', 
     'Number': '1'
   })
-  with pysam.AlignmentFile(args.alignments+'.bam', 'rb') as unitigs, open(args.regions+'.bed', 'r') as regions:
+  with pysam.AlignmentFile(args.alignments+'.bam', 'rb') as unitigs, gzip.open(args.regions+'.bed.gz', 'rb') as regions:
     print(vcf.raw_header, end='')
     for region in regions:
+      info('region = {}'.format(region))
+      1/0
       chromosome, start, end, _ = region.strip().split('\t') 
       region = '{}:{}-{}'.format(chromosome, start, end)
       for variant in vcf(region): 
