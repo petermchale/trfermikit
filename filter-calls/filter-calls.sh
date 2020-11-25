@@ -49,8 +49,8 @@ jq \
   }' \
   > ${output}/filter-calls.json
 
-gunzip --force ${calls}.vcf.gz \
-  && bash utilities/sort_compress_index_calls.sh ${calls}
+gunzip --force ${calls}.vcf.gz 
+cat ${calls}.vcf | bash utilities/sort_compress_index_calls.sh ${calls}
 exit 1
 
 # /usr/bin/time won't work with bash functions, only bash scripts
