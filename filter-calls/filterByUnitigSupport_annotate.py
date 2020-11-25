@@ -122,6 +122,7 @@ if __name__ == "__main__":
   import json 
   parameters = json.load(open('data/HG00514.DEL/filter-calls.json'))
   info(str(parameters))
+  info(parameters['intra cluster distance threshold'])
   1/0
 
   filter_annotate_calls()
