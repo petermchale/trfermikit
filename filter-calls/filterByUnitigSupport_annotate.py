@@ -103,7 +103,7 @@ def filter_annotate_calls():
     'Type': 'String', 
     'Number': '1'
   })
-  with pysam.AlignmentFile(args.alignments+'.bam', 'rb') as unitigs, gzip.open(args.regions+'.bed.gz', 'r') as regions:
+  with pysam.AlignmentFile(args.alignments+'.bam', 'rb') as unitigs, gzip.open(args.regions+'.bed.gz', 'rt') as regions:
     print(vcf.raw_header, end='')
     for region in regions:
       info('type(region) = {}'.format(type(region)))
