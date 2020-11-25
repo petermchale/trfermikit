@@ -44,7 +44,6 @@ jq \
   --null-input \
   --arg cluster_distance ${cluster_distance} \
   --arg sv_length_threshold ${sv_length_threshold} \
-  --arg mapping_quality_threshold ${mapping_quality_threshold} \
   '{ 
     "intra cluster distance threshold": $cluster_distance,
     "minimum SV size": $sv_length_threshold,
