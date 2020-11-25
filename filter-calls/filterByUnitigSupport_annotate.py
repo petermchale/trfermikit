@@ -120,7 +120,7 @@ def filter_annotate_calls():
 
 if __name__ == "__main__":
   import json 
-  parameters = json.load('data/HG00514/filter-calls.json')
+  parameters = json.load(open('data/HG00514/filter-calls.json'))
   info(str(parameters))
   1/0
 
