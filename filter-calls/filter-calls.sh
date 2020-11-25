@@ -39,21 +39,17 @@ cluster_distance="500"
 # Thus, discovered events <50bp may be flagged as FPs by truvari
 sv_length_threshold="5" # "50"
 
-block_length_threshold="25" # 50, 75
-mapping_quality_threshold="0"
-
 parameters=${output}/filter-calls
 jq \
   --null-input \
   --arg cluster_distance ${cluster_distance} \
   --arg sv_length_threshold ${sv_length_threshold} \
-  --arg block_length_threshold ${block_length_threshold} \
   --arg mapping_quality_threshold ${mapping_quality_threshold} \
   '{ 
     "intra cluster distance threshold": $cluster_distance,
     "minimum SV size": $sv_length_threshold,
-    "block length threshold": $block_length_threshold,
-    "mapping quality threshold": $mapping_quality_threshold
+    "block length threshold": "25",
+    "mapping quality threshold": "0"
   }' \
   > ${parameters}.json
 
