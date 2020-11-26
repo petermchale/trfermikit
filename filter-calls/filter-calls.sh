@@ -32,21 +32,15 @@ calls="${output}/fermikit.raw"
 unitigs="${output}/fermikit.srt"
 regions="${output}/regions"
 
-cluster_distance="500"
-
+parameters=${output}/filter-calls
 # Chaisson defines an SV to be an event >50bp in size
 # That is, only events >50bp are recorded in the pacbio callset
 # Thus, discovered events <50bp may be flagged as FPs by truvari
-sv_length_threshold="5" # "50"
-
-parameters=${output}/filter-calls
 jq \
   --null-input \
-  --arg cluster_distance ${cluster_distance} \
-  --arg sv_length_threshold ${sv_length_threshold} \
   '{ 
-    "intra cluster distance threshold": $cluster_distance,
-    "minimum SV size": $sv_length_threshold,
+    "intra cluster distance threshold": "500",
+    "minimum SV size": "5",
     "block length threshold": "25",
     "mapping quality threshold": "0"
   }' \
@@ -70,5 +64,5 @@ python filter-calls/filterByUnitigSupport_annotate.py \
   | bash utilities/sort_compress_index_calls.sh "${calls_unitigSupport}"
 
 calls_thinned="${calls_unitigSupport}.thinned"
-bash filter-calls/sparsify_clusters.sh --calls ${calls_unitigSupport} --cluster-distance ${cluster_distance} \
+bash filter-calls/sparsify_clusters.sh --calls ${calls_unitigSupport} --parameters ${parameters} \
   | bash utilities/sort_compress_index_calls.sh "${calls_thinned}"

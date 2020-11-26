@@ -60,9 +60,6 @@ def find_SVs():
       continue
 
     sv_length_threshold = int(parameters['minimum SV size'])
-    info('{}'.format(sv_length_threshold))
-    1/0 
-    
     if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= sv_length_threshold: 
       print(variant, end='')
  
