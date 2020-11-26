@@ -51,7 +51,7 @@ sv_length_threshold=$(jq --raw-output '."minimum SV size"' ${output}/filter-call
 
 #######################################################
 
-bash decompose_normalize_findSVs.sh \
+bash filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${pacbio_calls} \
     --reference ${reference} \
@@ -59,7 +59,7 @@ bash decompose_normalize_findSVs.sh \
     --sv-length-threshold ${sv_length_threshold} \
   | bash sort_compress_index_calls.sh ${pacbio_calls_decomposed_normalized_svtype}
 
-bash decompose_normalize_findSVs.sh \
+bash filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${manta_calls} \
     --reference ${reference} \
