@@ -47,7 +47,7 @@ manta_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/m
 pacbio_calls_decomposed_normalized_svtype="${pacbio_calls}.decomposed.normalized.${svtype}"
 manta_calls_decomposed_normalized_svtype="${manta_calls}.decomposed.normalized.${svtype}"
 
-sv_length_threshold=$(jq --raw-output '."minimum SV size"' ${output}/filter-calls.json)
+parameters="${output}/filter-calls"
 
 #######################################################
 
@@ -56,7 +56,7 @@ bash filter-calls/decompose_normalize_findSVs.sh \
     --calls ${pacbio_calls} \
     --reference ${reference} \
     --number_threads ${number_threads} \
-    --sv-length-threshold ${sv_length_threshold} \
+    --parameters ${parameters} \
   | bash sort_compress_index_calls.sh ${pacbio_calls_decomposed_normalized_svtype}
 
 bash filter-calls/decompose_normalize_findSVs.sh \
@@ -64,7 +64,7 @@ bash filter-calls/decompose_normalize_findSVs.sh \
     --calls ${manta_calls} \
     --reference ${reference} \
     --number_threads ${number_threads} \
-    --sv-length-threshold ${sv_length_threshold} \
+    --parameters ${parameters} \
   | bash sort_compress_index_calls.sh ${manta_calls_decomposed_normalized_svtype}
 
 pacbio_covered_regions () { 
