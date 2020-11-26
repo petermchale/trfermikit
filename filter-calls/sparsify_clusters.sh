@@ -31,7 +31,6 @@ intra_cluster_distance_threshold () {
 
 sparsify_clusters () {
   local calls_=$1
-  local cluster_distance_=$2
   local cluster_column=11
   local confidence_column=12
   bedtools cluster -i ${calls_}.vcf.gz -d $(intra_cluster_distance_threshold) \
@@ -46,4 +45,4 @@ vcf_headers () {
   zgrep ^"#" ${calls_}.vcf.gz
 }
 
-(vcf_headers ${calls}; sparsify_clusters ${calls} ${cluster_distance})
+(vcf_headers ${calls}; sparsify_clusters ${calls} 
