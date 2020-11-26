@@ -45,4 +45,4 @@ vcf_headers () {
   zgrep ^"#" ${calls_}.vcf.gz
 }
 
-(vcf_headers ${calls}; sparsify_clusters ${calls} 
+(vcf_headers ${calls}; sparsify_clusters ${calls})
