@@ -48,7 +48,6 @@ pacbio_calls_decomposed_normalized_svtype="${pacbio_calls}.decomposed.normalized
 manta_calls_decomposed_normalized_svtype="${manta_calls}.decomposed.normalized.${svtype}"
 
 sv_length_threshold=$(jq --raw-output '."minimum SV size"' ${output}/filter-calls.json)
-exit 1 
 
 #######################################################
 
