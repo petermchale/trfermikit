@@ -6,7 +6,7 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
     --parameters ) shift; [[ ! $1 =~ ^- ]] && parameters=$1;;
-    *) bash ../utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done

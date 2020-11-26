@@ -45,22 +45,22 @@ set -o pipefail
 # no need to export PATH since it is already in the environment: https://unix.stackexchange.com/a/26059/406037
 PATH="$PWD:$PATH"
 
-# the arguments --min-repeat-length and --functional-regions are optional 
-# only svtype==DEL is currently supported
-trfermikit \
-  --output ${output} \
-  --repeats ${repeats} \
-  --reference ${reference} \
-  --threads ${number_threads} \
-  --svtype ${svtype} \
-  --alignments ${alignments} \
-  --min-repeat-length ${min_repeat_length} \
-  --functional-regions ${functional_regions} 
-
-# bash evaluate-calls/evaluate.sh \
+# # the arguments --min-repeat-length and --functional-regions are optional 
+# # only svtype==DEL is currently supported
+# trfermikit \
 #   --output ${output} \
-#   --threads ${number_threads} \
+#   --repeats ${repeats} \
 #   --reference ${reference} \
-#   --population ${population} \
-#   --sample ${sample} \
+#   --threads ${number_threads} \
 #   --svtype ${svtype} \
+#   --alignments ${alignments} \
+#   --min-repeat-length ${min_repeat_length} \
+#   --functional-regions ${functional_regions} 
+
+bash evaluate-calls/evaluate.sh \
+  --output ${output} \
+  --threads ${number_threads} \
+  --reference ${reference} \
+  --population ${population} \
+  --sample ${sample} \
+  --svtype ${svtype} 
