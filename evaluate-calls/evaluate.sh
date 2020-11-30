@@ -57,7 +57,7 @@ bash filter-calls/decompose_normalize_findSVs.sh \
     --reference ${reference} \
     --number_threads ${number_threads} \
     --parameters ${parameters} \
-  | bash sort_compress_index_calls.sh ${pacbio_calls_decomposed_normalized_svtype}
+  | bash utilities/sort_compress_index_calls.sh ${pacbio_calls_decomposed_normalized_svtype}
 
 bash filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
