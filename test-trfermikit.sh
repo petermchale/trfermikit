@@ -38,24 +38,24 @@ output="data/${sample}.${svtype}"
 # to facilitate a small-scale test of tool correctness and tool usage: 
 repeats_small="${output}/repeats.small"
 set +o pipefail
-zgrep --invert-match ^"#" ${repeats}.bed.gz | head -100 | bash utilities/sort_compress_index_regions.sh ${repeats_small}
+zgrep --invert-match ^"#" ${repeats}.bed.gz | head -1000 | bash utilities/sort_compress_index_regions.sh ${repeats_small}
 repeats=${repeats_small}
 set -o pipefail
 
 # no need to export PATH since it is already in the environment: https://unix.stackexchange.com/a/26059/406037
 PATH="$PWD:$PATH"
 
-# # the arguments --min-repeat-length and --functional-regions are optional 
-# # only svtype==DEL is currently supported
-# trfermikit \
-#   --output ${output} \
-#   --repeats ${repeats} \
-#   --reference ${reference} \
-#   --threads ${number_threads} \
-#   --svtype ${svtype} \
-#   --alignments ${alignments} \
-#   --min-repeat-length ${min_repeat_length} \
-#   --functional-regions ${functional_regions} 
+# the arguments --min-repeat-length and --functional-regions are optional 
+# only svtype==DEL is currently supported
+trfermikit \
+  --output ${output} \
+  --repeats ${repeats} \
+  --reference ${reference} \
+  --threads ${number_threads} \
+  --svtype ${svtype} \
+  --alignments ${alignments} \
+  --min-repeat-length ${min_repeat_length} \
+  --functional-regions ${functional_regions} 
 
 bash evaluate-calls/evaluate.sh \
     --output ${output} \
