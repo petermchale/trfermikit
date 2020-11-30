@@ -83,6 +83,8 @@ truvari () {
   local comp_calls_="$1"
   local truvari_output_="$2"
   
+  rm --recursive --force ${truvari_output_}
+  
   # comp file argument must be bgzipped: 
   # https://github.com/spiralgenetics/truvari/blob/e1d9a4ea441b8102fb3e352ac6fcbf65fe9405e2/truvari/truvari#L705
   # this version of truvari resolved the following issue: 
