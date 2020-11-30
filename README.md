@@ -48,7 +48,8 @@ then the pipeline takes < 1.5hr for a 70X genome.
 An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
 ```
-pip install colored-traceback
+conda create --name trfermikit python=3.8
+pip install --requirements requirements.txt 
 ```
 
 ## TODO
