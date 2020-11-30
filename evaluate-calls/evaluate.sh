@@ -70,7 +70,6 @@ bash filter-calls/decompose_normalize_findSVs.sh \
 pacbio_covered_regions () { 
   local pacbio_covered_regions_on_h0_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/${sample}.h0.covered.sorted"
   local pacbio_covered_regions_on_h1_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/${sample}.h1.covered.sorted"
-  local repeat_directory_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/repeats"
 
   local regions_="${output}/regions"
 
@@ -84,7 +83,7 @@ truvari () {
   local truvari_output_="$2"
   
   rm --recursive --force ${truvari_output_}
-  
+
   # comp file argument must be bgzipped: 
   # https://github.com/spiralgenetics/truvari/blob/e1d9a4ea441b8102fb3e352ac6fcbf65fe9405e2/truvari/truvari#L705
   # this version of truvari resolved the following issue: 
@@ -99,7 +98,7 @@ truvari () {
     --comp ${comp_calls_}.vcf.gz \
     --output ${truvari_output_} \
     --includebed <(pacbio_covered_regions) \
-    > ${truvari_output_}.log 
+    > ${truvari_output_}.log 2>&1
 } 
 
 truvari \
