@@ -47,10 +47,28 @@ then the pipeline takes < 1.5hr for a 70X genome.
 
 An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
+## Installation
+Use python 3, e.g.,:
+
 ```
 conda create --name trfermikit python=3.8
-pip install --requirements requirements.txt 
+conda activate trfermikit
 ```
+
+Then download this repo:
+
+```
+git clone https://github.com/petermchale/trfermikit
+```
+
+Then execute:
+
+```
+cd trfermikit
+bash install.sh 
+```
+
+Installation successfully tested on Linux x86_64.
 
 ## TODO
 
