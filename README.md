@@ -6,7 +6,7 @@ Most SVs missed by short-read callers lie in tandem repeats:
 
 (based upon Supplementary Data 53 of [Chaisson et al 2019](https://pubmed.ncbi.nlm.nih.gov/30992455) and private communication with Mark Chaisson) 
 
-`trfermikit` has been optimized to finds SVs (currently only DELs) in a user-supplied set of tandem repeats. 
+`trfermikit` has been optimized to finds SVs in a user-supplied set of tandem repeats. 
 
 ## trfermikit is more sensitive than manta
 
