@@ -11,7 +11,7 @@ This observation prompted us to revisit attempts to discover SVs in tandem repea
 
 We designed `trfermikit` to pick up SVs that `manta` missed. 
 We then assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset. 
-Results can be found [here](evaluate-calls/evaluate.ipynb).
+The [results](evaluate-calls/evaluate.ipynb) show that `trfermikit` is more sensitive than `manta`. 
 
 ## How does it work?
 
