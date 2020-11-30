@@ -4,7 +4,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-set -o xtrace
+# set -o xtrace
 # Must use single quote to prevent variable expansion.
 # For example, if double quotes were used, ${LINENO} would take on the value of the current line,
 # instead of its value when PS4 is used later in the script
