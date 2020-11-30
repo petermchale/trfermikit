@@ -17,7 +17,7 @@ and `manta`, in both cases relative to a long-read benchmark callset. Results ca
 
 `trfermikit` is based upon the [fermikit](https://pubmed.ncbi.nlm.nih.gov/26220959/) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome and then calls variants from the alignment.
 
-`trfermikit` biases the minimap2 alignment step of the fermikit pipeline towards revealing deletions
+`trfermikit` biases the `minimap2` alignment step of the fermikit pipeline towards revealing deletions
 by:
 
 * increasing the reward for single-base matches
