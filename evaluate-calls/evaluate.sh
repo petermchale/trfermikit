@@ -65,7 +65,7 @@ bash filter-calls/decompose_normalize_findSVs.sh \
     --reference ${reference} \
     --number_threads ${number_threads} \
     --parameters ${parameters} \
-  | bash sort_compress_index_calls.sh ${manta_calls_decomposed_normalized_svtype}
+  | bash utilities/sort_compress_index_calls.sh ${manta_calls_decomposed_normalized_svtype}
 
 pacbio_covered_regions () { 
   local pacbio_covered_regions_on_h0_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/${sample}.h0.covered.sorted"
