@@ -3,7 +3,7 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-set -o noclobber
+# set -o noclobber
 
 # set -o xtrace
 # # Must use single quote to prevent variable expansion.
