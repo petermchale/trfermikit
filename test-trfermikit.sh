@@ -58,9 +58,11 @@ PATH="$PWD:$PATH"
 #   --functional-regions ${functional_regions} 
 
 bash evaluate-calls/evaluate.sh \
-  --output ${output} \
-  --threads ${number_threads} \
-  --reference ${reference} \
-  --population ${population} \
-  --sample ${sample} \
-  --svtype ${svtype} 
+    --output ${output} \
+    --threads ${number_threads} \
+    --reference ${reference} \
+    --population ${population} \
+    --sample ${sample} \
+    --svtype ${svtype} \
+  2> ${output}/evaluate.log 
+
