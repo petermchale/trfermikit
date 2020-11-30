@@ -43,6 +43,7 @@ fi
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="$PWD/utilities"
 
+rm --force --recursive ${output}
 mkdir --parents ${output} 
 
 bash make-regions/make-regions.sh \
