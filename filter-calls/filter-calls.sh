@@ -40,7 +40,7 @@ jq \
   --null-input \
   '{ 
     "intra cluster distance threshold": "500",
-    "minimum SV size": "5",
+    "minimum SV size": "50",
     "block length threshold": "25",
     "mapping quality threshold": "0"
   }' \
