@@ -8,10 +8,11 @@ Most SVs missed by short-read callers lie in tandem repeats:
 
 `trfermikit` has been optimized to finds SVs in a user-supplied set of tandem repeats. 
 
-## trfermikit is more sensitive than manta
+## Impact 
 
-We assessed the performance of `trfermikit` 
-and `manta`, in both cases relative to a long-read benchmark callset. Results can be found [here](evaluate-calls/evaluate.ipynb).
+We designed `trfermikit` to pick up SVs that `manta` missed. 
+We then assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset. 
+Results can be found [here](evaluate-calls/evaluate.ipynb).
 
 ## How does it work?
 
