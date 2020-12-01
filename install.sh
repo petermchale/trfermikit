@@ -21,9 +21,9 @@ if ! which conda; then
   exit 1
 fi 
 
-conda create --name trfermikit python=3.8 colorama cyvcf2
+conda create --name trfermikit python=3.8 
 source activate trfermikit 
-pip install colored-traceback 
+pip install --requirement requirements.txt 
 
 ########################## 
 
