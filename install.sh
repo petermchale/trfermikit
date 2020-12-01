@@ -31,8 +31,14 @@ pip install --requirement requirements.txt
 
 ########################## 
 
+mkdir --parents bin
+bin=$PWD/bin
 
+mkdir --parents library 
+cd library 
 
-    # download bedtools, samtools, minimap2, jq, bcftools, etc and install into $PWD/dependencies/bin
+bash install/bedtools.sh ${bin}
+
+    # download samtools, minimap2, jq, bcftools, etc and install into $PWD/dependencies/bin
     # 	— (reference download_install_*.sh files
 
