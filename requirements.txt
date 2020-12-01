@@ -1,5 +1,8 @@
+# dependencies required to run trfermikit: 
 colored-traceback 
 colorama
 cyvcf2
 
+# dependencies required to run the evaluation: 
 notebook
+pandas 
