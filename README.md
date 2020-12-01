@@ -53,6 +53,7 @@ An example of how to use `trfermikit` can be found [here](test-trfermikit.sh).
 git clone https://github.com/petermchale/trfermikit
 cd trfermikit
 bash install.sh 
+conda activate trfermikit
 ```
 
 Installation successfully tested on Linux x86_64.

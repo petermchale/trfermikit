@@ -1,3 +1,0 @@
-colored-traceback
-colorama
-cyvcf2

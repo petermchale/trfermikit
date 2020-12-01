@@ -8,12 +8,10 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 if ! which conda; then 
   echo "please install conda"
+  exit 1
 fi 
 
-tool="trfermikit"
-conda create --force --name $tool python=3.8
-pip install --requirement requirements.txt 
-source activate $tool
+conda create --force --name trfermikit python=3.8 colored-traceback colorama cyvcf2
 
 ########################## 
 
