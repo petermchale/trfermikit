@@ -8,7 +8,7 @@ bin=$1
 
 cd library 
 
-tool="bedtools"
+tool="bedtools2"
 
 if [[ ! -d ${tool} ]]; then 
   git clone https://github.com/arq5x/${tool}.git
