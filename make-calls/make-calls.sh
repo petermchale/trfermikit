@@ -58,8 +58,8 @@ regions="${output}/regions"
 #     -ubam -u -wa -a ${alignments}.cram -b ${regions}.bed -g ${reference}.genome -sorted | 
 #   samtools bam2fq > ${regions}.fq
 
-which samtools 
-which bin/samtools 
+bash utilities/info.sh "samtools is: $(which samtools)" 
+bash utilities/info.sh "bin/samtools is: $(which bin/samtools)" 
 exit 1 
 
 # "random access" of reads (expected to be faster when number of regions < ~10,000)
