@@ -43,7 +43,7 @@ repeats=${repeats_small}
 set -o pipefail
 
 # no need to export PATH since it is already in the environment: https://unix.stackexchange.com/a/26059/406037
-PATH="$PWD:$PATH"
+PATH="$PWD:$PWD/dependencies/bin:$PATH"
 
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported

@@ -10,7 +10,7 @@ This observation prompted us to revisit attempts to discover SVs in tandem repea
 ## Impact 
 
 We designed `trfermikit` to pick up SVs that `manta` missed. 
-We then assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset. 
+We then assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset, on a set of tandem repeats. 
 The [results](evaluate-calls/evaluate.ipynb) show that `trfermikit` is more sensitive than `manta`. 
 
 ## How does it work?
@@ -43,27 +43,14 @@ trfermikit --min-repeat-length 100 [...]
 
 then the pipeline takes < 1.5hr for a 70X genome.
 
-## How does one use it?
+## Usage
 
 An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
 ## Installation
-Use python 3, e.g.,:
-
-```
-conda create --name trfermikit python=3.8
-conda activate trfermikit
-```
-
-Then download this repo:
 
 ```
 git clone https://github.com/petermchale/trfermikit
-```
-
-Then execute:
-
-```
 cd trfermikit
 bash install.sh 
 ```
@@ -72,5 +59,5 @@ Installation successfully tested on Linux x86_64.
 
 ## TODO
 
-Create a docker container and nextflow workflow and register both at [dockstore](https://dockstore.org/).
+Create a docker container and nextflow workflow (with nextflow processes for "make-regions", "make-calls" and "filter-calls") and register both at [dockstore](https://dockstore.org/).
 
