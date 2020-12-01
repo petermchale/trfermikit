@@ -4,7 +4,7 @@ set -o nounset
 set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-bin=$1 
+root=$1 
 
 cd library 
 
@@ -15,5 +15,7 @@ if [[ ! -d ${tool} ]]; then
   cd ${tool}
   git checkout 4a3615f5c534a41c22d2f047f6e9d32d162d45a4
   make
-  cp bin/bedtools $bin
+  cp bin/bedtools ${root}/bin
+else 
+  bash ${root}/utilities/info.sh "skipping installation of ${tool}"
 fi 
