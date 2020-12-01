@@ -27,8 +27,8 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-which bedtools 
-which bin/bedtools 
+echo $(which bedtools)
+echo $(which bin/bedtools)
 exit 1 
 
 zgrep --invert-match ^"#" ${repeats}.bed.gz |
