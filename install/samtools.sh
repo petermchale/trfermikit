@@ -17,7 +17,6 @@ if [[ ! -d "${tool}-${version}" ]]; then
   tar -xvf ${tool}-${version}.tar
   rm ${tool}-${version}.tar
   cd ${tool}-${version}/
-  exit 1
   ./configure --prefix=${root}
   make
   make install
