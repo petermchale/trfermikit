@@ -6,27 +6,14 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 ########################## 
 
-if command -v module > /dev/null; then 
-  echo "module is present" 
-  module load anaconda
-else 
-  echo "module is not present"
-fi
-
 if ! which conda; then 
   echo "please install conda"
 fi 
 
 tool="trfermikit"
-if source activate $tool; then 
-  echo "conda environment activated"
-else 
-  conda create --name $tool python=3.8
-  source activate $tool
-  echo "conda environment created and activated"
-fi
-
+conda create --force --name $tool python=3.8
 pip install --requirement requirements.txt 
+source activate $tool
 
 ########################## 
 
