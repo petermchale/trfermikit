@@ -58,6 +58,10 @@ regions="${output}/regions"
 #     -ubam -u -wa -a ${alignments}.cram -b ${regions}.bed -g ${reference}.genome -sorted | 
 #   samtools bam2fq > ${regions}.fq
 
+which samtools 
+which bin/samtools 
+exit 1 
+
 # "random access" of reads (expected to be faster when number of regions < ~10,000)
 # "samtools view -M" uses the multi-region iterator 
 # (increases speed, removes duplicates and outputs the reads as they are ordered in the file)

@@ -37,6 +37,7 @@ mkdir --parents library
 root=$PWD
 
 bash install/bedtools.sh ${root}
+bash install/samtools.sh ${root}
 
     # download samtools, minimap2, jq, bcftools, etc and install into $PWD/dependencies/bin
     # 	— (reference download_install_*.sh files
