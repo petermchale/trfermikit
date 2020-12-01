@@ -12,12 +12,12 @@ version="1.10"
 tool="samtools"
 
 if [[ ! -d "${tool}-${version}" ]]; then
-  exit 1
   wget https://github.com/samtools/samtools/releases/download/${version}/${tool}-${version}.tar.bz2
   bzip2 -d ${tool}-${version}.tar.bz2
   tar -xvf ${tool}-${version}.tar
   rm ${tool}-${version}.tar
   cd ${tool}-${version}/
+  exit 1
   ./configure --prefix=${root}
   make
   make install
