@@ -22,9 +22,11 @@ if ! which conda; then
 fi 
 
 conda create --name trfermikit python=3.8 
+
 set +o nounset
 source activate trfermikit 
 set -o nounset
+
 pip install --requirement requirements.txt 
 
 ########################## 
