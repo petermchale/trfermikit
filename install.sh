@@ -32,9 +32,9 @@ pip install --requirement requirements.txt
 ########################## 
 
 mkdir --parents bin
-bin=$PWD/bin
-
 mkdir --parents library 
+
+bin=$PWD/bin
 
 bash install/bedtools.sh ${bin}
 
