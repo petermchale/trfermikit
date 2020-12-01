@@ -35,7 +35,6 @@ mkdir --parents bin
 bin=$PWD/bin
 
 mkdir --parents library 
-cd library 
 
 bash install/bedtools.sh ${bin}
 
