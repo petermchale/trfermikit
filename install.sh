@@ -7,7 +7,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 ########################## 
 
 if ! which conda; then 
-  echo "please install conda"
+  bash utilities/error.sh "please install conda"
   exit 1
 fi 
 
