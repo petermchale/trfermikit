@@ -33,7 +33,7 @@ min_repeat_length="100"
 number_threads="16"
 svtype="DEL"
 
-output="data/${sample}.${svtype}"
+output="$PWD/data/${sample}.${svtype}"
 
 # to facilitate a small-scale test of tool correctness and tool usage: 
 repeats_small="${output}/repeats.small"

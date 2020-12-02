@@ -58,6 +58,15 @@ conda activate trfermikit
 
 Installation successfully tested on Linux x86_64.
 
+You can invoke `trfermikit` from inside or outside its parent directory.
+For example, assuming that this directory has been copied to `~/bin`, 
+one may invoke `trfermikit` as follows: 
+
+```
+~/bin/trfermikit/trfermikit [...]
+```
+
+
 ## TODO
 
 Create a docker container and nextflow workflow (with nextflow processes for "make-regions", "make-calls" and "filter-calls") and register both at [dockstore](https://dockstore.org/).

@@ -56,16 +56,16 @@ regions="${output}/regions"
 # "bedtools intersect -sorted" uses the "chromsweep" algorithm for sorted (-k1,1 -k2,2n) input
 # /usr/bin/time --verbose bedtools intersect \
 #     -ubam -u -wa -a ${alignments}.cram -b ${regions}.bed -g ${reference}.genome -sorted | 
-#   samtools bam2fq > ${regions}.fq
+#   bin/samtools bam2fq > ${regions}.fq
 
 # "random access" of reads (expected to be faster when number of regions < ~10,000)
 # "samtools view -M" uses the multi-region iterator 
 # (increases speed, removes duplicates and outputs the reads as they are ordered in the file)
-/usr/bin/time --verbose samtools view -u -M \
+/usr/bin/time --verbose bin/samtools view -u -M \
     --threads ${number_threads} \
     -L ${regions}.bed.gz \
     ${alignments}.cram | 
-  samtools fastq > ${regions}.fq 
+  bin/samtools fastq > ${regions}.fq 
 
 bgzip --force ${regions}.fq 
 
