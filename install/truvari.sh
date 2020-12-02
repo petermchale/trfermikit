@@ -15,7 +15,7 @@ if [[ ! -d "truvari" ]]; then
   cd truvari
   python -m pip install --upgrade pip setuptools wheel
   python setup.py sdist bdist_wheel
-  pip install dist/Truvari-${truvari_version}.tar.gz
+  pip install dist/Truvari-${version}.tar.gz
 else 
   bash ${root}/utilities/info.sh "skipping installation of truvari"
 fi 
