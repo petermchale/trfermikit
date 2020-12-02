@@ -61,5 +61,5 @@ bash evaluate-calls/evaluate.sh \
     --population ${population} \
     --sample ${sample} \
     --svtype ${svtype} \
-  2> ${output}/evaluate.log 
+  2> ${output}/evaluate-calls.log 
 
