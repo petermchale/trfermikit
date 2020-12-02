@@ -20,6 +20,13 @@ else
   bash ${root}/utilities/info.sh "skipping installation of truvari"
 fi 
 
+if ! which truvari > /dev/null 2>&1; then 
+  bash ${root}/utilities/error.sh "truvari not available at the command line!"
+  exit 1 
+else 
+  bash ${root}/utilities/info.sh "truvari successfully installed"
+fi 
+
 
 
 
