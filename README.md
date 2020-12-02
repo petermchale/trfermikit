@@ -55,9 +55,9 @@ bash install.sh
 conda activate trfermikit
 ```
 
-Installation successfully tested on Linux x86_64.
+Only installation on Linux x86_64 is currently supported
 
-You can invoke `trfermikit` from inside or outside its parent directory.
+One can invoke `trfermikit` from inside or outside its parent directory.
 For example, assuming that this directory has been copied to `~/bin`, 
 one may invoke `trfermikit` as follows: 
 
