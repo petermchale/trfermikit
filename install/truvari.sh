@@ -13,10 +13,6 @@ version="2.0.2"
 if [[ ! -d "truvari" ]]; then
   git clone https://github.com/spiralgenetics/truvari
   cd truvari
-  bash ${root}/utilities/info.sh "$(conda info --envs)"
-  bash ${root}/utilities/info.sh "$(python --version)"
-  exit 1 
-
   python -m pip install --upgrade pip setuptools wheel
   python setup.py sdist bdist_wheel
   pip install dist/Truvari-${truvari_version}.tar.gz
