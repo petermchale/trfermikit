@@ -17,7 +17,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 functional_regions="$1" 
 
-bash utilities/info.sh "$(bedtools --version)"
+bash utilities/info.sh "$(bin/bedtools --version)"
 
 # https://github.com/arq5x/bedtools2/issues/834
-bedtools intersect -a stdin -b <(zgrep --invert-match ^"#" ${functional_regions}.bed.gz) -wa -u -f 1
+bin/bedtools intersect -a stdin -b <(zgrep --invert-match ^"#" ${functional_regions}.bed.gz) -wa -u -f 1

@@ -87,7 +87,7 @@ mosdepth \
   ${mosdepth_prefix} \
   ${alignments}.cram
 
-bedtools slop -i ${mosdepth_prefix}.regions.bed.gz -g ${reference}.genome -b ${slop} \
+bin/bedtools slop -i ${mosdepth_prefix}.regions.bed.gz -g ${reference}.genome -b ${slop} \
   | awk --assign min_coverage=${min_coverage} '$4 > min_coverage' \
   | awk --assign max_coverage=${max_coverage} '$4 < max_coverage' \
   | awk --assign OFS='\t' '{ print $1, $2, $3 }' \
