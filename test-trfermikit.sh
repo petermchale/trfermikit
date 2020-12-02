@@ -42,9 +42,11 @@ zgrep --invert-match ^"#" ${repeats}.bed.gz | head -1000 | bash utilities/sort_c
 repeats=${repeats_small}
 set -o pipefail
 
+path_to_trfermikit_directory="$PWD"
+
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
-./trfermikit \
+${path_to_trfermikit_directory}/trfermikit \
   --output ${output} \
   --repeats ${repeats} \
   --reference ${reference} \
@@ -54,7 +56,7 @@ set -o pipefail
   --min-repeat-length ${min_repeat_length} \
   --functional-regions ${functional_regions} 
 
-bash evaluate-calls/evaluate.sh \
+bash ${path_to_trfermikit_directory}/evaluate-calls/evaluate.sh \
     --output ${output} \
     --threads ${number_threads} \
     --reference ${reference} \

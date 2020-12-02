@@ -32,7 +32,6 @@ The trade-off is a large false-discovery rate.
 * are supported by "dirty" fermikit unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero)
 * occur in “clusters”
 
-
 ## How fast is it?
 
 If one confines the search to tandem repeats larger than 100bp in length:
@@ -43,11 +42,11 @@ trfermikit --min-repeat-length 100 [...]
 
 then the pipeline takes < 1.5hr for a 70X genome.
 
-## Usage
+## Quickstart
 
 An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
-## Installation
+## Installation and Usage
 
 ```
 git clone https://github.com/petermchale/trfermikit
@@ -65,7 +64,6 @@ one may invoke `trfermikit` as follows:
 ```
 ~/bin/trfermikit/trfermikit [...]
 ```
-
 
 ## TODO
 
