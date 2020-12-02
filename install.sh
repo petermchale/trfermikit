@@ -23,11 +23,11 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 # conda create --name trfermikit python=3.8 
 
-# set +o nounset
-# source activate trfermikit 
-# set -o nounset
+set +o nounset
+source activate trfermikit 
+set -o nounset
 
-# pip install --requirement requirements.txt 
+pip install --requirement requirements.txt 
 
 # ########################## 
 
