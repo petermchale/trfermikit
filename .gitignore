@@ -5,3 +5,4 @@ data
 library
 bin
 share
+*.pyc
