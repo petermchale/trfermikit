@@ -5,7 +5,7 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 root=$1
-mosdepth="${root}/bin/jq"
+mosdepth="${root}/bin/mosdepth"
 
 if [[ ! -f ${mosdepth} ]]; then
   wget -O ${mosdepth} https://github.com/brentp/mosdepth/releases/download/v0.2.6/mosdepth 
