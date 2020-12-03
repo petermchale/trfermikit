@@ -95,6 +95,8 @@ ${root}/bin/bedtools slop -i ${mosdepth_prefix}.regions.bed.gz -g ${reference}.g
   | awk --assign min_coverage=${min_coverage} '$4 > min_coverage' \
   | awk --assign max_coverage=${max_coverage} '$4 < max_coverage' \
   | awk --assign OFS='\t' '{ print $1, $2, $3 }' \
-  | bash ${root}/utilities/sort_compress_index_regions.sh "${output}/regions" \
+  | bash ${root}/utilities/sort_compress_index_regions.sh \
+    --regions "${output}/regions" \
+    --root ${root} \
 && rm -rf "${output}/tmp"
 
