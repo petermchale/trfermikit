@@ -11,10 +11,14 @@ while [[ "$1" =~ ^- ]]; do
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
-    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
+
+${root}/utilities/info.sh "root in make-regions is: ${root}"
+exit 1 
 
 set -o errexit
 set -o pipefail

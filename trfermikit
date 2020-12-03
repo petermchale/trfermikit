@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# https://stackoverflow.com/a/246128/6674256
+root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
@@ -12,7 +15,7 @@ while [[ "$1" =~ ^- ]]; do
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
-    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
@@ -35,16 +38,13 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-exit 1
-
 if [[ ${svtype} != "DEL" ]]; then
   echo "Only discovery of SVs of type DEL are currently supported"
   exit 1
 fi
 
 # https://stackoverflow.com/a/43476575/6674256
-export PYTHONPATH="$PWD/utilities"
+export PYTHONPATH="${root}/utilities"
 
 mkdir --parents ${output} 
 rm --force ${output}/fermikit.*
@@ -57,19 +57,22 @@ bash ${root}/make-regions/make-regions.sh \
     --threads ${number_threads} \
     --functional-regions ${functional_regions} \
     --reference ${reference} \
+    --root ${root} \
   2> ${output}/make-regions.log 
 
-bash make-calls/make-calls.sh \
+bash ${root}/make-calls/make-calls.sh \
     --output ${output} \
     --alignments ${alignments} \
     --threads ${number_threads} \
     --reference ${reference} \
+    --root ${root} \
   > ${output}/make-calls.log 2>&1
 
-bash filter-calls/filter-calls.sh \
+bash ${root}/filter-calls/filter-calls.sh \
     --output ${output} \
     --svtype ${svtype} \
     --reference ${reference} \
     --threads ${number_threads} \
+    --root ${root} \
  2> ${output}/filter-calls.log 
 
