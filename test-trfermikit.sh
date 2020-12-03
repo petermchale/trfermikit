@@ -34,15 +34,16 @@ number_threads="16"
 svtype="DEL"
 
 output="$PWD/data/${sample}.${svtype}"
+path_to_trfermikit_directory="$PWD"
 
 # to facilitate a small-scale test of tool correctness and tool usage: 
 repeats_small="${output}/repeats.small"
 set +o pipefail
-zgrep --invert-match ^"#" ${repeats}.bed.gz | head -1000 | bash utilities/sort_compress_index_regions.sh ${repeats_small}
+zgrep --invert-match ^"#" ${repeats}.bed.gz \
+  | head -1000 \
+  | bash ${path_to_trfermikit_directory}utilities/sort_compress_index_regions.sh ${repeats_small}
 repeats=${repeats_small}
 set -o pipefail
-
-path_to_trfermikit_directory="$PWD"
 
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
