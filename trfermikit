@@ -49,26 +49,26 @@ export PYTHONPATH="${root}/utilities"
 mkdir --parents ${output} 
 rm --force ${output}/fermikit.*
 
-bash ${root}/make-regions/make-regions.sh \
-    --output ${output} \
-    --repeats ${repeats} \
-    --min-repeat-length ${min_repeat_length} \
-    --alignments ${alignments} \
-    --threads ${number_threads} \
-    --functional-regions ${functional_regions} \
-    --reference ${reference} \
-    --root ${root} 
-  # 2> ${output}/make-regions.log 
-
-exit 1 
+# bash ${root}/make-regions/make-regions.sh \
+#     --output ${output} \
+#     --repeats ${repeats} \
+#     --min-repeat-length ${min_repeat_length} \
+#     --alignments ${alignments} \
+#     --threads ${number_threads} \
+#     --functional-regions ${functional_regions} \
+#     --reference ${reference} \
+#     --root ${root} \
+#   2> ${output}/make-regions.log 
 
 bash ${root}/make-calls/make-calls.sh \
     --output ${output} \
     --alignments ${alignments} \
     --threads ${number_threads} \
     --reference ${reference} \
-    --root ${root} \
-  > ${output}/make-calls.log 2>&1
+    --root ${root} 
+  # > ${output}/make-calls.log 2>&1
+
+exit 1
 
 bash ${root}/filter-calls/filter-calls.sh \
     --output ${output} \

@@ -8,7 +8,8 @@ while [[ "$1" =~ ^- ]]; do
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
-    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
@@ -33,7 +34,7 @@ gap_open_penalties="6,26" # there are two because the cost function of gap lengt
 gap_extension_penalties="1,0" # there are two because the cost function of gap length is piecewise linear
 minimum_unitig_mapping_quality="1" 
 
-jq \
+${root}/bin/jq \
   --null-input \
   --arg single_base_match_reward ${single_base_match_reward} \
   --arg single_base_mismatch_penalty ${single_base_mismatch_penalty} \
@@ -61,13 +62,13 @@ regions="${output}/regions"
 # "random access" of reads (expected to be faster when number of regions < ~10,000)
 # "samtools view -M" uses the multi-region iterator 
 # (increases speed, removes duplicates and outputs the reads as they are ordered in the file)
-/usr/bin/time --verbose bin/samtools view -u -M \
+/usr/bin/time --verbose ${root}/bin/samtools view -u -M \
     --threads ${number_threads} \
     -L ${regions}.bed.gz \
     ${alignments}.cram | 
-  bin/samtools fastq > ${regions}.fq 
+  ${root}/bin/samtools fastq > ${regions}.fq 
 
-bgzip --force ${regions}.fq 
+${root}/bin/bgzip --force ${regions}.fq 
 
 # generate Makefile for unitig assembly
 # https://github.com/lh3/fermikit
@@ -75,7 +76,7 @@ bgzip --force ${regions}.fq
 do_assembly="make-calls/assemble.sh"
 fermikit_prefix="${output}/fermikit"
 assembly_diagnostics="${fermikit_prefix}.assembly.diagnostics.json"
-make-calls/fermi.kit/fermi2.pl unitig \
+${root}/make-calls/fermi.kit/fermi2.pl unitig \
     -A ${do_assembly} \
     -d ${assembly_diagnostics} \
     -t ${number_threads} \
@@ -88,7 +89,7 @@ make-calls/fermi.kit/fermi2.pl unitig \
 make -f ${fermikit_prefix}.mak || true
 
 filtered_fastq_empty () {
-  echo $(jq --raw-output '."filtered fastq empty"' ${assembly_diagnostics})
+  echo $(${root}/bin/jq --raw-output '."filtered fastq empty"' ${assembly_diagnostics})
 }
 
 if [[ $(filtered_fastq_empty) == "true" ]]; then 
@@ -98,7 +99,7 @@ fi
 # execute shell commands that align unitigs (with minimap2) and call variants
 # ... "-m" means "use minimap2" 
 # ... ${fermikit_prefix}.mag.gz contains the (unaligned) unitigs
-make-calls/fermi.kit/run-calling \
+${root}/make-calls/fermi.kit/run-calling \
     -m \
     -t ${number_threads} \
     -A ${single_base_match_reward} \
@@ -112,6 +113,6 @@ make-calls/fermi.kit/run-calling \
 
 calls="${output}/fermikit.raw"
 gunzip --force ${calls}.vcf.gz 
-cat ${calls}.vcf | bash utilities/sort_compress_index_calls.sh ${calls}
+cat ${calls}.vcf | bash ${root}/utilities/sort_compress_index_calls.sh ${calls}
 
 
