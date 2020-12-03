@@ -60,13 +60,13 @@ rm --force ${output}/fermikit.*
 #     --root ${root} \
 #   2> ${output}/make-regions.log 
 
-# bash ${root}/make-calls/make-calls.sh \
-#     --output ${output} \
-#     --alignments ${alignments} \
-#     --threads ${number_threads} \
-#     --reference ${reference} \
-#     --root ${root} \
-#   > ${output}/make-calls.log 2>&1
+bash ${root}/make-calls/make-calls.sh \
+    --output ${output} \
+    --alignments ${alignments} \
+    --threads ${number_threads} \
+    --reference ${reference} \
+    --root ${root} \
+  > ${output}/make-calls.log 2>&1
 
 bash ${root}/filter-calls/filter-calls.sh \
     --output ${output} \
