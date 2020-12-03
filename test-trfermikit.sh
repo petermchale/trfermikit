@@ -42,7 +42,9 @@ repeats_small="${output}/repeats.small"
 set +o pipefail
 zgrep --invert-match ^"#" ${repeats}.bed.gz \
   | head -1000 \
-  | bash ${trfermikit_path}/utilities/sort_compress_index_regions.sh ${repeats_small}
+  | bash ${trfermikit_path}/utilities/sort_compress_index_regions.sh \
+    --regions ${repeats_small} \
+    --root ${root} 
 repeats=${repeats_small}
 set -o pipefail
 
