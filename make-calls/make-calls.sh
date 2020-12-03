@@ -73,7 +73,7 @@ ${root}/bin/bgzip --force ${regions}.fq
 # generate Makefile for unitig assembly
 # https://github.com/lh3/fermikit
 # assemble reads from regions into unitigs (-s specifies the genome size and -l the read length)
-do_assembly="make-calls/assemble.sh"
+do_assembly="${root}/make-calls/assemble.sh"
 fermikit_prefix="${output}/fermikit"
 assembly_diagnostics="${fermikit_prefix}.assembly.diagnostics.json"
 ${root}/make-calls/fermi.kit/fermi2.pl unitig \
