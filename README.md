@@ -46,7 +46,7 @@ Only installation on Linux x86_64 is currently supported.
 
 ## Usage 
 
-Assuming that this directory lies in `$HOME`, then
+Assuming that this directory lies in `$HOME`, say, then
 one may invoke `trfermikit` by either doing:
 
 ```
