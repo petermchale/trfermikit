@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# https://devhints.io/bash#miscellaneous
+# put option-fetching before "set -o nounset" so that we can detect flags without arguments
+while [[ "$1" =~ ^- ]]; do 
+  case $1 in
+    --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+  esac 
+  shift
+done
+
 set -o errexit
 set -o pipefail
 set -o nounset
@@ -14,7 +25,5 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-calls="$1"
-
-bcftools sort /dev/stdin | bgzip --stdout --force > ${calls}.vcf.gz
-tabix --preset vcf ${calls}.vcf.gz
+${root}/bin/bcftools sort /dev/stdin | ${root}/bin/bgzip --stdout --force > ${calls}.vcf.gz
+${root}/bin/tabix --preset vcf ${calls}.vcf.gz

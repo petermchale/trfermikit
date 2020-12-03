@@ -7,7 +7,7 @@ use Getopt::Std;
 my %opts = (t=>4);
 
 # Peter McHale Nov 2020 
-getopts("t:b:o:A:B:O:E:q:m", \%opts);
+getopts("t:b:o:A:B:O:E:q:r:m", \%opts);
 
 # Peter McHale Nov 2020
 die('Usage: run-calling [options] <indexed-ref> <unitigs.mag.gz>
@@ -21,6 +21,7 @@ Options:
   -O INT[,INT] gap open penalties
   -E INT[,INT] gap extension penalties
   -q INT    minimum mapping quality 
+  -r STR    trfermikit directory path 
 ') if @ARGV < 2;
 
 # Peter McHale Nov 2020
@@ -33,6 +34,7 @@ print STDERR "B = $opts{B}\n";
 print STDERR "O = $opts{O}\n";
 print STDERR "E = $opts{E}\n";
 print STDERR "q = $opts{q}\n";
+print STDERR "trfermikit directory path = $opts{r}\n";
 print STDERR "ARGV[0] = $ARGV[0]\n";
 print STDERR "ARGV[1] = $ARGV[1]\n";
 
@@ -90,7 +92,7 @@ if (defined $opts{m}) {
         print STDERR "idx = $idx\n";
         print STDERR "mmi = $mmi\n";
         print STDERR "argv1 = $ARGV[1]\n"; 
-	$cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && /usr/bin/time --verbose minimap2 -ax asm10 -k23 -w11 -A$opts{A} -B$opts{B} -O$opts{O} -E$opts{E} -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
+	$cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && /usr/bin/time --verbose $opts{r}/bin/minimap2 -ax asm10 -k23 -w11 -A$opts{A} -B$opts{B} -O$opts{O} -E$opts{E} -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
 	# $cmd .= "[ ! -f $prefix.unsrt.sam.gz ] && minimap2 -ax asm10 -f1000 -n2 -s100 --end-bonus 5 -t$opts{t} $mmi $ARGV[1] 2> $prefix.unsrt.sam.log | gzip -1 > $prefix.unsrt.sam.gz;\n";
 } else {
         # Peter McHale Jan 10 2020
@@ -101,7 +103,7 @@ if (defined $opts{m}) {
 $cmd .= "[ ! -f $prefix.srt.bam ] && /usr/bin/time --verbose $root/htsbox samsort -S $prefix.unsrt.sam.gz > $prefix.srt.bam;\n";
 
 # Peter McHale Nov 2020 
-$cmd .= "bin/samtools index ${prefix}.srt.bam;\n";
+$cmd .= "$opts{r}/bin/samtools index ${prefix}.srt.bam;\n";
 
 # Peter McHale 7 Feb 2020: "htsbox pileup -d" (which is part of the "-u" option) replaces depths of alleles (FORMAT.AD) with base quality scores 
 # What this amounts to is that support for REF allele is now something like -10*log10(probability of base errors in REF allele),

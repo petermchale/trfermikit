@@ -107,12 +107,16 @@ ${root}/make-calls/fermi.kit/run-calling \
     -O ${gap_open_penalties} \
     -E ${gap_extension_penalties} \
     -q ${minimum_unitig_mapping_quality} \
+    -r ${root} \
     ${reference}.fa \
     ${fermikit_prefix}.mag.gz \
   | bash -euxo pipefail
 
 calls="${output}/fermikit.raw"
 gunzip --force ${calls}.vcf.gz 
-cat ${calls}.vcf | bash ${root}/utilities/sort_compress_index_calls.sh ${calls}
+cat ${calls}.vcf \
+  | bash ${root}/utilities/sort_compress_index_calls.sh \
+    --calls ${calls} \
+    --root ${root}
 
 

@@ -43,7 +43,4 @@ bash install/jq.sh ${root}
 bash install/mosdepth.sh ${root}
 bash install/htslib.sh ${root}
 bash install/bcftools.sh ${root}
-
-    # download minimap2, jq, bcftools, bgzip, tabix, etc and install into $PWD/bin
-    # 	— reference download_install_*.sh files
-
+bash install/minimap2.sh ${root}
