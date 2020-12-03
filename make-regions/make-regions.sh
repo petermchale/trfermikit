@@ -17,7 +17,7 @@ while [[ "$1" =~ ^- ]]; do
   shift
 done
 
-${root}/utilities/info.sh "root in make-regions is: ${root}"
+bash ${root}/utilities/info.sh "root in make-regions is: ${root}"
 exit 1 
 
 set -o errexit

@@ -57,8 +57,8 @@ bash ${root}/make-regions/make-regions.sh \
     --threads ${number_threads} \
     --functional-regions ${functional_regions} \
     --reference ${reference} \
-    --root ${root} \
-  2> ${output}/make-regions.log 
+    --root ${root} 
+  # 2> ${output}/make-regions.log 
 
 bash ${root}/make-calls/make-calls.sh \
     --output ${output} \
