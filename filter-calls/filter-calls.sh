@@ -8,7 +8,8 @@ while [[ "$1" =~ ^- ]]; do
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
@@ -36,7 +37,7 @@ parameters=${output}/filter-calls
 # Chaisson defines an SV to be an event >50bp in size
 # That is, only events >50bp are recorded in the pacbio callset
 # Thus, discovered events <50bp may be flagged as FPs by truvari
-jq \
+${root}/bin/jq \
   --null-input \
   '{ 
     "intra cluster distance threshold": "500",
@@ -47,22 +48,32 @@ jq \
   > ${parameters}.json
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
-bash filter-calls/decompose_normalize_findSVs.sh \
+bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${calls} \
     --reference ${reference} \
     --number_threads ${number_threads} \
     --parameters ${parameters} \
-  | bash utilities/sort_compress_index_calls.sh ${calls_decomposed_normalized_svtype}
+    --root ${root} \
+  | bash ${root}/utilities/sort_compress_index_calls.sh \
+    --calls ${calls_decomposed_normalized_svtype} \
+    --root ${root}
 
 calls_unitigSupport="${calls_decomposed_normalized_svtype}.unitigSupport"
-python filter-calls/filterByUnitigSupport_annotate.py \
+python ${root}/filter-calls/filterByUnitigSupport_annotate.py \
     --alignments ${unitigs} \
     --regions ${regions} \
     --calls ${calls_decomposed_normalized_svtype} \
     --parameters ${parameters} \
-  | bash utilities/sort_compress_index_calls.sh "${calls_unitigSupport}"
+  | bash ${root}/utilities/sort_compress_index_calls.sh \
+    --calls "${calls_unitigSupport}" \
+    --root ${root}
 
 calls_thinned="${calls_unitigSupport}.thinned"
-bash filter-calls/sparsify_clusters.sh --calls ${calls_unitigSupport} --parameters ${parameters} \
-  | bash utilities/sort_compress_index_calls.sh "${calls_thinned}"
+bash ${root}/filter-calls/sparsify_clusters.sh \
+    --calls ${calls_unitigSupport} \
+    --parameters ${parameters} \
+    --root ${root} \
+  | bash ${root}/utilities/sort_compress_index_calls.sh \
+    --calls "${calls_thinned}" \
+    --root ${root}
