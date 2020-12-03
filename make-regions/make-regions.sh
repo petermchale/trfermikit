@@ -68,7 +68,7 @@ filter_repeats_by_length_and_function () {
     --repeats ${repeats} \
     --min-repeat-length ${min_repeat_length} \
     --max-region-length ${max_region_length} \
-    --root ${root}
+    --root ${root} \
   | 
   # https://unix.stackexchange.com/a/38311/406037 : 
   if [[ "${functional_regions}" == "none" ]]; then 
