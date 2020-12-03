@@ -33,7 +33,7 @@ min_repeat_length="100"
 number_threads="16"
 svtype="DEL"
 
-output="$PWD/data/${sample}.${svtype}"
+output="data/${sample}.${svtype}"
 path_to_trfermikit_directory="$PWD"
 
 # to facilitate a small-scale test of tool correctness and tool usage: 

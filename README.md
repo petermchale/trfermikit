@@ -46,7 +46,7 @@ then the pipeline takes < 1.5hr for a 70X genome.
 
 An example of how to use `trfermikit` can be found [here](test-trfermikit.sh). 
 
-## Installation and Usage
+## Installation
 
 ```
 git clone https://github.com/petermchale/trfermikit
@@ -54,15 +54,20 @@ cd trfermikit
 bash install.sh 
 conda activate trfermikit
 ```
-
 Only installation on Linux x86_64 is currently supported.
 
-One can invoke `trfermikit` by specifying the path to this directory in your filesystem. 
-For example, assuming that this directory lies in `$HOME`, then
-one may invoke `trfermikit` as follows: 
+## Usage 
+
+Assuming that this directory lies in `$HOME`, then
+one may invoke `trfermikit` by either doing:
 
 ```
 $HOME/trfermikit/trfermikit [...]
+```
+or
+```
+PATH="$HOME/trfermikit:$PATH"
+trfermikit [...] 
 ```
 
 ## TODO
