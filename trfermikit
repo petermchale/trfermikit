@@ -35,6 +35,9 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
+root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+exit 1
+
 if [[ ${svtype} != "DEL" ]]; then
   echo "Only discovery of SVs of type DEL are currently supported"
   exit 1
@@ -46,7 +49,7 @@ export PYTHONPATH="$PWD/utilities"
 mkdir --parents ${output} 
 rm --force ${output}/fermikit.*
 
-bash make-regions/make-regions.sh \
+bash ${root}/make-regions/make-regions.sh \
     --output ${output} \
     --repeats ${repeats} \
     --min-repeat-length ${min_repeat_length} \
