@@ -18,7 +18,6 @@ while [[ "$1" =~ ^- ]]; do
 done
 
 bash ${root}/utilities/info.sh "root in make-regions is: ${root}"
-exit 1 
 
 set -o errexit
 set -o pipefail
@@ -65,6 +64,8 @@ jq \
     "functional regions": $functional_regions
   }' \
   > ${output}/make-regions.json
+
+exit 1 
 
 filter_repeats_by_length_and_function () {
   bash make-regions/filter_by_length.sh \

@@ -57,12 +57,12 @@ conda activate trfermikit
 
 Only installation on Linux x86_64 is currently supported.
 
-One can invoke `trfermikit` from inside or outside its parent directory.
-For example, assuming that this directory has been copied to `~/bin`, 
+One can invoke `trfermikit` by specifying the path to this directory in your filesystem. 
+For example, assuming that this directory lies in `$HOME`, then
 one may invoke `trfermikit` as follows: 
 
 ```
-~/bin/trfermikit/trfermikit [...]
+$HOME/trfermikit/trfermikit [...]
 ```
 
 ## TODO
