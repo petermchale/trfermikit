@@ -34,20 +34,21 @@ number_threads="16"
 svtype="DEL"
 
 output="data/${sample}.${svtype}"
-path_to_trfermikit_directory="$PWD"
+trfermikit_path="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
+PATH="${trfermikit_path}:$PATH"
 
 # to facilitate a small-scale test of tool correctness and tool usage: 
 repeats_small="${output}/repeats.small"
 set +o pipefail
 zgrep --invert-match ^"#" ${repeats}.bed.gz \
   | head -1000 \
-  | bash ${path_to_trfermikit_directory}/utilities/sort_compress_index_regions.sh ${repeats_small}
+  | bash utilities/sort_compress_index_regions.sh ${repeats_small}
 repeats=${repeats_small}
 set -o pipefail
 
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
-${path_to_trfermikit_directory}/trfermikit \
+trfermikit \
   --output ${output} \
   --repeats ${repeats} \
   --reference ${reference} \
@@ -57,7 +58,7 @@ ${path_to_trfermikit_directory}/trfermikit \
   --min-repeat-length ${min_repeat_length} \
   --functional-regions ${functional_regions} 
 
-bash ${path_to_trfermikit_directory}/evaluate-calls/evaluate.sh \
+bash ${trfermikit_path}/evaluate-calls/evaluate.sh \
     --output ${output} \
     --threads ${number_threads} \
     --reference ${reference} \
