@@ -1,8 +1,13 @@
-__pycache__
-.ipynb_checkpoints
 data
-.vscode
+
 library
 bin
 share
+include
+lib
+
+.vscode
+
+.ipynb_checkpoints
 *.pyc
+__pycache__
