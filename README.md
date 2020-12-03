@@ -15,19 +15,17 @@ The [results](evaluate-calls/evaluate.ipynb) show that `trfermikit` is more sens
 
 ## How does it work?
 
-`trfermikit` is based upon the [fermikit](https://pubmed.ncbi.nlm.nih.gov/26220959/) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome and then calls variants from the alignment.
+`trfermikit` is based upon the [fermikit](https://pubmed.ncbi.nlm.nih.gov/26220959/) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome, and then calls variants from the alignment.
 
 `trfermikit` biases the `minimap2` alignment step of the fermikit pipeline towards revealing deletions
 by:
-
 * increasing the reward for single-base matches
 * increasing the penalty for single-base mismatches 
 * decreasing the gap-open penalties (there are two because the cost function of gap length is piecewise linear)
 * decreasing the gap-extension penalties 
+This recovers a lot of events that a more stringent caller would throw out. 
 
-This, by itself, recovers a lot of events that a more stringent caller would throw out. 
-The trade-off is a large false-discovery rate. 
-
+Yet, some of those additional captured events are false discoveries. 
 `trfermikit` mitigates this effect by throwing out calls that:
 * are supported by "dirty" fermikit unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero)
 * occur in “clusters”
