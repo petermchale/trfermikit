@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+# https://devhints.io/bash#miscellaneous
+# put option-fetching before "set -o nounset" so that we can detect flags without arguments
+while [[ "$1" =~ ^- ]]; do 
+  case $1 in
+    --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+  esac 
+  shift
+done
+
 set -o errexit
 set -o pipefail
 set -o nounset
@@ -15,9 +26,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-functional_regions="$1" 
-
-bash utilities/info.sh "$(bin/bedtools --version)"
+bash ${root}/utilities/info.sh "$(${root}/bin/bedtools --version)"
 
 # https://github.com/arq5x/bedtools2/issues/834
-bin/bedtools intersect -a stdin -b <(zgrep --invert-match ^"#" ${functional_regions}.bed.gz) -wa -u -f 1
+${root}/bin/bedtools intersect -a stdin -b <(zgrep --invert-match ^"#" ${functional_regions}.bed.gz) -wa -u -f 1

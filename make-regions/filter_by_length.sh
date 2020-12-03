@@ -7,7 +7,8 @@ while [[ "$1" =~ ^- ]]; do
     --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
     --max-region-length ) shift; [[ ! $1 =~ ^- ]] && max_region_length=$1;;
-    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
@@ -28,10 +29,10 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 zgrep --invert-match ^"#" ${repeats}.bed.gz |
-  python utilities/get_regular_chromosomes.py |
-  python make-regions/classify_tandem_repeats_by_length.py ${min_repeat_length} |
+  python ${root}/utilities/get_regular_chromosomes.py |
+  python ${root}/make-regions/classify_tandem_repeats_by_length.py ${min_repeat_length} |
   sort --version-sort -k1,1 -k2,2 | # bedtools merge requires sorted input
-  bin/bedtools merge -i stdin -c 4 -o collapse | 
-  python make-regions/classify_merged_tandem_repeats.py |
+  ${root}/bin/bedtools merge -i stdin -c 4 -o collapse | 
+  python ${root}/make-regions/classify_merged_tandem_repeats.py |
   awk --assign OFS='\t' '$NF == "1" { print $1, $2, $3 }' | 
   awk --assign max_region_length=${max_region_length} '$3-$2 < max_region_length' 
