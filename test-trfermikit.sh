@@ -44,7 +44,7 @@ zgrep --invert-match ^"#" ${repeats}.bed.gz \
   | head -1000 \
   | bash ${trfermikit_path}/utilities/sort_compress_index_regions.sh \
     --regions ${repeats_small} \
-    --root ${root} 
+    --root ${trfermikit_path} 
 repeats=${repeats_small}
 set -o pipefail
 
