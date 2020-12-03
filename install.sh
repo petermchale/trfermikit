@@ -40,6 +40,7 @@ bash install/bedtools.sh ${root}
 bash install/samtools.sh ${root}
 bash install/truvari.sh ${root}
 bash install/jq.sh ${root}
+bash install/mosdepth.sh ${root}
 
     # download minimap2, jq, bcftools, bgzip, tabix, etc and install into $PWD/bin
     # 	— reference download_install_*.sh files
