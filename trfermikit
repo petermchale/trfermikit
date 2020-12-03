@@ -60,6 +60,8 @@ bash ${root}/make-regions/make-regions.sh \
     --root ${root} 
   # 2> ${output}/make-regions.log 
 
+exit 1 
+
 bash ${root}/make-calls/make-calls.sh \
     --output ${output} \
     --alignments ${alignments} \

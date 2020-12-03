@@ -79,7 +79,7 @@ filter_repeats_by_length_and_function () {
 
 mkdir --parents "${output}/tmp" 
 mosdepth_prefix="${output}/tmp/mosdepth.coverage"
-mosdepth \
+${root}/bin/mosdepth \
   --no-per-base \
   --fast-mode \
   --threads ${number_threads} \
@@ -88,10 +88,10 @@ mosdepth \
   ${mosdepth_prefix} \
   ${alignments}.cram
 
-bin/bedtools slop -i ${mosdepth_prefix}.regions.bed.gz -g ${reference}.genome -b ${slop} \
+${root}/bin/bedtools slop -i ${mosdepth_prefix}.regions.bed.gz -g ${reference}.genome -b ${slop} \
   | awk --assign min_coverage=${min_coverage} '$4 > min_coverage' \
   | awk --assign max_coverage=${max_coverage} '$4 < max_coverage' \
   | awk --assign OFS='\t' '{ print $1, $2, $3 }' \
-  | bash utilities/sort_compress_index_regions.sh "${output}/regions" \
+  | bash ${root}/utilities/sort_compress_index_regions.sh "${output}/regions" \
 && rm -rf "${output}/tmp"
 
