@@ -26,19 +26,9 @@ by:
 This recovers a lot of events that a more stringent caller would throw out. 
 
 Yet, some of those additional captured events are false discoveries. 
-`trfermikit` mitigates this effect by throwing out calls that:
+`trfermikit` mitigates this by throwing out calls that:
 * are supported by "dirty" fermikit unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero)
 * occur in “clusters”
-
-## How fast is it?
-
-If one confines the search to tandem repeats larger than 100bp in length:
-
-```
-trfermikit --min-repeat-length 100 [...]
-```
-
-then the pipeline takes < 1.5hr for a 70X genome.
 
 ## Quickstart
 
@@ -67,6 +57,17 @@ or
 PATH="$HOME/trfermikit:$PATH"
 trfermikit [...] 
 ```
+
+## How fast is it?
+
+If one confines the search to tandem repeats larger than 100bp in length:
+
+```
+trfermikit --min-repeat-length 100 [...]
+```
+
+then the pipeline takes < 1.5hr for a 70X genome.
+
 
 ## TODO
 
