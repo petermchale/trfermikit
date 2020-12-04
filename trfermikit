@@ -43,7 +43,9 @@ if [[ ! -f ${alignments}.cram.crai ]]; then
 fi 
 
 # TODO: 
-bash ${root}/utilities/prepare_reference.sh ${reference}
+bash ${root}/utilities/prepare_reference.sh \
+  --reference ${reference} \
+  --root ${root}
 
 # TODO: 
 # Pull genome build from cram and/or fasta (and check they are the same)  

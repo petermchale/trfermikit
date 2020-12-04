@@ -1,3 +1,14 @@
+# https://devhints.io/bash#miscellaneous
+# put option-fetching before "set -o nounset" so that we can detect flags without arguments
+while [[ "$1" =~ ^- ]]; do 
+  case $1 in
+    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+  esac 
+  shift
+done
+
 set -o errexit
 set -o pipefail
 set -o nounset
@@ -12,8 +23,6 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-
-reference=$1 
 
 if [[ ! -f ${reference}.fa.fai ]]; then 
   ${root}/bin/samtools faidx ${reference}.fa
