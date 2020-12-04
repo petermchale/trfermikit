@@ -52,7 +52,7 @@ bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${calls} \
     --reference ${reference} \
-    --number_threads ${number_threads} \
+    --threads ${number_threads} \
     --parameters ${parameters} \
     --root ${root} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \

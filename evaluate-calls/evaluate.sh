@@ -10,7 +10,8 @@ while [[ "$1" =~ ^- ]]; do
     --population ) shift; [[ ! $1 =~ ^- ]] && population=$1;;
     --sample ) shift; [[ ! $1 =~ ^- ]] && sample=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
-    *) bash utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
@@ -33,7 +34,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 #######################################################
 
 # https://stackoverflow.com/a/43476575/6674256
-export PYTHONPATH="$PWD/utilities"
+export PYTHONPATH="${root}/utilities"
 
 #######################################################
 
@@ -51,21 +52,27 @@ parameters="${output}/filter-calls"
 
 #######################################################
 
-bash filter-calls/decompose_normalize_findSVs.sh \
+bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${pacbio_calls} \
     --reference ${reference} \
-    --number_threads ${number_threads} \
+    --threads ${number_threads} \
     --parameters ${parameters} \
-  | bash utilities/sort_compress_index_calls.sh ${pacbio_calls_decomposed_normalized_svtype}
+    --root ${root} \
+  | bash ${root}/utilities/sort_compress_index_calls.sh \
+    --calls ${pacbio_calls_decomposed_normalized_svtype} \
+    --root ${root}
 
-bash filter-calls/decompose_normalize_findSVs.sh \
+bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${manta_calls} \
     --reference ${reference} \
-    --number_threads ${number_threads} \
+    --threads ${number_threads} \
     --parameters ${parameters} \
-  | bash utilities/sort_compress_index_calls.sh ${manta_calls_decomposed_normalized_svtype}
+    --root ${root} \
+  | bash ${root}/utilities/sort_compress_index_calls.sh \
+    --calls ${manta_calls_decomposed_normalized_svtype} \
+    --root ${root}
 
 pacbio_covered_regions () { 
   local pacbio_covered_regions_on_h0_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/${sample}.h0.covered.sorted"
@@ -73,12 +80,12 @@ pacbio_covered_regions () {
 
   local regions_="${output}/regions"
 
-  bin/bedtools intersect -a ${regions_}.bed.gz -b ${pacbio_covered_regions_on_h0_}.bed -wa -u -f 1 |
-    bin/bedtools intersect -a stdin -b ${pacbio_covered_regions_on_h1_}.bed -wa -u -f 1 |
+  ${root}/bin/bedtools intersect -a ${regions_}.bed.gz -b ${pacbio_covered_regions_on_h0_}.bed -wa -u -f 1 |
+    ${root}/bin/bedtools intersect -a stdin -b ${pacbio_covered_regions_on_h1_}.bed -wa -u -f 1 |
     sort --version-sort -k1,1 -k2,2
 } 
 
-truvari () { 
+wrap_truvari () { 
   local comp_calls_="$1"
   local truvari_output_="$2"
   
@@ -101,19 +108,19 @@ truvari () {
     > ${truvari_output_}.log 2>&1
 } 
 
-truvari \
+wrap_truvari \
   "${tr_fermikit_calls}" \
   "${output}/${truvari_trfermikit}"
  
-truvari \
+wrap_truvari \
   "${tr_fermikit_calls}.unitigSupport" \
   "${output}/${truvari_trfermikit}.unitigSupport"
 
-truvari \
+wrap_truvari \
   "${tr_fermikit_calls}.unitigSupport.thinned" \
   "${output}/${truvari_trfermikit}.unitigSupport.thinned"
 
-truvari \
+wrap_truvari \
   "${manta_calls_decomposed_normalized_svtype}" \
   "${output}/${truvari_manta}"
 

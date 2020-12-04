@@ -7,7 +7,7 @@ while [[ "$1" =~ ^- ]]; do
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
-    --number_threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
+    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --parameters ) shift; [[ ! $1 =~ ^- ]] && parameters=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;

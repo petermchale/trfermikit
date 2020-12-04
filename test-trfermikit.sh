@@ -50,15 +50,15 @@ set -o pipefail
 
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
-trfermikit \
-  --output ${output} \
-  --repeats ${repeats} \
-  --reference ${reference} \
-  --threads ${number_threads} \
-  --svtype ${svtype} \
-  --alignments ${alignments} \
-  --min-repeat-length ${min_repeat_length} \
-  --functional-regions ${functional_regions} 
+# trfermikit \
+#   --output ${output} \
+#   --repeats ${repeats} \
+#   --reference ${reference} \
+#   --threads ${number_threads} \
+#   --svtype ${svtype} \
+#   --alignments ${alignments} \
+#   --min-repeat-length ${min_repeat_length} \
+#   --functional-regions ${functional_regions} 
 
 bash ${trfermikit_path}/evaluate-calls/evaluate.sh \
     --output ${output} \
@@ -67,5 +67,5 @@ bash ${trfermikit_path}/evaluate-calls/evaluate.sh \
     --population ${population} \
     --sample ${sample} \
     --svtype ${svtype} \
-  2> ${output}/evaluate-calls.log 
-
+    --root ${trfermikit_path}
+  # 2> ${output}/evaluate-calls.log 
