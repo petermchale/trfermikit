@@ -46,6 +46,7 @@ fi
 bash ${root}/utilities/prepare_reference.sh \
   --reference ${reference} \
   --root ${root}
+exit 1 
 
 # TODO: 
 # Pull genome build from cram and/or fasta (and check they are the same)  

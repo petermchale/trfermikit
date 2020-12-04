@@ -32,10 +32,11 @@ if [[ ! -f ${reference}.genome ]]; then
   # http://www.htslib.org/doc/faidx.html : 
   cut -f1,2 ${reference}.fa.fai > ${reference}.genome
 fi 
-exit 1
 
 # -x STR    Preset  []. This option applies multiple options at the same time. It should be applied before other options because options applied later will overwrite the values set by -x.  Available STR are:
 # asm5    Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 -N50 --min-occ-floor=100).  Typically, the  alignment  will  not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%.
 # asm10   Long assembly to reference mapping (-k19 -w19 -A1 -B9 -O16,41 -E2,1 -s200 -z200 -N50 --min-occ-floor=100).  Up to 10% sequence divergence.
 # asm20   Long assembly to reference mapping (-k19 -w10 -A1 -B4 -O6,26 -E2,1 -s200 -z200 -N50 --min-occ-floor=100).  Up to 20% sequence divergence.
-[[ ! -f ${reference}.mmi ]] && minimap2 -x asm10 -k23 -w11 -d ${reference}.mmi ${reference}.fa
+if [[ ! -f ${reference}.mmi ]]; then 
+  ${root}/bin/minimap2 -x asm10 -k23 -w11 -d ${reference}.mmi ${reference}.fa
+fi 
