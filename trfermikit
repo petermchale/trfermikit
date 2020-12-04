@@ -9,7 +9,6 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
-    --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
@@ -38,6 +37,19 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
+# TODO: 
+if [[ ! -f ${alignments}.cram.crai ]]; then 
+  ${root}/utilities/error.sh "Please index ${alignments}.cram"
+  exit 1
+fi 
+
+# TODO: 
+bash ${root}/utilities/prepare_reference.sh ${reference}
+
+# TODO: 
+# Pull genome build from cram and/or fasta (and check they are the same)  
+genome_build="38" 
+
 if [[ ${svtype} != "DEL" ]]; then
   echo "Only discovery of SVs of type DEL are currently supported"
   exit 1
@@ -50,8 +62,8 @@ mkdir --parents ${output}
 rm --force ${output}/fermikit.*
 
 bash ${root}/make-regions/make-regions.sh \
+    --genome-build ${genome_build} \
     --output ${output} \
-    --repeats ${repeats} \
     --min-repeat-length ${min_repeat_length} \
     --alignments ${alignments} \
     --threads ${number_threads} \

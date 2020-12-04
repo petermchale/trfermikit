@@ -10,8 +10,8 @@ kernel=$(uname --kernel-name)
 machine=$(uname --machine)
 
 if [[ ${machine} != 'x86_64' || ${kernel} != 'Linux'* ]]; then
-    bash utilities/error.sh "not Linux x86_64"
-    exit 1
+  bash utilities/error.sh "not Linux x86_64"
+  exit 1
 fi 
 
 ########################## 

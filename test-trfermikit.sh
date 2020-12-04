@@ -19,13 +19,11 @@ population="CHS"
 sample="HG00514"
 
 # build 38 of human reference genome:
-# *.bed.gz, *.bed.gz.tbi :
-repeats="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/repeats/simple-repeats_no-annotations" 
-# *.genome, *.mmi, *.fa, *.fa.fai :
+# *.fa, *.fa.fai :
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 # *.cram, *.cram.crai : 
 alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
-# *.bed.gz, *.bed.gz.tbi :
+# *.bed.gz :
 functional_regions="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99" 
 
 min_repeat_length="100"
@@ -37,22 +35,10 @@ trfermikit_path="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analys
 output="${trfermikit_path}/data/${sample}.${svtype}"
 PATH="${trfermikit_path}:$PATH"
 
-# to facilitate a small-scale test of tool correctness and tool usage: 
-repeats_small="${output}/repeats.small"
-set +o pipefail
-zgrep --invert-match ^"#" ${repeats}.bed.gz \
-  | head -1000 \
-  | bash ${trfermikit_path}/utilities/sort_compress_index_regions.sh \
-    --regions ${repeats_small} \
-    --root ${trfermikit_path} 
-repeats=${repeats_small}
-set -o pipefail
-
 # the arguments --min-repeat-length and --functional-regions are optional 
 # only svtype==DEL is currently supported
 trfermikit \
   --output ${output} \
-  --repeats ${repeats} \
   --reference ${reference} \
   --threads ${number_threads} \
   --svtype ${svtype} \

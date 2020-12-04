@@ -4,8 +4,8 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
+    --genome-build ) shift; [[ ! $1 =~ ^- ]] && genome_build=$1;;
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
-    --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
@@ -62,6 +62,13 @@ ${root}/bin/jq \
     "functional regions": $functional_regions
   }' \
   > ${output}/make-regions.json
+
+# TODO:
+# if repeats file doesn’t exist in $output, 
+# then download it (given $genome_build),
+# putting the column names in a header line 
+# (see /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/repeats)
+# ALSO: use (head -1000) to facilitate a small-scale test of tool correctness and tool usage 
 
 filter_repeats_by_length_and_function () {
   bash ${root}/make-regions/filter_by_length.sh \
