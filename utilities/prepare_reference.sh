@@ -27,10 +27,12 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 if [[ ! -f ${reference}.fa.fai ]]; then 
   ${root}/bin/samtools faidx ${reference}.fa
 fi 
-exit 1 
 
-# http://www.htslib.org/doc/faidx.html : 
-[[ ! -f ${reference}.genome ]] && cut -f1,2 ${reference}.fa.fai > ${reference}.genome
+if [[ ! -f ${reference}.genome ]]; then 
+  # http://www.htslib.org/doc/faidx.html : 
+  cut -f1,2 ${reference}.fa.fai > ${reference}.genome
+fi 
+exit 1
 
 # -x STR    Preset  []. This option applies multiple options at the same time. It should be applied before other options because options applied later will overwrite the values set by -x.  Available STR are:
 # asm5    Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 -N50 --min-occ-floor=100).  Typically, the  alignment  will  not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%.
