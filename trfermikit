@@ -39,7 +39,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 # TODO: 
 if [[ ! -f ${alignments}.cram.crai ]]; then 
-  ${root}/utilities/error.sh "Please index ${alignments}.cram"
+  bash ${root}/utilities/error.sh "Please index ${alignments}.cram"
   exit 1
 fi 
 
