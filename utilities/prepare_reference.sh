@@ -15,7 +15,10 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 reference=$1 
 
-[[ ! -f ${reference}.fa ]] && ${root}/bin/samtools faidx ${reference}.fa
+[[ -f ${reference}.fa.fai ]] 
+echo $? 
+exit 1  
+# || ${root}/bin/samtools faidx ${reference}.fa
 
 # http://www.htslib.org/doc/faidx.html : 
 [[ ! -f ${reference}.genome ]] && cut -f1,2 ${reference}.fa.fai > ${reference}.genome
