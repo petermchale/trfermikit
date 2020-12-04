@@ -44,3 +44,4 @@ bash install/mosdepth.sh ${root}
 bash install/htslib.sh ${root}
 bash install/bcftools.sh ${root}
 bash install/minimap2.sh ${root}
+bash install/mysql.sh ${root}

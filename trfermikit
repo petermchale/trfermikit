@@ -7,10 +7,12 @@ root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
+    --genome-build ) shift; [[ ! $1 =~ ^- ]] && genome_build=$1;;
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
+    --min-repeat-period ) shift; [[ ! $1 =~ ^- ]] && min_repeat_period=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
@@ -20,6 +22,7 @@ while [[ "$1" =~ ^- ]]; do
 done
 
 min_repeat_length=${min_repeat_length:-"0"}
+min_repeat_period=${min_repeat_period:-"0"}
 functional_regions=${functional_regions:-"none"}
 
 set -o errexit
@@ -42,15 +45,9 @@ if [[ ! -f ${alignments}.cram.crai ]]; then
   exit 1
 fi 
 
-# TODO: 
 bash ${root}/utilities/prepare_reference.sh \
   --reference ${reference} \
   --root ${root}
-exit 1 
-
-# TODO: 
-# Pull genome build from cram and/or fasta (and check they are the same)  
-genome_build="38" 
 
 if [[ ${svtype} != "DEL" ]]; then
   echo "Only discovery of SVs of type DEL are currently supported"
@@ -67,6 +64,7 @@ bash ${root}/make-regions/make-regions.sh \
     --genome-build ${genome_build} \
     --output ${output} \
     --min-repeat-length ${min_repeat_length} \
+    --min-repeat-period ${min_repeat_period} \
     --alignments ${alignments} \
     --threads ${number_threads} \
     --functional-regions ${functional_regions} \

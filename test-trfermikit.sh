@@ -18,8 +18,9 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 population="CHS"
 sample="HG00514"
 
-# build 38 of human reference genome:
-# *.fa, *.fa.fai :
+genome_build="hg38" # or "hg19"
+
+# *.fa :
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 # *.cram, *.cram.crai : 
 alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
@@ -27,6 +28,7 @@ alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_cr
 functional_regions="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99" 
 
 min_repeat_length="100"
+min_repeat_period="0"
 
 number_threads="16"
 svtype="DEL"
@@ -35,15 +37,17 @@ trfermikit_path="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analys
 output="${trfermikit_path}/data/${sample}.${svtype}"
 PATH="${trfermikit_path}:$PATH"
 
-# the arguments --min-repeat-length and --functional-regions are optional 
+# the arguments --min-repeat-length, --min-repeat-period, and --functional-regions are optional 
 # only svtype==DEL is currently supported
 trfermikit \
+  --genome-build ${genome_build} \  
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
   --svtype ${svtype} \
   --alignments ${alignments} \
   --min-repeat-length ${min_repeat_length} \
+  --min-repeat-period ${min_repeat_period} \
   --functional-regions ${functional_regions} 
 
 bash ${trfermikit_path}/evaluate-calls/evaluate.sh \
