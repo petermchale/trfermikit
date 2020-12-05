@@ -68,17 +68,16 @@ ${root}/bin/jq \
   }' \
   > ${output}/make-regions.json
 
-# TODO:
 repeats="${output}/repeats.${genome_build}"
 if [[ ! -f ${repeats}.bed.gz ]]; then 
   bash ${root}/make-regions/download_simple_repeats.sh \
     --genome-build ${genome_build} \
     --root ${root} \
     --repeats ${repeats}
-  # then download it (given $genome_build),
-  # putting the column names in a header line 
-  # (see /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/repeats)
+else 
+  bash ${root}/utilities/info.sh "skipping the downloading of repeats"
 fi 
+
 exit 1 
 
 # TODO
