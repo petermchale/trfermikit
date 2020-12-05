@@ -40,11 +40,12 @@ fetch_data () {
       --user=genome \
       --host=genome-mysql.soe.ucsc.edu \
       --port=3306 \
-      --skip-column-names \
+      --column-names \
       --batch \
       --no-auto-rehash \
       --execute="SELECT ${chromosome}, ${start_coordinate}, ${end_coordinate}, ${period} from ${table};" \
-      ${database} 
+      ${database} \
+    | head -10
     # | awk '{ print $1 "\t" \
     #                $2 "\t" \
     #                $3 "\t" \
