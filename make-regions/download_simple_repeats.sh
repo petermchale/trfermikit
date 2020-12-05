@@ -4,6 +4,7 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --genome-build ) shift; [[ ! $1 =~ ^- ]] && genome_build=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -26,7 +27,6 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 table="simpleRepeat"
 database="${genome_build}"
-repeats="repeats"
 
 chromosome="chrom"
 start_coordinate="chromStart"
@@ -45,7 +45,8 @@ fetch_data () {
       --no-auto-rehash \
       --execute="SELECT ${chromosome}, ${start_coordinate}, ${end_coordinate}, ${period} from ${table};" \
       ${database} \
-    | head -10 | cat -A 
+    | ${root}/bin/bgzip --stdout \
+    > ${repeats}.tab.gz
     # | awk '{ print $1 "\t" \
     #                $2 "\t" \
     #                $3 "\t" \
