@@ -40,7 +40,7 @@ PATH="${trfermikit_path}:$PATH"
 # the arguments --min-repeat-length, --min-repeat-period, and --functional-regions are optional 
 # only svtype==DEL is currently supported
 trfermikit \
-  --genome-build ${genome_build} \  
+  --genome-build ${genome_build} \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
