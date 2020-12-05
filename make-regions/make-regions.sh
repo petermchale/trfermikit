@@ -70,10 +70,14 @@ ${root}/bin/jq \
 
 # TODO:
 if [[ ! -f ${output}/repeats.bed.gz ]]; then 
+  ${root}/make-regions/download_simple_repeats.sh \
+    --genome-build ${genome_build} \
+    --root ${root} 
   # then download it (given $genome_build),
   # putting the column names in a header line 
   # (see /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/repeats)
 fi 
+exit 1 
 
 # TODO
 # use (head -1000) to facilitate a small-scale test of tool correctness and tool usage 
