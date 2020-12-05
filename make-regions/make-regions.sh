@@ -69,7 +69,7 @@ ${root}/bin/jq \
   > ${output}/make-regions.json
 
 # TODO:
-repeats="${output}/repeats.${genome-build}"
+repeats="${output}/repeats.${genome_build}"
 if [[ ! -f ${repeats}.bed.gz ]]; then 
   bash ${root}/make-regions/download_simple_repeats.sh \
     --genome-build ${genome_build} \
