@@ -45,7 +45,7 @@ fetch_data () {
       --no-auto-rehash \
       --execute="SELECT ${chromosome}, ${start_coordinate}, ${end_coordinate}, ${period} from ${table};" \
       ${database} \
-    | head -10
+    | head -10 | cat -A 
     # | awk '{ print $1 "\t" \
     #                $2 "\t" \
     #                $3 "\t" \
