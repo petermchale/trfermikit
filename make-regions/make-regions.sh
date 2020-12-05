@@ -70,7 +70,7 @@ ${root}/bin/jq \
 
 # TODO:
 if [[ ! -f ${output}/repeats.bed.gz ]]; then 
-  ${root}/make-regions/download_simple_repeats.sh \
+  bash ${root}/make-regions/download_simple_repeats.sh \
     --genome-build ${genome_build} \
     --root ${root} 
   # then download it (given $genome_build),
