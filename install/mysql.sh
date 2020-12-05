@@ -12,7 +12,7 @@ if [[ ! -d "mysql-8.0.22-linux-glibc2.12-x86_64" ]]; then
   wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.22-linux-glibc2.12-x86_64.tar
   tar -xvf mysql-8.0.22-linux-glibc2.12-x86_64.tar
   tar -xvf mysql-8.0.22-linux-glibc2.12-x86_64.tar.xz
-  cp mysql-8.0.22-linux-glibc2.12-x86_64/bin/mysql ${root}/bin
+  ln -s ${root}/library/mysql-8.0.22-linux-glibc2.12-x86_64/bin/mysql ${root}/bin/mysql
   rm mysql*tar*
 else 
   bash ${root}/utilities/info.sh "skipping installation of mysql"
