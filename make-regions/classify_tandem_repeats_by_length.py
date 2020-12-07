@@ -32,8 +32,5 @@ def add_column():
         log_fields = fields[:] + [classification]
         print('\t'.join(map(str, log_fields)), file=log_file)        
 
-        from color_text import info 
-        info('\t'.join(map(str, stdout_fields)))
-
 if __name__ == '__main__': 
   add_column()
