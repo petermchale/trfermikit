@@ -33,14 +33,17 @@ calls="${output}/fermikit.raw"
 unitigs="${output}/fermikit.srt"
 regions="${output}/regions"
 
+intra_cluster_distance_threshold="500"
+
 parameters=${output}/filter-calls
 # Chaisson defines an SV to be an event >50bp in size
 # That is, only events >50bp are recorded in the pacbio callset
 # Thus, discovered events <50bp may be flagged as FPs by truvari
 ${root}/bin/jq \
   --null-input \
+  --arg intra_cluster_distance_threshold ${intra_cluster_distance_threshold} \
   '{ 
-    "intra cluster distance threshold": "500",
+    "intra cluster distance threshold": $intra_cluster_distance_threshold,
     "minimum SV size": "50",
     "block length threshold": "25",
     "mapping quality threshold": "0"
