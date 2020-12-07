@@ -16,18 +16,14 @@ def add_column():
   args = parser.parse_args()
 
   for line_number, line in enumerate(sys.stdin):
-    fields = line.strip().split()
-    info('{}\t{}'.format(line_number, fields))
+    info('{}\t({})'.format(line_number, line))
     sys.exit(1)
     if line_number == 0:
-      condition1 = fields[0] != 'chrom' 
-      condition2 = fields[1] != 'chromStart'
-      condition3 = fields[2] != 'chromEnd'
-      condition4 = fields[3] != 'period'      
-      if condition1 or condition2 or condition3 or condition4: 
+      if line != 'chrom\tchromStart\tchromEnd\tperiod\n': 
         error('repeats file does not have correct column names')
         sys.exit(1)
     else: 
+      fields = line.strip().split()
       new_fields = fields + [classify(fields, args)]
       print('\t'.join(map(str, new_fields)))
 
