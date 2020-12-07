@@ -31,7 +31,7 @@ def add_column():
         new_fields_1 = fields[:3] + [classify(fields, args)]
         new_line_1 = '\t'.join(map(str, new_fields_1))
         print(new_line_1)
-        from color_test import info 
+        from color_text import info 
         info(new_line_1)
         print(new_line, file=log_file)
 
