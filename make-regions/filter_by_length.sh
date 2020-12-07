@@ -37,7 +37,7 @@ zgrep --invert-match ^"#" ${repeats}.tab.gz |
   python ${root}/utilities/get_regular_chromosomes.py |
   sort --version-sort -k1,1 -k2,2 | # bedtools merge requires sorted input
   ${root}/bin/bedtools merge -i stdin -c 4 -o collapse | # assumes that column 4 contains classification
-  tee a.txt |
   python ${root}/make-regions/classify_merged_tandem_repeats.py |
+  tee a.txt |
   awk --assign OFS='\t' '$NF == "1" { print $1, $2, $3 }' | 
   awk --assign max_region_length=${max_region_length} '$3-$2 < max_region_length' 
