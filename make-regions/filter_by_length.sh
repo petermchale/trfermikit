@@ -29,7 +29,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-zgrep --invert-match ^"#" ${repeats}.tab.gz |
+zgrep --invert-match ^"#" ${repeats}.tab.gz 
   python ${root}/make-regions/classify_tandem_repeats_by_length.py \
     --min-repeat-length ${min_repeat_length} \
     --min-repeat-period ${min_repeat_period} \
@@ -38,6 +38,5 @@ zgrep --invert-match ^"#" ${repeats}.tab.gz |
   sort --version-sort -k1,1 -k2,2 | # bedtools merge requires sorted input
   ${root}/bin/bedtools merge -i stdin -c 4 -o collapse | # assumes that column 4 contains classification
   python ${root}/make-regions/classify_merged_tandem_repeats.py |
-  tee a.txt |
   awk --assign OFS='\t' '$NF == "1" { print $1, $2, $3 }' | 
   awk --assign max_region_length=${max_region_length} '$3-$2 < max_region_length' 
