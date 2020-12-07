@@ -70,8 +70,8 @@ BASH_ENV=${root}/utilities/debug.sh \
       --threads ${number_threads} \
       --functional-regions ${functional_regions} \
       --reference ${reference} \
-      --root ${root} 
-    # 2> ${output}/make-regions.log 
+      --root ${root} \
+    2> ${output}/make-regions.log 
 
 BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/make-calls/make-calls.sh \
