@@ -16,11 +16,12 @@ def add_column():
   args = parser.parse_args()
 
   for line_number, line in enumerate(sys.stdin):
-    info('{}\t({})'.format(line_number, line))
-    sys.exit(1)
     if line_number == 0:
       if line != 'chrom\tchromStart\tchromEnd\tperiod\n': 
         error('repeats file does not have correct column names')
+        sys.exit(1)
+      else: 
+        info('passed header test')
         sys.exit(1)
     else: 
       fields = line.strip().split()
