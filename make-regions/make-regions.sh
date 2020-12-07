@@ -87,7 +87,7 @@ filter_repeats_by_length_and_function () {
     --root ${root} \
   | 
   # https://unix.stackexchange.com/a/38311/406037 : 
-  if [[ "${functional_regions}" == "none" ]]; 
+  if [[ "${functional_regions}" == "none" ]]; then 
     cat
   else 
     bash ${root}/make-regions/filter_by_function.sh \
