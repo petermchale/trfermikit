@@ -29,9 +29,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-set -o errtrace
-
-zgrep --invert-match ^"#" ${repeats}.bed.gz |
+zgrep --invert-match ^"#" ${repeats}.tab.gz |
   python ${root}/make-regions/classify_tandem_repeats_by_length.py \
     --min-repeat-length ${min_repeat_length} \
     --min-repeat-period ${min_repeat_period} \
