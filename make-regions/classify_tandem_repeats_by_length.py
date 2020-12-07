@@ -16,7 +16,7 @@ def add_column():
   parser.add_argument('--log-file', type=str, dest='log_file', help='')  
   args = parser.parse_args()
 
-  with gzip.open(args.log_file, 'wb') as log_file: 
+  with gzip.open(args.log_file, 'wt') as log_file: 
     for line_number, line in enumerate(sys.stdin):
       if line_number == 0:
         if line != 'chrom\tchromStart\tchromEnd\tperiod\n': 
