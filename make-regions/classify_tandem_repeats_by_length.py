@@ -20,13 +20,11 @@ def add_column():
       if line != 'chrom\tchromStart\tchromEnd\tperiod\n': 
         error('repeats file does not have correct column names')
         sys.exit(1)
-      else: 
-        info('passed header test')
-        sys.exit(1)
     else: 
       fields = line.strip().split()
       new_fields = fields + [classify(fields, args)]
       print('\t'.join(map(str, new_fields)))
+      info('\t'.join(map(str, new_fields)))
 
 if __name__ == '__main__': 
   add_column()
