@@ -96,9 +96,9 @@ filter_repeats_by_length_and_function () {
   fi 
 }
 
-scratch=$(mktemp --tmpdir=${output} -t tmp.XXXXXXXXXX --directory)
-finish {
-  rm -rf "${scratch}"
+scratch=$(mktemp --tmpdir=${output} --directory)
+finish () {
+  rm --recursive --force "${scratch}"
 }
 trap finish EXIT
 
