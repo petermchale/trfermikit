@@ -19,7 +19,7 @@ def add_column():
   with gzip.open(args.log_file, 'wt') as log_file: 
     for line_number, line in enumerate(sys.stdin):
       if line_number == 0:
-        if line != 'chrom\tchromStart\tchromEnd\tperiodP\n': 
+        if line != 'chrom\tchromStart\tchromEnd\tperiod\n': 
           from color_text import error
           error('repeats file does not have correct column names')
           sys.exit(1)
