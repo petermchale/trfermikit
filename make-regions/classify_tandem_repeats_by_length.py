@@ -15,18 +15,19 @@ def add_column():
   parser.add_argument('--min-repeat-period', type=int, dest='min_repeat_period', help='')  
   args = parser.parse_args()
 
-  for line_number, line in enumerate(sys.stdin):
-    if line_number == 0:
-      if line != 'chrom\tchromStart\tchromEnd\tperiod\n': 
-        error('repeats file does not have correct column names')
-        sys.exit(1)
-      print('{}\t{}'.format(line.strip(), 'class'), file='a.tab')
-    else: 
-      fields = line.strip().split()
-      new_fields = fields + [classify(fields, args)]
-      print('\t'.join(map(str, new_fields)))
-      print('\t'.join(map(str, new_fields)), file='a.tab')
-      # info('\t'.join(map(str, new_fields)))
+  with open('filename.txt', 'w') as f:
+    for line_number, line in enumerate(sys.stdin):
+      if line_number == 0:
+        if line != 'chrom\tchromStart\tchromEnd\tperiod\n': 
+          error('repeats file does not have correct column names')
+          sys.exit(1)
+        print('{}\t{}'.format(line.strip(), 'class'), file=f)
+      else: 
+        fields = line.strip().split()
+        new_fields = fields + [classify(fields, args)]
+        print('\t'.join(map(str, new_fields)))
+        print('\t'.join(map(str, new_fields)), file=f)
+        # info('\t'.join(map(str, new_fields)))
 
 if __name__ == '__main__': 
   add_column()
