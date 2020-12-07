@@ -27,9 +27,6 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-echo "intra_cluster_distance_threshold: $intra_cluster_distance_threshold" 
-exit 1 
-
 sparsify_clusters () {
   local calls_=$1
   local cluster_column=11
