@@ -6,6 +6,7 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
+    --min-repeat-period ) shift; [[ ! $1 =~ ^- ]] && min_repeat_period=$1;;
     --max-region-length ) shift; [[ ! $1 =~ ^- ]] && max_region_length=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
@@ -30,7 +31,9 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 zgrep --invert-match ^"#" ${repeats}.bed.gz |
   python ${root}/utilities/get_regular_chromosomes.py |
-  python ${root}/make-regions/classify_tandem_repeats_by_length.py ${min_repeat_length} |
+  python ${root}/make-regions/classify_tandem_repeats_by_length.py \
+    --min-repeat-length ${min_repeat_length} \
+    --min-repeat-period ${min_repeat_period} |
   sort --version-sort -k1,1 -k2,2 | # bedtools merge requires sorted input
   ${root}/bin/bedtools merge -i stdin -c 4 -o collapse | 
   python ${root}/make-regions/classify_merged_tandem_repeats.py |

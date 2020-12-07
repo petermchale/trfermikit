@@ -78,15 +78,11 @@ else
   bash ${root}/utilities/info.sh "skipping the downloading of repeats"
 fi 
 
-exit 1 
-
-# TODO
-# use (head -1000) to facilitate a small-scale test of tool correctness and tool usage 
-
 filter_repeats_by_length_and_function () {
   bash ${root}/make-regions/filter_by_length.sh \
     --repeats ${repeats} \
     --min-repeat-length ${min_repeat_length} \
+    --min-repeat-period ${min_repeat_period} \
     --max-region-length ${max_region_length} \
     --root ${root} \
   | 

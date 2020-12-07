@@ -28,7 +28,7 @@ alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_cr
 functional_regions="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99" 
 
 min_repeat_length="100"
-min_repeat_period="0"
+min_repeat_period="6"
 
 number_threads="16"
 svtype="DEL"
