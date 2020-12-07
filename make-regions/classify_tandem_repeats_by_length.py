@@ -28,7 +28,11 @@ def add_column():
         fields = line.strip().split()
         new_fields = fields + [classify(fields, args)]
         new_line = '\t'.join(map(str, new_fields))
-        print(new_line)
+        new_fields_1 = fields[:3] + [classify(fields, args)]
+        new_line_1 = '\t'.join(map(str, new_fields_1))
+        print(new_line_1)
+        from color_test import info 
+        info(new_line_1)
         print(new_line, file=log_file)
 
 if __name__ == '__main__': 
