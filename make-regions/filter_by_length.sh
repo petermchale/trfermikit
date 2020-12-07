@@ -29,7 +29,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-trap 'echo "$BASH_COMMAND" failed with error code $?' ERR
+trap 'bash ${root}/utilities/error.sh "$BASH_COMMAND" failed with error code $?' ERR
 
 zgrep --invert-match ^"#" ${repeats}.tab.gz |
   python ${root}/utilities/get_regular_chromosomes.py |
