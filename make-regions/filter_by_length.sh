@@ -29,7 +29,9 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-zgrep --invert-match ^"#" ${repeats}.bed.gz |
+trap 'echo "$BASH_COMMAND" failed with error code $?' ERR
+
+zgrep --invert-match ^"#" ${repeats}.tab.gz |
   python ${root}/utilities/get_regular_chromosomes.py |
   python ${root}/make-regions/classify_tandem_repeats_by_length.py \
     --min-repeat-length ${min_repeat_length} \

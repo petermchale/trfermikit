@@ -96,8 +96,13 @@ filter_repeats_by_length_and_function () {
   fi 
 }
 
-mkdir --parents "${output}/tmp" 
-mosdepth_prefix="${output}/tmp/mosdepth.coverage"
+scratch=$(mktemp --tmpdir=${output} -t tmp.XXXXXXXXXX --directory)
+finish {
+  rm -rf "${scratch}"
+}
+trap finish EXIT
+
+mosdepth_prefix="${scratch}/mosdepth.coverage"
 ${root}/bin/mosdepth \
   --no-per-base \
   --fast-mode \
@@ -113,6 +118,6 @@ ${root}/bin/bedtools slop -i ${mosdepth_prefix}.regions.bed.gz -g ${reference}.g
   | awk --assign OFS='\t' '{ print $1, $2, $3 }' \
   | bash ${root}/utilities/sort_compress_index_regions.sh \
     --regions "${output}/regions" \
-    --root ${root} \
-&& rm -rf "${output}/tmp"
+    --root ${root}
+
 
