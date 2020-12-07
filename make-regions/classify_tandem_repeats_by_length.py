@@ -26,14 +26,14 @@ def add_column():
         print('{}\t{}'.format(line.strip(), 'class'), file=log_file)
       else: 
         fields = line.strip().split()
-        new_fields = fields + [classify(fields, args)]
-        new_line = '\t'.join(map(str, new_fields))
-        new_fields_1 = fields[:3] + [classify(fields, args)]
-        new_line_1 = '\t'.join(map(str, new_fields_1))
-        print(new_line_1)
+        classification = classify(fields, args)
+        stdout_fields = fields[:3] + [classification]
+        print('\t'.join(map(str, stdout_fields)))        
+        log_fields = fields[:] + [classification]
+        print('\t'.join(map(str, log_fields)), file=log_file)        
+
         from color_text import info 
-        info(new_line_1)
-        print(new_line, file=log_file)
+        info('\t'.join(map(str, stdout_fields)))
 
 if __name__ == '__main__': 
   add_column()
