@@ -24,7 +24,7 @@ def add_column():
       fields = line.strip().split()
       new_fields = fields + [classify(fields, args)]
       print('\t'.join(map(str, new_fields)))
-      info('\t'.join(map(str, new_fields)))
+      # info('\t'.join(map(str, new_fields)))
 
 if __name__ == '__main__': 
   add_column()
