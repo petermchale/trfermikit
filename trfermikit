@@ -60,7 +60,7 @@ export PYTHONPATH="${root}/utilities"
 mkdir --parents ${output} 
 rm --force ${output}/fermikit.*
 
-BASH_ENV=${root}/utilities/debug.sh \
+# BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/make-regions/make-regions.sh \
       --genome-build ${genome_build} \
       --output ${output} \
