@@ -30,10 +30,10 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 zgrep --invert-match ^"#" ${repeats}.tab.gz |
-  python ${root}/utilities/get_regular_chromosomes.py |
   python ${root}/make-regions/classify_tandem_repeats_by_length.py \
     --min-repeat-length ${min_repeat_length} \
     --min-repeat-period ${min_repeat_period} |
+  python ${root}/utilities/get_regular_chromosomes.py |
   sort --version-sort -k1,1 -k2,2 | # bedtools merge requires sorted input
   ${root}/bin/bedtools merge -i stdin -c 4 -o collapse | 
   python ${root}/make-regions/classify_merged_tandem_repeats.py |

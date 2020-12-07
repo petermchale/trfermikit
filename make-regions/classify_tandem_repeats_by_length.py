@@ -1,7 +1,7 @@
 import sys
 import color_traceback
 import argparse
-from color_text import error
+from color_text import error, info
 
 def classify(fields, args): 
   _, start, end, period = fields
@@ -17,7 +17,8 @@ def add_column():
 
   for line_number, line in enumerate(sys.stdin):
     fields = line.strip().split()
-    print(line_number, fields)
+    info('{}\t{}'.format(line_number, fields))
+    sys.exit(1)
     if line_number == 0:
       condition1 = fields[0] != 'chrom' 
       condition2 = fields[1] != 'chromStart'
