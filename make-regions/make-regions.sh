@@ -35,8 +35,8 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 slop=$(${root}/utilities/fetch_value.sh ${root} makeRegions slop)
 min_coverage=$(${root}/utilities/fetch_value.sh ${root} makeRegions minCoverage)
+max_coverage=$(${root}/utilities/fetch_value.sh ${root} makeRegions maxCoverage)
 exit 1
-max_coverage=200
 max_region_length=100000
 
 if [[ "${functional_regions}" == "none" ]]; then
