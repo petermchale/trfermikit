@@ -17,6 +17,6 @@
     "maxIntraClusterDistance": "500",
     "minSVSize": "50",
     "minUnitigMappingQuality": "0",
-    "blockLengthThreshold": "25"
+    "minUnitigBlockLength": "25"
   }
 }
