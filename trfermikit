@@ -87,8 +87,8 @@ BASH_ENV=${root}/utilities/debug.sh \
       --alignments ${alignments} \
       --threads ${number_threads} \
       --reference ${reference} \
-      --root ${root} \
-    > ${output}/make-calls.log 2>&1
+      --root ${root} 
+    # > ${output}/make-calls.log 2>&1
 
 BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/filter-calls/filter-calls.sh \
