@@ -27,9 +27,7 @@ fi
 
 min_repeat_length=${min_repeat_length:-"0"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
-cat $output/config.json
-exit 1 
-
+# TODO: 
 min_repeat_period=${min_repeat_period:-"0"}
 functional_regions=${functional_regions:-"none"}
 
