@@ -45,9 +45,6 @@ filtered_fastq_empty () {
   fi
 }
 
-${trfermikit_root}/utilities/info.sh "trfermikit_root: $trfermikit_root"
-exit 1 
-
 ${trfermikit_root}/bin/jq \
   --null-input \
   --arg filtered_fastq_empty $(filtered_fastq_empty) \
