@@ -40,13 +40,17 @@ def coordinates(variant):
   return call_start, call_end
 
 def retainCall_reportConfidence(unitigs, variant, region, parameters): 
-  mapping_quality_threshold = int(parameters['mapping quality threshold'])
-  block_length_threshold = int(parameters['block length threshold'])
+  min_mapping_quality = int(parameters['filterCalls']['minUnitigMappingQuality'])
+  min_unitig_block_length = int(parameters['filterCalls']['minUnitigBlockLength'])
+  from color_text import info 
+  info('min_mapping_quality: {}'.format(min_mapping_quality))
+  info('min_unitig_block_length: {}'.format(min_unitig_block_length))
+  sys.exit(1)
 
   call_start, call_end = coordinates(variant) 
  
   for unitig in unitigs.fetch(*parse(region)):
-    if unitig.mapping_quality <= mapping_quality_threshold:
+    if unitig.mapping_quality <= min_mapping_quality:
       continue
     # https://pysam.readthedocs.io/en/latest/api.html#pysam.AlignedSegment.get_blocks
     blocks = unitig.get_blocks()
@@ -60,10 +64,10 @@ def retainCall_reportConfidence(unitigs, variant, region, parameters):
         max_block_size_downstream_of_call, max_block_index_downstream_of_call = max_block(blocks_downstream_of_call) 
 #        block_immediately_upstream_of_call = blocks_upstream_of_call[-1]
 #        block_immediately_downstream_of_call = blocks_downstream_of_call[0]
-#        condition_1 = length(block_immediately_upstream_of_call) > block_length_threshold
-#        condition_2 = length(block_immediately_downstream_of_call) > block_length_threshold
-        condition_1 = max_block_size_upstream_of_call > block_length_threshold
-        condition_2 = max_block_size_downstream_of_call > block_length_threshold
+#        condition_1 = length(block_immediately_upstream_of_call) > min_unitig_block_length
+#        condition_2 = length(block_immediately_downstream_of_call) > min_unitig_block_length
+        condition_1 = max_block_size_upstream_of_call > min_unitig_block_length
+        condition_2 = max_block_size_downstream_of_call > min_unitig_block_length
         # condition_3 = max_block_index_upstream_of_call == 0
         # condition_4 = max_block_index_downstream_of_call == len(blocks_downstream_of_call) - 1
         call_confidence = (max_block_size_upstream_of_call + max_block_size_downstream_of_call)/len(blocks)

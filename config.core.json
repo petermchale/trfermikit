@@ -16,7 +16,7 @@
   "filterCalls": {
     "maxIntraClusterDistance": "500",
     "minSVSize": "50",
-    "blockLengthThreshold": "25",
-    "mappingQualityThreshold": "0"
+    "minUnitigMappingQuality": "0",
+    "blockLengthThreshold": "25"
   }
 }

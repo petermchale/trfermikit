@@ -60,10 +60,6 @@ def find_SVs():
       continue
 
     minSVSize = int(parameters['filterCalls']['minSVSize'])
-    from color_text import info
-    info('parameters: {}'.format(parameters))
-    info('minSVSize: {}'.format(minSVSize))
-    sys.exit(1)
     if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= minSVSize: 
       print(variant, end='')
  
