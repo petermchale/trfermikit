@@ -44,6 +44,7 @@ functional_regions=${functional_regions:-"none"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
 
 ${root}/utilities/update_config.sh ${root} ${output} core reference ${reference}
+${root}/utilities/update_config.sh ${root} ${output} core numberThreads ${number_threads}
 exit 1 
 
 set -o nounset
