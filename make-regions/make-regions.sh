@@ -33,8 +33,11 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-slop=250
-bash ${root}/utilities/info.sh "slop in make-regions: $make_regions_slop"
+jq="${root}/bin/jq"
+config="${root}/config"
+
+slop=$($jq --raw-output '.makeRegions.slop' ${config}.json)
+bash ${root}/utilities/info.so "slop in make-regions: $slop"
 exit 1 
 
 min_coverage=0
