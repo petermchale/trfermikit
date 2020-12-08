@@ -22,10 +22,14 @@ while [[ "$1" =~ ^- ]]; do
 done
 
 if [[ ! -f ${output}/config.json ]]; then 
-  cp ${root}/config.json ${output}/config.json 
+  cp ${root}/config.core.json ${output}/config.json
 fi 
 
 min_repeat_length=${min_repeat_length:-"0"}
+${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
+cat $output/config.json
+exit 1 
+
 min_repeat_period=${min_repeat_period:-"0"}
 functional_regions=${functional_regions:-"none"}
 
