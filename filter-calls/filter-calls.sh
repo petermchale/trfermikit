@@ -30,13 +30,13 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 ${root}/utilities/update_config.sh ${root} ${output} filterCalls svtype ${svtype}
-exit 1 
 
 calls="${output}/fermikit.raw"
 unitigs="${output}/fermikit.srt"
 regions="${output}/regions"
 
-intra_cluster_distance_threshold="500"
+intra_cluster_distance_threshold=$(${root}/utilities/read_config.sh ${root} ${output} filterCalls intraClusterDistanceThreshold)
+exit 1
 
 parameters=${output}/filter-calls
 # Chaisson defines an SV to be an event >50bp in size

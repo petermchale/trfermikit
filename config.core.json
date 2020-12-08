@@ -12,5 +12,8 @@
     "gapOpenPenalties": "6,26",
     "gapExtensionPenalties": "1,0",
     "minimumUnitigMappingQuality": "1"
+  },
+  "filterCalls": {
+    "intraClusterDistanceThreshold": "500"
   }
 }
