@@ -54,7 +54,7 @@ python ${root}/filter-calls/filterByUnitigSupport_annotate.py \
     --alignments ${unitigs} \
     --regions ${regions} \
     --calls ${calls_decomposed_normalized_svtype} \
-    --parameters ${parameters} \
+    --parameters "${output}/config" \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls "${calls_unitigSupport}" \
     --root ${root}
