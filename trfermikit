@@ -37,13 +37,12 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 if [[ ! -f ${output}/config.json ]]; then 
   cp ${root}/config.core.json ${output}/config.json
 fi 
-exit 1 
 
 min_repeat_length=${min_repeat_length:-"0"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
 functional_regions=${functional_regions:-"none"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
-
+exit 1
 set -o nounset
 
 if [[ ! -f ${alignments}.cram.crai ]]; then 
