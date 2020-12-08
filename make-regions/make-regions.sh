@@ -33,8 +33,8 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-slop=$(${root}/utilties/fetch_value.sh ${root} makeRegions slop)
-min_coverage=$(${root}/utilties/fetch_value.sh ${root} makeRegions minCoverage)
+slop=$(${root}/utilities/fetch_value.sh ${root} makeRegions slop)
+min_coverage=$(${root}/utilities/fetch_value.sh ${root} makeRegions minCoverage)
 exit 1
 max_coverage=200
 max_region_length=100000
