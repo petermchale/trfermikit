@@ -36,7 +36,11 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 jq="${root}/bin/jq"
 config="${root}/config"
 
-slop=$($jq --raw-output '.makeRegions.slop' ${config}.json)
+f () { 
+  echo "$jq --raw-output '."$1"' ${config}.json"
+}
+
+slop=$(f makeRegions.slop)
 bash ${root}/utilities/info.sh "slop in make-regions: $slop"
 exit 1 
 
