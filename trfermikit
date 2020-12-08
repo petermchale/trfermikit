@@ -20,18 +20,8 @@ while [[ "$1" =~ ^- ]]; do
   shift
 done
 
-if [[ ! -f ${output}/config.json ]]; then 
-  cp ${root}/config.core.json ${output}/config.json
-fi 
-
-min_repeat_length=${min_repeat_length:-"0"}
-${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
-functional_regions=${functional_regions:-"none"}
-${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
-
 set -o errexit
 set -o pipefail
-set -o nounset
 # set -o noclobber
 
 set -o xtrace
@@ -43,6 +33,18 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+if [[ ! -f ${output}/config.json ]]; then 
+  cp ${root}/config.core.json ${output}/config.json
+fi 
+exit 1 
+
+min_repeat_length=${min_repeat_length:-"0"}
+${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
+functional_regions=${functional_regions:-"none"}
+${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
+
+set -o nounset
 
 if [[ ! -f ${alignments}.cram.crai ]]; then 
   bash ${root}/utilities/error.sh "Please index: ${alignments}.cram"
