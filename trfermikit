@@ -21,6 +21,10 @@ while [[ "$1" =~ ^- ]]; do
   shift
 done
 
+if [[ ! -f ${output}/config.json ]]; then 
+  cp ${root}/config.json ${output}/config.json 
+fi 
+
 min_repeat_length=${min_repeat_length:-"0"}
 min_repeat_period=${min_repeat_period:-"0"}
 functional_regions=${functional_regions:-"none"}

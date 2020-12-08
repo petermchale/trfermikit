@@ -33,10 +33,10 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-slop=$(${root}/utilities/fetch_value.sh ${root} makeRegions slop)
-min_coverage=$(${root}/utilities/fetch_value.sh ${root} makeRegions minCoverage)
-max_coverage=$(${root}/utilities/fetch_value.sh ${root} makeRegions maxCoverage)
-max_region_length=$(${root}/utilities/fetch_value.sh ${root} makeRegions maxRegionLength)
+slop=$(${root}/utilities/fetch_value.sh ${root} ${output} makeRegions slop)
+min_coverage=$(${root}/utilities/fetch_value.sh ${root} ${output} makeRegions minCoverage)
+max_coverage=$(${root}/utilities/fetch_value.sh ${root} ${output} makeRegions maxCoverage)
+max_region_length=$(${root}/utilities/fetch_value.sh ${root} ${output} makeRegions maxRegionLength)
 exit 1 
 
 if [[ "${functional_regions}" == "none" ]]; then
