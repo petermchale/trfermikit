@@ -67,28 +67,28 @@ fi
 export PYTHONPATH="${root}/utilities"
 
 mkdir --parents ${output} 
-# rm --force ${output}/fermikit.*
+rm --force ${output}/fermikit.*
 
-# BASH_ENV=${root}/utilities/debug.sh \
-#   bash ${root}/make-regions/make-regions.sh \
-#       --genome-build ${genome_build} \
-#       --output ${output} \
-#       --min-repeat-length ${min_repeat_length} \
-#       --alignments ${alignments} \
-#       --threads ${number_threads} \
-#       --functional-regions ${functional_regions} \
-#       --reference ${reference} \
-#       --root ${root} \
-#     2> ${output}/make-regions.log 
+BASH_ENV=${root}/utilities/debug.sh \
+  bash ${root}/make-regions/make-regions.sh \
+      --genome-build ${genome_build} \
+      --output ${output} \
+      --min-repeat-length ${min_repeat_length} \
+      --alignments ${alignments} \
+      --threads ${number_threads} \
+      --functional-regions ${functional_regions} \
+      --reference ${reference} \
+      --root ${root} \
+    2> ${output}/make-regions.log 
 
-# BASH_ENV=${root}/utilities/debug.sh \
-#   bash ${root}/make-calls/make-calls.sh \
-#       --output ${output} \
-#       --alignments ${alignments} \
-#       --threads ${number_threads} \
-#       --reference ${reference} \
-#       --root ${root} \
-#     > ${output}/make-calls.log 2>&1
+BASH_ENV=${root}/utilities/debug.sh \
+  bash ${root}/make-calls/make-calls.sh \
+      --output ${output} \
+      --alignments ${alignments} \
+      --threads ${number_threads} \
+      --reference ${reference} \
+      --root ${root} \
+    > ${output}/make-calls.log 2>&1
 
 BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/filter-calls/filter-calls.sh \
@@ -96,6 +96,6 @@ BASH_ENV=${root}/utilities/debug.sh \
       --svtype ${svtype} \
       --reference ${reference} \
       --threads ${number_threads} \
-      --root ${root} 
-  # 2> ${output}/filter-calls.log 
+      --root ${root} \
+  2> ${output}/filter-calls.log 
 

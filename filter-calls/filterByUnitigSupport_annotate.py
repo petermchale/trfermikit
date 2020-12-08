@@ -42,10 +42,6 @@ def coordinates(variant):
 def retainCall_reportConfidence(unitigs, variant, region, parameters): 
   min_mapping_quality = int(parameters['filterCalls']['minUnitigMappingQuality'])
   min_unitig_block_length = int(parameters['filterCalls']['minUnitigBlockLength'])
-  from color_text import info 
-  info('min_mapping_quality: {}'.format(min_mapping_quality))
-  info('min_unitig_block_length: {}'.format(min_unitig_block_length))
-  sys.exit(1)
 
   call_start, call_end = coordinates(variant) 
  
