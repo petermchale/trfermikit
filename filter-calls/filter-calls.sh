@@ -35,23 +35,7 @@ calls="${output}/fermikit.raw"
 unitigs="${output}/fermikit.srt"
 regions="${output}/regions"
 
-intra_cluster_distance_threshold=$(${root}/utilities/read_config.sh ${root} ${output} filterCalls intraClusterDistanceThreshold)
-exit 1
-
-parameters=${output}/filter-calls
-# Chaisson defines an SV to be an event >50bp in size
-# That is, only events >50bp are recorded in the pacbio callset
-# Thus, discovered events <50bp may be flagged as FPs by truvari
-${root}/bin/jq \
-  --null-input \
-  --arg intra_cluster_distance_threshold ${intra_cluster_distance_threshold} \
-  '{ 
-    "intra cluster distance threshold": $intra_cluster_distance_threshold,
-    "minimum SV size": "50",
-    "block length threshold": "25",
-    "mapping quality threshold": "0"
-  }' \
-  > ${parameters}.json
+max_intra_cluster_distance=$(${root}/utilities/read_config.sh ${root} ${output} filterCalls maxIntraClusterDistance)
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
 bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
@@ -59,7 +43,7 @@ bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --calls ${calls} \
     --reference ${reference} \
     --threads ${number_threads} \
-    --parameters ${parameters} \
+    --parameters "${output}/config" \
     --root ${root} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls ${calls_decomposed_normalized_svtype} \
@@ -79,7 +63,7 @@ calls_thinned="${calls_unitigSupport}.thinned"
 bash ${root}/filter-calls/sparsify_clusters.sh \
     --calls ${calls_unitigSupport} \
     --root ${root} \
-    --intra-cluster-distance-threshold ${intra_cluster_distance_threshold} \
+    --max-intra-cluster-distance ${max_intra_cluster_distance} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls "${calls_thinned}" \
     --root ${root}

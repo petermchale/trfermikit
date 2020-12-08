@@ -11,9 +11,12 @@
     "singleBaseMismatchPenalty": "12",
     "gapOpenPenalties": "6,26",
     "gapExtensionPenalties": "1,0",
-    "minimumUnitigMappingQuality": "1"
+    "minUnitigMappingQuality": "1"
   },
   "filterCalls": {
-    "intraClusterDistanceThreshold": "500"
+    "maxIntraClusterDistance": "500",
+    "minSVSize": "50",
+    "blockLengthThreshold": "25",
+    "mappingQualityThreshold": "0"
   }
 }

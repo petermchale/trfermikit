@@ -32,7 +32,7 @@ single_base_match_reward=$(${root}/utilities/read_config.sh ${root} ${output} ma
 single_base_mismatch_penalty=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMismatchPenalty)
 gap_open_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapOpenPenalties)
 gap_extension_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapExtensionPenalties)
-minimum_unitig_mapping_quality=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls minimumUnitigMappingQuality)
+minimum_unitig_mapping_quality=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls minUnitigMappingQuality)
 
 # get short reads that were originally aligned to given regions
 regions="${output}/regions"

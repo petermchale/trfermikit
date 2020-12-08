@@ -59,8 +59,12 @@ def find_SVs():
     if hom_ref(variant): 
       continue
 
-    sv_length_threshold = int(parameters['minimum SV size'])
-    if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= sv_length_threshold: 
+    minSVSize = int(parameters['filterCalls']['minSVSize'])
+    from color_text import info
+    info('parameters: {}'.format(parameters))
+    info('minSVSize: {}'.format(minSVSize))
+    sys.exit(1)
+    if get_svtype(variant) == svtype and abs(get_sv_length(variant)) >= minSVSize: 
       print(variant, end='')
  
   variants.close()

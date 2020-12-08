@@ -6,7 +6,7 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
-    --intra-cluster-distance-threshold ) shift; [[ ! $1 =~ ^- ]] && intra_cluster_distance_threshold=$1;;
+    --max-intra-cluster-distance ) shift; [[ ! $1 =~ ^- ]] && max_intra_cluster_distance=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -30,7 +30,7 @@ sparsify_clusters () {
   local calls_=$1
   local cluster_column=11
   local confidence_column=12
-  ${root}/bin/bedtools cluster -i ${calls_}.vcf.gz -d ${intra_cluster_distance_threshold} \
+  ${root}/bin/bedtools cluster -i ${calls_}.vcf.gz -d ${max_intra_cluster_distance} \
     | python ${root}/filter-calls/append_INFO_value_to_vcf_record.py "Confidence" \
     | sort -k${cluster_column},${cluster_column}n -k${confidence_column},${confidence_column}nr \
     | ${root}/bin/bedtools groupby -grp ${cluster_column} -opCols ${confidence_column} -ops max -full \
