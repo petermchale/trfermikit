@@ -46,7 +46,6 @@ ${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegio
 ${root}/utilities/update_config.sh ${root} ${output} core reference ${reference}
 ${root}/utilities/update_config.sh ${root} ${output} core numberThreads ${number_threads}
 ${root}/utilities/update_config.sh ${root} ${output} core alignments ${alignments}
-exit 1 
 
 set -o nounset
 
