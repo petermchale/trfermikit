@@ -33,7 +33,6 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions genomeBuild ${genome_build}
-exit 1 
 
 slop=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions slop)
 min_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minCoverage)
@@ -48,35 +47,12 @@ else
 fi
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions overlappedFunctionalRegions ${overlapped_functional_regions}
 
-${root}/bin/jq \
-  --null-input \
-  --arg genome_build ${genome_build} \
-  --arg slop ${slop} \
-  --arg min_coverage ${min_coverage} \
-  --arg max_coverage ${max_coverage} \
-  --arg min_repeat_length ${min_repeat_length} \
-  --arg min_repeat_period ${min_repeat_period} \
-  --arg max_region_length ${max_region_length} \
-  --arg functional_regions ${functional_regions} \
-  --arg overlapped_functional_regions ${overlapped_functional_regions} \
-  '{ 
-    "genome build": $genome_build,
-    "slop": $slop,
-    "minimum coverage": $min_coverage,
-    "maximum coverage": $max_coverage,
-    "minimum repeat length": $min_repeat_length,
-    "minimum repeat period": $min_repeat_period,
-    "maximum region length": $max_region_length,
-    "overlapped functional regions": $overlapped_functional_regions,
-    "functional regions": $functional_regions
-  }' \
-  > ${output}/make-regions.json
-
 repeats="${output}/repeats.${genome_build}"
 if [[ ! -f ${repeats}.tab.gz ]]; then 
   bash ${root}/make-regions/download_simple_repeats.sh \
     --genome-build ${genome_build} \
     --root ${root} \
+    --output ${output} \
     --repeats ${repeats}
 else 
   bash ${root}/utilities/info.sh "skipping the downloading of repeats"

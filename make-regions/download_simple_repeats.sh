@@ -4,6 +4,7 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --genome-build ) shift; [[ ! $1 =~ ^- ]] && genome_build=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
@@ -27,6 +28,8 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 table="simpleRepeat"
 database="${genome_build}"
+
+${root}/utilities/update_config.sh ${root} ${output} makeRegions ucscTable ${table}
 
 chromosome="chrom"
 start_coordinate="chromStart"
