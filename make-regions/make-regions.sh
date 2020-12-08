@@ -37,7 +37,7 @@ jq="${root}/bin/jq"
 config="${root}/config"
 
 f () { 
-  echo $($jq --raw-output --arg key $1 '.$key' ${config}.json)
+  echo $($jq --raw-output --arg key $1 '."$key"' ${config}.json)
 }
 
 slop=$(f makeRegions.slop)
