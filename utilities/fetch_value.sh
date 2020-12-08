@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o xtrace 
+
 root=$1 
 key1=$2 
 key2=$3 
