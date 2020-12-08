@@ -7,6 +7,8 @@ Most SVs missed by short-read callers lie in tandem repeats:
 (based upon Supplementary Data 53 of [Chaisson et al 2019](https://pubmed.ncbi.nlm.nih.gov/30992455) and private communication with Mark Chaisson). 
 This observation prompted us to revisit attempts to discover SVs in tandem repeats using short reads. 
 
+## Scope 
+
 As callers exist 
 to capture SVs in tandem repeats where 
 the repeat unit is smaller than 6bps,
