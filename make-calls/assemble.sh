@@ -45,7 +45,7 @@ filtered_fastq_empty () {
   fi
 }
 
-echo "trfermikit_root: $trfermikit_root"
+${trfermikit_root}/utilities/info.sh "trfermikit_root: $trfermikit_root"
 exit 1 
 
 ${trfermikit_root}/bin/jq \
