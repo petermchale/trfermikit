@@ -43,6 +43,9 @@ ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength
 functional_regions=${functional_regions:-"none"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
 
+${root}/utilities/update_config.sh ${root} ${output} core reference ${reference}
+exit 1 
+
 set -o nounset
 
 if [[ ! -f ${alignments}.cram.crai ]]; then 

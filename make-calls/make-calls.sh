@@ -93,9 +93,6 @@ filtered_fastq_empty () {
   echo $(${root}/bin/jq --raw-output '.filteredFastqEmpty' ${assembly_diagnostics})
 }
 
-filtered_fastq_empty
-exit 1 
-
 if [[ $(filtered_fastq_empty) == "true" ]]; then 
   exit 1
 fi
