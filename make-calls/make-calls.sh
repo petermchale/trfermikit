@@ -33,23 +33,6 @@ single_base_mismatch_penalty=$(${root}/utilities/read_config.sh ${root} ${output
 gap_open_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapOpenPenalties)
 gap_extension_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapExtensionPenalties)
 minimum_unitig_mapping_quality=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls minimumUnitigMappingQuality)
-exit 1 
-
-${root}/bin/jq \
-  --null-input \
-  --arg single_base_match_reward ${single_base_match_reward} \
-  --arg single_base_mismatch_penalty ${single_base_mismatch_penalty} \
-  --arg gap_open_penalties ${gap_open_penalties} \
-  --arg gap_extension_penalties ${gap_extension_penalties} \
-  --arg minimum_unitig_mapping_quality ${minimum_unitig_mapping_quality} \
-  '{ 
-    "single-base match reward": $single_base_match_reward,
-    "single-base mismatch penalty": $single_base_mismatch_penalty,
-    "gap-open penalties": $gap_open_penalties,
-    "gap-extension penalties": $gap_extension_penalties,
-    "minimum unitig mapping quality": $minimum_unitig_mapping_quality
-  }' \
-  > ${output}/make-calls.json
 
 # get short reads that were originally aligned to given regions
 regions="${output}/regions"

@@ -43,9 +43,9 @@ ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength
 functional_regions=${functional_regions:-"none"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
 
-${root}/utilities/update_config.sh ${root} ${output} core reference ${reference}
-${root}/utilities/update_config.sh ${root} ${output} core numberThreads ${number_threads}
-${root}/utilities/update_config.sh ${root} ${output} core alignments ${alignments}
+${root}/utilities/update_config.sh ${root} ${output} general reference ${reference}
+${root}/utilities/update_config.sh ${root} ${output} general numberThreads ${number_threads}
+${root}/utilities/update_config.sh ${root} ${output} general alignments ${alignments}
 
 set -o nounset
 
@@ -81,14 +81,14 @@ rm --force ${output}/fermikit.*
 #       --root ${root} \
 #     2> ${output}/make-regions.log 
 
-BASH_ENV=${root}/utilities/debug.sh \
-  bash ${root}/make-calls/make-calls.sh \
-      --output ${output} \
-      --alignments ${alignments} \
-      --threads ${number_threads} \
-      --reference ${reference} \
-      --root ${root} 
-    # > ${output}/make-calls.log 2>&1
+# BASH_ENV=${root}/utilities/debug.sh \
+#   bash ${root}/make-calls/make-calls.sh \
+#       --output ${output} \
+#       --alignments ${alignments} \
+#       --threads ${number_threads} \
+#       --reference ${reference} \
+#       --root ${root} \
+#     > ${output}/make-calls.log 2>&1
 
 BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/filter-calls/filter-calls.sh \
