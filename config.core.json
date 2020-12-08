@@ -3,11 +3,6 @@
     "slop": "250",
     "minCoverage": "0",
     "maxCoverage": "200",
-    "maxRegionLength": "100000",
-
-    "minimumRepeatLength": "100",
-    "minimum repeat period": "6",
-    "overlapped functional regions": "true",
-    "functional regions": "/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99"    
+    "maxRegionLength": "100000"
   }
 }
