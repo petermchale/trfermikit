@@ -77,10 +77,10 @@ filter_repeats_by_length_and_function () {
 }
 
 scratch=$(mktemp --tmpdir=${output} --directory)
-finish () {
+clean_up () {
   rm --recursive --force "${scratch}"
 }
-trap finish EXIT
+trap clean_up EXIT
 
 mosdepth_prefix="${scratch}/mosdepth.coverage"
 ${root}/bin/mosdepth \

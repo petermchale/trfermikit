@@ -28,5 +28,9 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 bash ${root}/utilities/info.sh "$(${root}/bin/bedtools --version)"
 
+minRepeatFunctionalOverlap="1"
+
+${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatFunctionalOverlap ${minRepeatFunctionalOverlap}
+
 # https://github.com/arq5x/bedtools2/issues/834
-${root}/bin/bedtools intersect -a stdin -b <(zgrep --invert-match ^"#" ${functional_regions}.bed.gz) -wa -u -f 1
+${root}/bin/bedtools intersect -a stdin -b <(zgrep --invert-match ^"#" ${functional_regions}.bed.gz) -wa -u -f ${minRepeatFunctionalOverlap}
