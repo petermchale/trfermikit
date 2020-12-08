@@ -8,7 +8,6 @@ while [[ "$1" =~ ^- ]]; do
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
-    --min-repeat-period ) shift; [[ ! $1 =~ ^- ]] && min_repeat_period=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
@@ -37,6 +36,7 @@ slop=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions slop)
 min_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minCoverage)
 max_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxCoverage)
 max_region_length=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxRegionLength)
+min_repeat_period=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minRepeatPeriod)
 
 if [[ "${functional_regions}" == "none" ]]; then
   overlapped_functional_regions=false
@@ -44,7 +44,6 @@ else
   overlapped_functional_regions=true
 fi
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions overlappedFunctionalRegions ${overlapped_functional_regions}
-exit 1
 
 ${root}/bin/jq \
   --null-input \

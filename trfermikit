@@ -12,7 +12,6 @@ while [[ "$1" =~ ^- ]]; do
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
-    --min-repeat-period ) shift; [[ ! $1 =~ ^- ]] && min_repeat_period=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
@@ -27,8 +26,6 @@ fi
 
 min_repeat_length=${min_repeat_length:-"0"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
-min_repeat_period=${min_repeat_period:-"0"}
-${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${min_repeat_period}
 functional_regions=${functional_regions:-"none"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
 
@@ -72,7 +69,6 @@ BASH_ENV=${root}/utilities/debug.sh \
       --genome-build ${genome_build} \
       --output ${output} \
       --min-repeat-length ${min_repeat_length} \
-      --min-repeat-period ${min_repeat_period} \
       --alignments ${alignments} \
       --threads ${number_threads} \
       --functional-regions ${functional_regions} \
