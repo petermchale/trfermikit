@@ -49,7 +49,7 @@ ${trfermikit_root}/bin/jq \
   --null-input \
   --arg filtered_fastq_empty $(filtered_fastq_empty) \
   '{ 
-    "filtered fastq empty": $filtered_fastq_empty
+    "filteredFastqEmpty": $filtered_fastq_empty
   }' \
   > ${assembly_diagnostics}
 
