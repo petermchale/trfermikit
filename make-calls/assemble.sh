@@ -21,6 +21,7 @@ N_THREADS=$4
 dependency=$5
 target=$6 
 assembly_diagnostics=$7
+trfermikit_root=$8
 
 # these functions anticipate the error: 
 # prefix.pre.gz.log: fermi2: unitig.c:414: fm6_unitig: Assertion `e->mcnt[1] >= n_threads * 2' failed.
@@ -44,7 +45,10 @@ filtered_fastq_empty () {
   fi
 }
 
-jq \
+echo "trfermikit_root: $trfermikit_root"
+exit 1 
+
+${trfermikit_root}/bin/jq \
   --null-input \
   --arg filtered_fastq_empty $(filtered_fastq_empty) \
   '{ 

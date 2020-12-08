@@ -75,7 +75,6 @@ python ${root}/filter-calls/filterByUnitigSupport_annotate.py \
 calls_thinned="${calls_unitigSupport}.thinned"
 bash ${root}/filter-calls/sparsify_clusters.sh \
     --calls ${calls_unitigSupport} \
-    --parameters ${parameters} \
     --root ${root} \
     --intra-cluster-distance-threshold ${intra_cluster_distance_threshold} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \

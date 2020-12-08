@@ -79,6 +79,7 @@ assembly_diagnostics="${fermikit_prefix}.assembly.diagnostics.json"
 ${root}/make-calls/fermi.kit/fermi2.pl unitig \
     -A ${do_assembly} \
     -d ${assembly_diagnostics} \
+    -r ${root} \
     -t ${number_threads} \
     -l150 \
     -p ${fermikit_prefix} \
