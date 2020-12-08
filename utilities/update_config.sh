@@ -16,4 +16,4 @@ ${root}/bin/jq \
     '.[$key1][$key2] = $value' \
     $output/config.json \
   > $output/config.tmp.json
-# mv $output/config.tmp.json $output/config.json
+mv $output/config.tmp.json $output/config.json
