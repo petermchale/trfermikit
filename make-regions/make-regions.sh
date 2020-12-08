@@ -34,6 +34,7 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 slop=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions slop)
+exit 1
 min_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minCoverage)
 max_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxCoverage)
 max_region_length=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxRegionLength)
