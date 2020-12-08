@@ -12,14 +12,12 @@ to capture SVs in tandem repeats where
 the repeat unit is smaller than 6bps,
 known in the community as Short Tandem Repeats 
 (STRs),
-we focused on tandem repeats with repeat units 
+we designed `trfermikit` to pick up SVs that `manta` missed
+in tandem repeats with repeat units 
 larger than 6bps, known as 
 Variable Number Tandem Repeats (VNTRs). 
 
 ## Impact 
-
-We designed `trfermikit` to pick up SVs that `manta` missed
-in VNTRs. 
 
 We then assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset, on VNTRs. 
 The [results](evaluate-calls/evaluate.ipynb) show that `trfermikit` is more sensitive than `manta`. 
