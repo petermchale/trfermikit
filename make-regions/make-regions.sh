@@ -34,6 +34,9 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 slop=250
+bash ${root}/utilities/info.sh "slop in make-regions: $make_regions_slop"
+exit 1 
+
 min_coverage=0
 max_coverage=200
 max_region_length=100000

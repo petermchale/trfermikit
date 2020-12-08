@@ -37,6 +37,8 @@ trfermikit_path="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analys
 output="${trfermikit_path}/data/${sample}.${svtype}"
 PATH="${trfermikit_path}:$PATH"
 
+export make_regions_slop="600" 
+
 # the arguments --min-repeat-length, --min-repeat-period, and --functional-regions are optional 
 # only svtype==DEL is currently supported
 trfermikit \
