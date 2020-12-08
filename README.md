@@ -21,7 +21,7 @@ Variable Number Tandem Repeats (VNTRs).
 We designed `trfermikit` to pick up SVs that `manta` missed
 in VNTRs. 
 
-We then assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset, on a set of tandem repeats. 
+We then assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset, on VNTRs. 
 The [results](evaluate-calls/evaluate.ipynb) show that `trfermikit` is more sensitive than `manta`. 
 
 ## How does it work?
