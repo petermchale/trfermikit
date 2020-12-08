@@ -29,11 +29,11 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' 
 
 single_base_match_reward=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMatchReward)
-exit 1
-single_base_mismatch_penalty="12" 
-gap_open_penalties="6,26" # there are two because the cost function of gap length is piecewise linear
-gap_extension_penalties="1,0" # there are two because the cost function of gap length is piecewise linear
-minimum_unitig_mapping_quality="1" 
+single_base_mismatch_penalty=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMismatchPenalty)
+gap_open_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapOpenPenalties)
+gap_extension_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapExtensionPenalties)
+minimum_unitig_mapping_quality=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls minimumUnitigMappingQuality)
+exit 1 
 
 ${root}/bin/jq \
   --null-input \
