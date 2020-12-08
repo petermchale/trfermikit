@@ -37,7 +37,7 @@ jq="${root}/bin/jq"
 config="${root}/config"
 
 slop=$($jq --raw-output '.makeRegions.slop' ${config}.json)
-bash ${root}/utilities/info.so "slop in make-regions: $slop"
+bash ${root}/utilities/info.sh "slop in make-regions: $slop"
 exit 1 
 
 min_coverage=0
