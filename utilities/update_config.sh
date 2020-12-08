@@ -14,6 +14,6 @@ ${root}/bin/jq \
     --arg key2 $key2 \
     --arg value $value \
     '.[$key1][$key2] = $value' \
-    $output/config.json \
-  > $output/config.tmp.json
-mv $output/config.tmp.json $output/config.json
+    $output/config.json 
+#   > $output/config.tmp.json
+# mv $output/config.tmp.json $output/config.json
