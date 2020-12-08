@@ -6,6 +6,7 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
