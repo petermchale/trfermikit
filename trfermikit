@@ -96,6 +96,6 @@ BASH_ENV=${root}/utilities/debug.sh \
       --svtype ${svtype} \
       --reference ${reference} \
       --threads ${number_threads} \
-      --root ${root} \
-  2> ${output}/filter-calls.log 
+      --root ${root} 
+  # 2> ${output}/filter-calls.log 
 
