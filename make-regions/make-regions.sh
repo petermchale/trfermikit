@@ -37,10 +37,10 @@ jq="${root}/bin/jq"
 config="${root}/config"
 
 f () { 
-  echo $($jq --raw-output --arg key $1 '.[$key]' ${config}.json)
+  echo $($jq --raw-output --arg key1 $1 --arg key2 $2 '.[$key1][$key2]' ${config}.json)
 }
 
-slop=$(f makeRegions.slop)
+slop=$(f makeRegions slop)
 bash ${root}/utilities/info.sh "slop in make-regions: $slop"
 exit 1 
 
