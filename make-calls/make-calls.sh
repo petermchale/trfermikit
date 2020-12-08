@@ -28,7 +28,8 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' 
 
-single_base_match_reward="10" 
+single_base_match_reward=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMatchReward)
+exit 1
 single_base_mismatch_penalty="12" 
 gap_open_penalties="6,26" # there are two because the cost function of gap length is piecewise linear
 gap_extension_penalties="1,0" # there are two because the cost function of gap length is piecewise linear

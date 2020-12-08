@@ -5,5 +5,12 @@
     "maxCoverage": "200",
     "maxRegionLength": "100000",
     "minRepeatPeriod": "6"
+  },
+  "makeCalls": { 
+    "singleBaseMatchReward": "10",
+    "singleBaseMismatchPenalty": "12",
+    "gapOpenPenalties": "6,26",
+    "gapExtensionPenalties": "1,0",
+    "minimumUnitigMappingQuality": "1"
   }
 }
