@@ -33,14 +33,11 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-jq="${root}/bin/jq"
-config="${root}/config"
-
-f () { 
-  echo $($jq --raw-output --arg key1 $1 --arg key2 $2 '.[$key1][$key2]' ${config}.json)
+fetch_value () { 
+  echo $(${root}/bin/jq --raw-output --arg key1 $1 --arg key2 $2 '.[$key1][$key2]' ${root}/config.json)
 }
 
-slop=$(f makeRegions slop)
+slop=$(fetch_value makeRegions slop)
 bash ${root}/utilities/info.sh "slop in make-regions: $slop"
 exit 1 
 
