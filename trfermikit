@@ -27,8 +27,9 @@ fi
 
 min_repeat_length=${min_repeat_length:-"0"}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
-# TODO: 
 min_repeat_period=${min_repeat_period:-"0"}
+${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${min_repeat_period}
+exit 1 
 functional_regions=${functional_regions:-"none"}
 
 set -o errexit
