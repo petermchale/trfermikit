@@ -33,15 +33,9 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-fetch_value () { 
-  echo $(${root}/bin/jq --raw-output --arg key1 $1 --arg key2 $2 '.[$key1][$key2]' ${root}/config.json)
-}
-
-slop=$(fetch_value makeRegions slop)
-bash ${root}/utilities/info.sh "slop in make-regions: $slop"
-exit 1 
-
-min_coverage=0
+slop=$(${root}/utilties/fetch_value.sh ${root} makeRegions slop)
+min_coverage=$(${root}/utilties/fetch_value.sh ${root} makeRegions minCoverage)
+exit 1
 max_coverage=200
 max_region_length=100000
 
