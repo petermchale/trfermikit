@@ -43,6 +43,8 @@ if [[ "${functional_regions}" == "none" ]]; then
 else
   overlapped_functional_regions=true
 fi
+${root}/utilities/update_config.sh ${root} ${output} makeRegions overlappedFunctionalRegions ${overlapped_functional_regions}
+exit 1
 
 ${root}/bin/jq \
   --null-input \
