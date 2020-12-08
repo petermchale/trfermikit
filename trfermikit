@@ -58,7 +58,7 @@ fi
 export PYTHONPATH="${root}/utilities"
 
 mkdir --parents ${output} 
-# rm --force ${output}/fermikit.*
+rm --force ${output}/fermikit.*
 
 # BASH_ENV=${root}/utilities/debug.sh \
 #   bash ${root}/make-regions/make-regions.sh \
