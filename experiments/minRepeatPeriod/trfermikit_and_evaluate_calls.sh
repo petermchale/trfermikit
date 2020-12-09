@@ -29,16 +29,14 @@ min_repeat_length="100"
 number_threads="16"
 svtype="DEL"
 
-trfermikit \
-  --genome-build ${genome_build} \
-  --output ${output} \
-  --reference ${reference} \
-  --threads ${number_threads} \
-  --svtype ${svtype} \
-  --alignments ${alignments} \
-  --min-repeat-length ${min_repeat_length} \
-
-exit 1 
+# trfermikit \
+#   --genome-build ${genome_build} \
+#   --output ${output} \
+#   --reference ${reference} \
+#   --threads ${number_threads} \
+#   --svtype ${svtype} \
+#   --alignments ${alignments} \
+#   --min-repeat-length ${min_repeat_length} \
 
 bash ${root}/evaluate-calls/evaluate.sh \
     --output ${output} \
