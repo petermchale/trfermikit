@@ -21,5 +21,5 @@ for minRepeatPeriod in 0 6; do
   cp ${root}/config.core.json ${output}/config.json
   ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
 
-  bash trfermikit_and_evaluate_calls.sh ${root} ${output}
+  bash ${root}/experiments/minRepeatPeriod/trfermikit_and_evaluate_calls.sh ${root} ${output}
 done
