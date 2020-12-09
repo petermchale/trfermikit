@@ -32,24 +32,23 @@ for minRepeatPeriod in 0 6; do
   mkdir --parents ${output}   
   cp ${root}/config.core.json ${output}/config.json
   ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
-  exit 1
 
-  trfermikit \
-    --genome-build ${genome_build} \
-    --output ${output} \
-    --reference ${reference} \
-    --threads ${number_threads} \
-    --svtype ${svtype} \
-    --alignments ${alignments} \
-    --min-repeat-length ${min_repeat_length} \
+  # trfermikit \
+  #   --genome-build ${genome_build} \
+  #   --output ${output} \
+  #   --reference ${reference} \
+  #   --threads ${number_threads} \
+  #   --svtype ${svtype} \
+  #   --alignments ${alignments} \
+  #   --min-repeat-length ${min_repeat_length} \
 
-  bash ${root}/evaluate-calls/evaluate.sh \
-      --output ${output} \
-      --threads ${number_threads} \
-      --reference ${reference} \
-      --population ${population} \
-      --sample ${sample} \
-      --svtype ${svtype} \
-      --root ${root} \
-    2> ${output}/evaluate-calls.log 
+  # bash ${root}/evaluate-calls/evaluate.sh \
+  #     --output ${output} \
+  #     --threads ${number_threads} \
+  #     --reference ${reference} \
+  #     --population ${population} \
+  #     --sample ${sample} \
+  #     --svtype ${svtype} \
+  #     --root ${root} \
+  #   2> ${output}/evaluate-calls.log 
 done
