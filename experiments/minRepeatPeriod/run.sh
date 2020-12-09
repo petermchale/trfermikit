@@ -14,7 +14,6 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
-PATH="${root}:$PATH"
 
 for minRepeatPeriod in 0 6; do 
   output="${root}/experiments/minRepeatPeriod/${minRepeatPeriod}"
@@ -22,5 +21,5 @@ for minRepeatPeriod in 0 6; do
   cp ${root}/config.core.json ${output}/config.json
   ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
 
-  # bash trfermikit_and_evaluate_calls.sh ${root}
+  bash trfermikit_and_evaluate_calls.sh ${root} ${output}
 done

@@ -13,6 +13,11 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
+root=$1 
+output=$2 
+
+PATH="${root}:$PATH"
+
 genome_build="hg38" # or "hg19"
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 
@@ -32,6 +37,8 @@ trfermikit \
   --svtype ${svtype} \
   --alignments ${alignments} \
   --min-repeat-length ${min_repeat_length} \
+
+exit 1 
 
 bash ${root}/evaluate-calls/evaluate.sh \
     --output ${output} \
