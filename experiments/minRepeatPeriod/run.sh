@@ -13,17 +13,6 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-genome_build="hg38" # or "hg19"
-reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
-
-population="CHS"
-sample="HG00514"
-alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
-
-min_repeat_length="100"
-number_threads="16"
-svtype="DEL"
-
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
 PATH="${root}:$PATH"
 
@@ -33,22 +22,5 @@ for minRepeatPeriod in 0 6; do
   cp ${root}/config.core.json ${output}/config.json
   ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
 
-  # trfermikit \
-  #   --genome-build ${genome_build} \
-  #   --output ${output} \
-  #   --reference ${reference} \
-  #   --threads ${number_threads} \
-  #   --svtype ${svtype} \
-  #   --alignments ${alignments} \
-  #   --min-repeat-length ${min_repeat_length} \
-
-  # bash ${root}/evaluate-calls/evaluate.sh \
-  #     --output ${output} \
-  #     --threads ${number_threads} \
-  #     --reference ${reference} \
-  #     --population ${population} \
-  #     --sample ${sample} \
-  #     --svtype ${svtype} \
-  #     --root ${root} \
-  #   2> ${output}/evaluate-calls.log 
+  # bash trfermikit_and_evaluate_calls.sh ${root}
 done
