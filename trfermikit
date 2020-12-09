@@ -34,6 +34,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
+mkdir --parents ${output} 
 if [[ ! -f ${output}/config.json ]]; then 
   cp ${root}/config.core.json ${output}/config.json
 fi 
@@ -66,7 +67,6 @@ fi
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
 
-mkdir --parents ${output} 
 rm --force ${output}/fermikit.*
 
 BASH_ENV=${root}/utilities/debug.sh \

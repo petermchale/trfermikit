@@ -29,7 +29,7 @@ PATH="${root}:$PATH"
 
 for minRepeatPeriod in 0 6; do 
   output="${root}/experiments/minRepeatPeriod/${minRepeatPeriod}"
-
+  mkdir --parents ${output}   
   cp ${root}/config.core.json ${output}/config.json
   ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
   exit 1
