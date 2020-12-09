@@ -43,7 +43,7 @@ Yet, some of those additional captured events are false discoveries.
 
 ## Quickstart
 
-An example of how to use `trfermikit` can be found [here](example.sh). 
+An example of how to use `trfermikit` can be found [here](experiments/minRepeatPeriod/run_trfermikit_and_evaluate_calls.sh). 
 
 ## Installation
 
