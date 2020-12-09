@@ -1,4 +1,5 @@
 data
+experiments/*/data
 
 library
 bin

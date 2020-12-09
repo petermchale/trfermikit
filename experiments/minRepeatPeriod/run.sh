@@ -16,7 +16,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
 
 for minRepeatPeriod in 0 6; do 
-  output="${root}/experiments/minRepeatPeriod/${minRepeatPeriod}"
+  output="${root}/experiments/minRepeatPeriod/data/${minRepeatPeriod}"
   mkdir --parents ${output}   
   cp ${root}/config.core.json ${output}/config.json
   ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
