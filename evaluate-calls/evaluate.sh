@@ -48,7 +48,7 @@ manta_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/m
 pacbio_calls_decomposed_normalized_svtype="${pacbio_calls}.decomposed.normalized.${svtype}"
 manta_calls_decomposed_normalized_svtype="${manta_calls}.decomposed.normalized.${svtype}"
 
-parameters="${output}/filter-calls"
+parameters="${output}/config"
 
 #######################################################
 
@@ -85,7 +85,7 @@ pacbio_covered_regions () {
     sort --version-sort -k1,1 -k2,2
 } 
 
-wrap_truvari () { 
+run_truvari () { 
   local comp_calls_="$1"
   local truvari_output_="$2"
   
@@ -108,19 +108,19 @@ wrap_truvari () {
     > ${truvari_output_}.log 2>&1
 } 
 
-wrap_truvari \
+run_truvari \
   "${tr_fermikit_calls}" \
   "${output}/${truvari_trfermikit}"
  
-wrap_truvari \
+run_truvari \
   "${tr_fermikit_calls}.unitigSupport" \
   "${output}/${truvari_trfermikit}.unitigSupport"
 
-wrap_truvari \
+run_truvari \
   "${tr_fermikit_calls}.unitigSupport.thinned" \
   "${output}/${truvari_trfermikit}.unitigSupport.thinned"
 
-wrap_truvari \
+run_truvari \
   "${manta_calls_decomposed_normalized_svtype}" \
   "${output}/${truvari_manta}"
 

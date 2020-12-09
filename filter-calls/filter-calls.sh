@@ -37,13 +37,15 @@ regions="${output}/regions"
 
 max_intra_cluster_distance=$(${root}/utilities/read_config.sh ${root} ${output} filterCalls maxIntraClusterDistance)
 
+parameters="${output}/config"
+
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
 bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${calls} \
     --reference ${reference} \
     --threads ${number_threads} \
-    --parameters "${output}/config" \
+    --parameters ${parameters} \
     --root ${root} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls ${calls_decomposed_normalized_svtype} \
@@ -54,7 +56,7 @@ python ${root}/filter-calls/filterByUnitigSupport_annotate.py \
     --alignments ${unitigs} \
     --regions ${regions} \
     --calls ${calls_decomposed_normalized_svtype} \
-    --parameters "${output}/config" \
+    --parameters ${parameters} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls "${calls_unitigSupport}" \
     --root ${root}
