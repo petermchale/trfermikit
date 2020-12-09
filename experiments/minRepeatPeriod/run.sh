@@ -28,7 +28,7 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 PATH="${root}:$PATH"
 
 for minRepeatPeriod in 0 6; do 
-  output="${root}/experiments/minRepeatPeriod/minRepeatPeriod=${minRepeatPeriod}"
+  output="${root}/experiments/minRepeatPeriod/${minRepeatPeriod}"
 
   cp ${root}/config.core.json ${output}/config.json
   ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
