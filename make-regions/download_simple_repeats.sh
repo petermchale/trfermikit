@@ -47,7 +47,6 @@ ${root}/bin/mysql \
     --no-auto-rehash \
     --execute="SELECT ${chromosome}, ${start_coordinate}, ${end_coordinate}, ${period} from ${table};" \
     ${database} \
-  | head -1000 \
   | ${root}/bin/bgzip --stdout \
   > ${repeats}.tab.gz
 

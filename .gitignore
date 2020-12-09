@@ -1,5 +1,5 @@
 data
-experiments/*/data
+slurm* 
 
 library
 bin
