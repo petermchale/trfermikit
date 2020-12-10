@@ -75,7 +75,7 @@ Options are:
 | Key | Value | Description |
 | --- | --- | --- |
 --functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those tandem repeats that lie in these regions 
-| --min-repeat-length | integer [default: 0] | only consider tandem repeats whose total number of bps is larger than this number 
+| --min-repeat-length | integer [default value: 0] | only consider tandem repeats whose total number of bps is larger than this number 
 
 
 ## How fast is it?
