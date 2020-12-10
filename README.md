@@ -71,10 +71,10 @@ trfermikit [OPTIONS] \
   --alignments <path to short-read alignments (without the ".cram" suffix"; index assumed to be present)> 
 ```
 
-Optional parameters are: 
-| Option | Value | Description |
+Options are: 
+| Key | Value | Description |
 | --- | --- | --- |
---functional-regions | <path to a set of regions (without the ".bed.gz" suffix)> | Restrict examination to those VNTRs that lie in these regions 
+--functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those VNTRs that lie in these regions 
 
 
 
