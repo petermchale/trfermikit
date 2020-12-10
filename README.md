@@ -74,9 +74,8 @@ trfermikit [OPTIONS] \
 Options are: 
 | Key | Value | Description |
 | --- | --- | --- |
---functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those VNTRs that lie in these regions 
-
-
+--functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those tandem repeats that lie in these regions 
+| --min-repeat-length | integer [default: 0] | only consider tandem repeats that are longer than this number 
 
 
 ## How fast is it?
