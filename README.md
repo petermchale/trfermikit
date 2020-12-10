@@ -57,17 +57,27 @@ Only installation on Linux x86_64 is currently supported.
 
 ## Usage 
 
-Assuming that this directory lies in `$HOME`, say, then
-one may invoke `trfermikit` by either doing:
+Assuming that the path to this directory is 
+`${root}`, usage is: 
 
 ```
-$HOME/trfermikit/trfermikit [...]
+PATH="${root}:$PATH"
+trfermikit [OPTIONS] \
+  --genome-build <"hg38" or "hg19"> \
+  --output <path to results directory> \
+  --reference <path to reference fasta (without the ".fa" suffix)> \
+  --threads <number of threads> \
+  --svtype <"DEL" or "INS"> \
+  --alignments <path to short-read alignments (without the ".cram" suffix"; index assumed to be present)> 
 ```
-or
-```
-PATH="$HOME/trfermikit:$PATH"
-trfermikit [...] 
-```
+
+Optional parameters are: 
+| Option | Value | Description |
+| --- | --- | --- |
+--functional-regions | <path to a set of regions (without the ".bed.gz" suffix)> | Restrict examination to those VNTRs that lie in these regions 
+
+
+
 
 ## How fast is it?
 
