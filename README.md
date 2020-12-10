@@ -86,7 +86,7 @@ If one confines the search to tandem repeats larger than 100bp in length:
 trfermikit --min-repeat-length 100 [...]
 ```
 
-then the pipeline takes < 1.5hr for a 70X genome.
+then the pipeline takes about 2 hours for a 70X genome.
 
 
 ## TODO
