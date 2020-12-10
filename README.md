@@ -91,5 +91,6 @@ then the pipeline takes < 1.5hr for a 70X genome.
 
 ## TODO
 
-Create a docker container and nextflow workflow (with nextflow processes for "make-regions", "make-calls" and "filter-calls") and register both at [dockstore](https://dockstore.org/).
+* Create a docker container and nextflow workflow (with nextflow processes for "make-regions", "make-calls" and "filter-calls") and register both at [dockstore](https://dockstore.org/).
+* Make `--genome-build` and `--threads` optional
 
