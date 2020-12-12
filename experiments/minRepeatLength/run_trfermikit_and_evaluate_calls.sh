@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --time=6:00:00
+#SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=40g # sacct -o reqmem,maxrss,averss,elapsed -j JOBID
 #SBATCH --account=redwood-gpu
