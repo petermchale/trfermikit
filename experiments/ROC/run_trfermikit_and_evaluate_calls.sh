@@ -22,10 +22,10 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 root=$1
 output=$2 
+genome_build=$3
 
 PATH="${root}:$PATH"
 
-genome_build="hg38" # or "hg19"
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 
 population="CHS"

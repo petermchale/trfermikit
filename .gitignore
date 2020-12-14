@@ -12,3 +12,4 @@ libexec
 .ipynb_checkpoints
 *.pyc
 __pycache__
+*.tab.gz

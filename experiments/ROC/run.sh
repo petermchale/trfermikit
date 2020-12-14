@@ -15,6 +15,8 @@ set -o nounset
 
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
 
+genome_build="hg38" # or "hg19"
+
 job_count=0 
 
 for minCoverage in 0 5 10; do # trfermikit is "0"
@@ -32,6 +34,7 @@ for minCoverage in 0 5 10; do # trfermikit is "0"
             experiment="${d1};${d2};${d5};${d6}"
             output="${root}/experiments/ROC/data/${experiment}"
             mkdir --parents ${output}
+
             cp ${root}/config.core.json ${output}/config.json
             ${root}/utilities/update_config.sh ${root} ${output} makeRegions minCoverage ${minCoverage}
             ${root}/utilities/update_config.sh ${root} ${output} makeCalls gapOpenPenalties ${gapOpenPenalties}
@@ -39,11 +42,13 @@ for minCoverage in 0 5 10; do # trfermikit is "0"
             ${root}/utilities/update_config.sh ${root} ${output} makeCalls singleBaseMismatchPenalty ${singleBaseMismatchPenalty}
             ${root}/utilities/update_config.sh ${root} ${output} filterCalls minUnitigMappingQuality ${minUnitigMappingQuality}
             ${root}/utilities/update_config.sh ${root} ${output} filterCalls minUnitigBlockLength ${minUnitigBlockLength}
-            
+
+            ln -s ${root}/experiments/repeats.${genome_build}.tab.gz ${output} 
+
             sbatch \
               --job-name="${experiment}" \
               --output="${output}/slurm.%j.log" \
-              ${root}/experiments/ROC/run_trfermikit_and_evaluate_calls.sh ${root} ${output}
+              ${root}/experiments/ROC/run_trfermikit_and_evaluate_calls.sh ${root} ${output} ${genome_build}
             ((job_count++))          
           done
         done
