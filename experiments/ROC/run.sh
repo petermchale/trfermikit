@@ -21,7 +21,7 @@ job_count=0
 
 for minCoverage in 0 5 10; do # trfermikit is "0"
   d1="minCoverage=${minCoverage}"
-  for gapOpenPenalties in 3,15 6,26 10,35; do # asm10 is "16,41"; trfermikit is "6,26"
+  for gapOpenPenalties in 5,20 6,26 10,35; do # asm10 is "16,41"; trfermikit is "6,26"
     d2="gapOpenPenalties=${gapOpenPenalties}"
     for singleBaseMatchReward in 10; do # asm10 is "1"; trfermikit is "10"
       # d3="singleBaseMatchReward=${singleBaseMatchReward}"
@@ -31,7 +31,7 @@ for minCoverage in 0 5 10; do # trfermikit is "0"
           d5="minUnitigMappingQuality=${minUnitigMappingQuality}"
           for minUnitigBlockLength in 15 25 40; do # trfermikit is "25" 
             d6="minUnitigBlockLength=${minUnitigBlockLength}"
-            experiment="${d1};${d2};${d5};${d6}"
+            experiment="${d1}_${d2}_${d5}_${d6}"
             output="${root}/experiments/ROC/data/${experiment}"
             mkdir --parents ${output}
 
@@ -43,6 +43,7 @@ for minCoverage in 0 5 10; do # trfermikit is "0"
             ${root}/utilities/update_config.sh ${root} ${output} filterCalls minUnitigMappingQuality ${minUnitigMappingQuality}
             ${root}/utilities/update_config.sh ${root} ${output} filterCalls minUnitigBlockLength ${minUnitigBlockLength}
 
+            # zcat ${root}/experiments/repeats.${genome_build}.tab.gz | head -1000 > ${output}/repeats.${genome_build}.tab.gz
             ln -s ${root}/experiments/repeats.${genome_build}.tab.gz ${output} 
 
             sbatch \

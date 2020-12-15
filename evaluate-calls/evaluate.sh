@@ -45,8 +45,8 @@ pacbio_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/calls/ftp
 tr_fermikit_calls="${output}/fermikit.raw.decomposed.normalized.${svtype}"
 manta_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/manta/standard_run/results/${population}/${sample}/results/variants/diploidSV"
 
-pacbio_calls_decomposed_normalized_svtype="${pacbio_calls}.decomposed.normalized.${svtype}"
-manta_calls_decomposed_normalized_svtype="${manta_calls}.decomposed.normalized.${svtype}"
+pacbio_calls_decomposed_normalized_svtype="${output}/pacbioCalls.decomposed.normalized.${svtype}"
+manta_calls_decomposed_normalized_svtype="${output}/mantaCalls.decomposed.normalized.${svtype}"
 
 parameters="${output}/config"
 

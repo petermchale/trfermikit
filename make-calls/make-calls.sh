@@ -50,9 +50,9 @@ regions="${output}/regions"
     --threads ${number_threads} \
     -L ${regions}.bed.gz \
     ${alignments}.cram | 
-  ${root}/bin/samtools fastq > ${regions}.fq 
-
-${root}/bin/bgzip --force ${regions}.fq 
+  ${root}/bin/samtools fastq |
+  ${root}/bin/bgzip --stdout \
+  > ${regions}.fq.gz 
 
 # generate Makefile for unitig assembly
 # https://github.com/lh3/fermikit
