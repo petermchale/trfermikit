@@ -1,27 +1,7 @@
 from cyvcf2 import VCF
 import sys 
-from color_text import error, info
-import color_traceback
 import argparse 
-from sv_size import get_sv_length
-
-def hom_ref(variant): 
-  # http://brentp.github.io/cyvcf2/#cyvcf2
-  if len(variant.genotypes) > 1: 
-    error('multi-sample vcf record:') 
-    info(str(variant)) 
-    sys.exit(1) 
-  genotype, = variant.genotypes
-  allele_haplotype_0, allele_haplotype_1, _ = genotype
-  return True if allele_haplotype_0 == 0 and allele_haplotype_1 == 0 else False
-
-def get_svtype(variant): 
-  if variant.INFO.get('SVTYPE'): 
-    # pacbio and manta vcf:
-    return variant.INFO.get('SVTYPE')
-  else: 
-    # tr-fermikit vcf: 
-    return 'DEL' if get_sv_length(variant) < 0 else 'INS'
+from sv import get_sv_length, hom_ref, get_svtype
 
 def find_SVs():
   parser = argparse.ArgumentParser(description='')
