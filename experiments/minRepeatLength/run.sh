@@ -15,10 +15,13 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
 
-#for minRepeatLength in 0 50 100; do 
-for minRepeatLength in 0; do 
+genome_build="hg38" # or "hg19"
+
+for minRepeatLength in 0 50 100; do 
   output="${root}/experiments/minRepeatLength/data/minRepeatLength=${minRepeatLength}"
   mkdir --parents ${output}
+
+  ln -s ${root}/experiments/repeats.${genome_build}.tab.gz ${output} 
 
   sbatch \
     --job-name="minRepeatLength=${minRepeatLength}" \
