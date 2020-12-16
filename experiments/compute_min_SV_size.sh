@@ -11,7 +11,7 @@ manta_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/m
 
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
-number_calls="16" 
+number_threads="16" 
 
 compute_min_SV_size () {
   local calls_=$1 
