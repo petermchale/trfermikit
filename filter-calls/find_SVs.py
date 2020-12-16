@@ -3,6 +3,7 @@ import sys
 from color_text import error, info
 import color_traceback
 import argparse 
+from sv_size import get_sv_length
 
 def hom_ref(variant): 
   # http://brentp.github.io/cyvcf2/#cyvcf2
@@ -13,19 +14,6 @@ def hom_ref(variant):
   genotype, = variant.genotypes
   allele_haplotype_0, allele_haplotype_1, _ = genotype
   return True if allele_haplotype_0 == 0 and allele_haplotype_1 == 0 else False
-
-def get_sv_length(variant): 
-  if variant.INFO.get('SVLEN'): 
-    # pacbio and manta vcf:
-    return variant.INFO.get('SVLEN') 
-  else: 
-    # tr-fermikit vcf: 
-    if len(variant.ALT) > 1:
-      error('There is more than one ALT allele!')
-      error('Please decompose the variant:')
-      info(str(variant))
-      sys.exit(1)
-    return len(variant.ALT[0]) - len(variant.REF)
 
 def get_svtype(variant): 
   if variant.INFO.get('SVTYPE'): 
