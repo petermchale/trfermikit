@@ -1,3 +1,6 @@
+from color_text import error, info
+import sys 
+
 def get_sv_length(variant): 
   if variant.INFO.get('SVLEN'): 
     # pacbio and manta vcf:
