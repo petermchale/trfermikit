@@ -4,6 +4,9 @@ output="minRepeatLength/data/minRepeatLength=0"
 parameters="${output}/config.json"
 tr_fermikit_calls="${output}/fermikit.raw"
 
+# https://stackoverflow.com/a/43476575/6674256
+export PYTHONPATH="${root}/utilities"
+
 zcat ${tr_fermikit_calls}.vcf.gz | 
   python ${root}/filter-calls/find_SVs.py \
       --calls stdin \
