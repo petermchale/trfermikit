@@ -1,6 +1,6 @@
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
 svtype="DEL"
-output="minRepeatLength/data/minRepeatLength=0" 
+output="minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/minCoverage=0_gapOpenPenalties=5,20_minUnitigMappingQuality=10_minUnitigBlockLength=25"
 parameters="${output}/config.json"
 tr_fermikit_calls="${output}/fermikit.raw"
 
