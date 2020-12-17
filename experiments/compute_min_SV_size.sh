@@ -41,10 +41,10 @@ compute_min_SV_size () {
       -any \
       --threads ${number_threads} \
       ${calls_}.vcf.gz \
-      2> /dev/null 
-    # | python compute_min_SV_size.py \
-    #   --svtype ${svtype} \
-    #   --calls "stdin"
+      2> /dev/null \
+    | python compute_min_SV_size.py \
+      --svtype ${svtype} \
+      --calls "stdin"
 }
 
 echo "min-size pacbio call of type ${svtype}:"
