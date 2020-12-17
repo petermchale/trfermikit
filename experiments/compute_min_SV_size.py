@@ -31,7 +31,7 @@ def compute_min_SV_size():
       
   variants.close()
 
-  print('min-size variant: {}'.format(str(min_size_variant)))
+  print('min-size variant: {}'.format(str(min_size_variant)), end='')
   print('min size: {}'.format(min_size))
 
 if __name__ == '__main__': 
