@@ -23,10 +23,15 @@ compute_min_SV_size () {
       -any \
       --threads ${number_threads} \
       ${calls_}.vcf.gz \
-    | python compute_min_SV_size.py ${svtype}
+    | python compute_min_SV_size.py \
+      --svtype ${svtype} \
+      --calls "stdin"
 }
 
-echo "min size of pacbio calls of type ${svtype} is: $(compute_min_SV_size ${pacbio_calls})" 
-echo "min size of trfermikit calls of type ${svtype} is: $(compute_min_SV_size ${tr_fermikit_calls})" 
-echo "min size of manta calls of type ${svtype} is: $(compute_min_SV_size ${manta_calls})" 
+echo "min-size pacbio call of type ${svtype}:"
+compute_min_SV_size ${pacbio_calls}
+echo "min-size trfermikit call of type ${svtype}:"
+compute_min_SV_size ${tr_fermikit_calls}
+echo "min-size manta call of type ${svtype}:"
+compute_min_SV_size ${manta_calls}
 

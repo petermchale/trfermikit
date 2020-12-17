@@ -1,23 +1,38 @@
 from cyvcf2 import VCF
 import sys 
+from sv import get_sv_length, hom_ref, get_svtype
+import argparse 
 
-for variant in VCF(sys.argv[1]): 
+def compute_min_SV_size():
+  parser = argparse.ArgumentParser(description='')
+  parser.add_argument('--calls', type=str, help='')
+  parser.add_argument('--svtype', type=str, help='')
+  args = parser.parse_args()
 
-sample = 'HG00514'
-experiment = 5
-number_calls = 0
-for variant in VCF('nstd152.GRCh38.variant_call.vcf.gz'):
-  if variant.INFO.get('EXPERIMENT') == experiment and variant.INFO.get('SAMPLE') == sample:
-    #print(variant)
-    number_calls += 1
-print('number of calls where experiment = {} in {}: {}'.format(experiment, sample, number_calls))
+  variants = VCF('/dev/stdin') if args.calls == 'stdin' else VCF(args.calls)
+  
+  svtype = args.svtype
+  if svtype not in ['DEL', 'INS']:
+    print('svtype', svtype, 'not permitted!', file=sys.stderr) 
+    sys.exit(1) 
 
-union = 'PacBio,Illumina'
-sv_type = '<DEL>'
-number_calls = 0
-for variant in VCF('ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/genotype/nstd152/' + sample + '.BIP-unified.vcf.gz'):
-  if variant.ALT[0] == sv_type and variant.INFO.get('UNION') == union: 
-    #print(variant)
-    number_calls += 1
-print('number of calls where union = {} and sv_type = {} in {}: {}'.format(union, sv_type, sample, number_calls))
+  min_size_variant = None
+  min_size = 10000
 
+  for variant in variants: 
+    # Decomposition may cause vcf records with genotype "0/0" to appear. 
+    # These should be removed 
+    if hom_ref(variant): 
+      continue
+
+    if get_svtype(variant) == svtype and abs(get_sv_length(variant)) < min_size:
+      min_size_variant = variant 
+      min_size = get_sv_length(variant)
+      
+  variants.close()
+
+  print('min-size variant: {}'.format(str(min_size_variant)))
+  print('min size: {}'.format(min_size))
+
+if __name__ == '__main__': 
+  compute_min_SV_size()
