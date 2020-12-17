@@ -1,3 +1,6 @@
+# https://stackoverflow.com/a/43476575/6674256
+export PYTHONPATH="${root}/utilities"
+
 population="CHS" 
 sample="HG00514" 
 
