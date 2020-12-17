@@ -1,5 +1,17 @@
-# https://stackoverflow.com/a/43476575/6674256
-export PYTHONPATH="${root}/utilities"
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o noclobber
+
+set -o xtrace
+# Must use single quote to prevent variable expansion.
+# For example, if double quotes were used, ${LINENO} would take on the value of the current line,
+# instead of its value when PS4 is used later in the script
+# https://stackoverflow.com/a/6697845/6674256
+# ${FOO:+val}    val if $FOO is set
+# ${FOO[0]}   element #0 of the FOO array
+# https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 population="CHS" 
 sample="HG00514" 
@@ -16,6 +28,9 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 number_threads="16" 
 
+# https://stackoverflow.com/a/43476575/6674256
+export PYTHONPATH="${root}/utilities"
+
 compute_min_SV_size () {
   local calls_=$1 
 
@@ -26,7 +41,7 @@ compute_min_SV_size () {
       -any \
       --threads ${number_threads} \
       ${calls_}.vcf.gz \
-    | python ${root}/experiments/compute_min_SV_size.py \
+    | python compute_min_SV_size.py \
       --svtype ${svtype} \
       --calls "stdin"
 }
