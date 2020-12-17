@@ -6,7 +6,7 @@ sample="HG00514"
 
 svtype="DEL" 
 
-output="minRepeatLength/data/minRepeatLength=0" 
+output="minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/minCoverage=0_gapOpenPenalties=5,20_minUnitigMappingQuality=10_minUnitigBlockLength=25"
 
 pacbio_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/calls/ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/genotype/nstd152/${sample}.BIP-unified.filtered"
 tr_fermikit_calls="${output}/fermikit.raw"
@@ -26,7 +26,7 @@ compute_min_SV_size () {
       -any \
       --threads ${number_threads} \
       ${calls_}.vcf.gz \
-    | python compute_min_SV_size.py \
+    | python ${root}/experiments/compute_min_SV_size.py \
       --svtype ${svtype} \
       --calls "stdin"
 }
