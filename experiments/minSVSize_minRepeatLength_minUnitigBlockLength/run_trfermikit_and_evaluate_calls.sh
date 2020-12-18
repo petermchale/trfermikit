@@ -2,8 +2,8 @@
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=40g # sacct -o reqmem,maxrss,averss,elapsed -j JOBID
-#SBATCH --account=redwood-gpu
-#SBATCH --partition=redwood-gpu
+#SBATCH --account=ucgd-rw
+#SBATCH --partition=ucgd-rw
 
 set -o errexit
 set -o pipefail
@@ -22,12 +22,11 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 root=$1
 output=$2 
-
-minRepeatLength="0"  
+genome_build=$3
+minRepeatLength=$4 
 
 PATH="${root}:$PATH"
 
-genome_build="hg38" # or "hg19"
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 
 population="CHS"

@@ -17,7 +17,7 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 
 genome_build="hg38" # or "hg19"
 
-for minSVSize in 20 30 40 50 75 100; do 
+for minSVSize in 1000 500 250 100 70 60 50; do 
   output="${root}/experiments/minSVSize/data/minSVSize=${minSVSize}"
   mkdir --parents ${output}
 
