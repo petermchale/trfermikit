@@ -38,8 +38,8 @@ export PYTHONPATH="${root}/utilities"
 
 #######################################################
 
-truvari_trfermikit="truvari-pacbio-trfermikit"
-truvari_manta="truvari-pacbio-manta"
+truvari_trfermikit="truvari-${svtype}-pacbio-trfermikit"
+truvari_manta="truvari-${svtype}-pacbio-manta"
 
 pacbio_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/calls/ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/genotype/nstd152/${sample}.BIP-unified.filtered"
 tr_fermikit_calls="${output}/fermikit.raw.decomposed.normalized.${svtype}"
