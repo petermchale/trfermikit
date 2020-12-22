@@ -5,6 +5,7 @@ import numpy as np
 from color_text import error, info
 import argparse
 import gzip
+from sv import get_svtype 
 
 def parse(locus): 
   chromosome, start_end = locus.split(':')
@@ -28,7 +29,7 @@ def coordinates(variant):
     info(str(variant)) 
     sys.exit(1)
   ALT = variant.ALT[0]
-  if len(ALT) > 1: 
+  if get_svtype(variant) == 'DEL' and len(ALT) > 1: 
     error('The ALT allele has more than one base')
     error('Please normalize (trim and left-align) the variant:')
     info(str(variant))
