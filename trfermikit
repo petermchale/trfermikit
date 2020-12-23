@@ -13,7 +13,6 @@ while [[ "$1" =~ ^- ]]; do
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
@@ -59,11 +58,6 @@ bash ${root}/utilities/prepare_reference.sh \
   --reference ${reference} \
   --root ${root}
 
-if [[ ${svtype} != "DEL" ]]; then
-  echo "Only discovery of SVs of type DEL are currently supported"
-  exit 1
-fi
-
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
 
@@ -90,12 +84,20 @@ BASH_ENV=${root}/utilities/debug.sh \
       --root ${root} \
     > ${output}/make-calls.log 2>&1
 
-BASH_ENV=${root}/utilities/debug.sh \
-  bash ${root}/filter-calls/filter-calls.sh \
-      --output ${output} \
-      --svtype ${svtype} \
-      --reference ${reference} \
-      --threads ${number_threads} \
-      --root ${root} \
-  2> ${output}/filter-calls.log 
+filter_calls () { 
+  local svtype=$1
+
+  BASH_ENV=${root}/utilities/debug.sh \
+    bash ${root}/filter-calls/filter-calls.sh \
+        --output ${output} \
+        --svtype ${svtype} \
+        --reference ${reference} \
+        --threads ${number_threads} \
+        --root ${root} \
+    2> ${output}/filter-calls-${svtype}.log 
+}
+
+filter_calls "DEL"
+filter_calls "INS"
+
 
