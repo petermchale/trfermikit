@@ -16,10 +16,8 @@ set -o nounset
 population="CHS" 
 sample="HG00514" 
 
-svtype="DEL" 
-
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
-output="${root}/experiments/minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/minCoverage=0_gapOpenPenalties=5,20_minUnitigMappingQuality=10_minUnitigBlockLength=25"
+output="$PWD/data/minSVSize=50"
 
 pacbio_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/calls/ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/genotype/nstd152/${sample}.BIP-unified.filtered"
 tr_fermikit_calls="${output}/fermikit.raw"
@@ -31,8 +29,9 @@ number_threads="16"
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
 
-compute_min_SV_size () {
+compute_min_SV_size_svtype () {
   local calls_=$1 
+  local svtype=$2
 
   ${root}/bin/bcftools norm \
       --check-ref w \
@@ -47,10 +46,16 @@ compute_min_SV_size () {
       --calls "stdin"
 }
 
-echo "min-size pacbio call of type ${svtype}:"
-compute_min_SV_size ${pacbio_calls}
-echo "min-size trfermikit call of type ${svtype}:"
-compute_min_SV_size ${tr_fermikit_calls}
-echo "min-size manta call of type ${svtype}:"
-compute_min_SV_size ${manta_calls}
+compute_min_SV_size () {
+  local svtype=$1
+  echo "min-size pacbio call of type ${svtype}:"
+  compute_min_SV_size_svtype ${pacbio_calls} ${svtype}
+  echo "min-size trfermikit call of type ${svtype}:"
+  compute_min_SV_size_svtype ${tr_fermikit_calls} ${svtype}
+  echo "min-size manta call of type ${svtype}:"
+  compute_min_SV_size_svtype ${manta_calls} ${svtype}
+}
 
+compute_min_SV_size "DEL" 
+compute_min_SV_size "INS" 
+ 
