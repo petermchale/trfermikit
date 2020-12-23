@@ -35,16 +35,14 @@ sample="HG00514"
 alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
 
 number_threads="16"
-svtype="DEL"
 
 trfermikit \
-  --genome-build ${genome_build} \
-  --output ${output} \
-  --reference ${reference} \
-  --threads ${number_threads} \
-  --svtype ${svtype} \
-  --alignments ${alignments} \
-  --min-repeat-length ${minRepeatLength} \
+    --genome-build ${genome_build} \
+    --output ${output} \
+    --reference ${reference} \
+    --threads ${number_threads} \
+    --alignments ${alignments} \
+    --min-repeat-length ${minRepeatLength} 
 
 bash ${root}/evaluate-calls/evaluate.sh \
     --output ${output} \
@@ -52,6 +50,7 @@ bash ${root}/evaluate-calls/evaluate.sh \
     --reference ${reference} \
     --population ${population} \
     --sample ${sample} \
-    --svtype ${svtype} \
     --root ${root} \
   2> ${output}/evaluate-calls.log 
+
+

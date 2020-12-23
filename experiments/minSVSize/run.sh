@@ -29,5 +29,5 @@ for minSVSize in 1000 500 250 100 70 60 50; do
   sbatch \
     --job-name="minSVSize=${minSVSize}" \
     --output="${output}/slurm.%j.log" \
-    ${root}/experiments/minSVSize/run_trfermikit_and_evaluate_calls.sh ${root} ${output} 
+    run_trfermikit_and_evaluate_calls.sh ${root} ${output} 
 done

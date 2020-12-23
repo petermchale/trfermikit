@@ -49,7 +49,7 @@ for minCoverage in 0 5 10; do # trfermikit is "0"
             sbatch \
               --job-name="${experiment}" \
               --output="${output}/slurm.%j.log" \
-              ${root}/experiments/ROC/run_trfermikit_and_evaluate_calls.sh ${root} ${output} ${genome_build}
+              ${root}/experiments/minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/run_trfermikit_and_evaluate_calls.sh ${root} ${output} ${genome_build}
             ((job_count++))          
           done
         done

@@ -34,14 +34,12 @@ alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_cr
 
 min_repeat_length="100"
 number_threads="16"
-svtype="DEL"
 
 trfermikit \
   --genome-build ${genome_build} \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
-  --svtype ${svtype} \
   --alignments ${alignments} \
   --min-repeat-length ${min_repeat_length} \
 
@@ -51,6 +49,5 @@ bash ${root}/evaluate-calls/evaluate.sh \
     --reference ${reference} \
     --population ${population} \
     --sample ${sample} \
-    --svtype ${svtype} \
     --root ${root} \
   2> ${output}/evaluate-calls.log 
