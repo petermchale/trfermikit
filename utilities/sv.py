@@ -31,6 +31,8 @@ def get_svtype(variant):
     return variant.INFO.get('SVTYPE')
   else: 
     # tr-fermikit vcf: 
-    return 'DEL' if get_sv_length(variant) < 0 else 'INS'
+    if get_sv_length(variant) < 0: return 'DEL' 
+    if get_sv_length(variant) > 0: return 'INS'
+    if get_sv_length(variant) == 0: return 'SNP'
 
 
