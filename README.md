@@ -22,7 +22,7 @@ Variable Number Tandem Repeats (VNTRs).
 ## Impact 
 
 We assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset, on VNTRs. 
-The [results](experiments/minSVSize_minRepeatLength_minUnitigBlockLength/images/fractionsOfMantaFN_trfermikitPrecisions/minSVSize.svg) show that `trfermikit` complements `manta`. 
+The [results](experiments/optimized_for_DELs/minSVSize_minRepeatLength_minUnitigBlockLength/images/fractionsOfMantaFN_trfermikitPrecisions/minSVSize-DEL.svg) show that `trfermikit` complements `manta`. 
 
 ## How does it work?
 
