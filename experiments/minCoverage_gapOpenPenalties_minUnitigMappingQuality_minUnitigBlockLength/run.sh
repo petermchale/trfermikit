@@ -32,7 +32,7 @@ for minCoverage in 0 5 10; do # trfermikit is "0"
           for minUnitigBlockLength in 15 25 40; do # trfermikit is "25" 
             d6="minUnitigBlockLength=${minUnitigBlockLength}"
             experiment="${d1}_${d2}_${d5}_${d6}"
-            output="${root}/experiments/ROC/data/${experiment}"
+            output="${root}/experiments/minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/${experiment}"
             mkdir --parents ${output}
 
             cp ${root}/config.core.json ${output}/config.json
