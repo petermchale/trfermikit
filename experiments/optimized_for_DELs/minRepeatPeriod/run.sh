@@ -17,14 +17,17 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 
 genome_build="hg38" # or "hg19"
 
-for minRepeatLength in 0 50 100; do 
-  output="${root}/experiments/minRepeatLength/data/minRepeatLength=${minRepeatLength}"
+for minRepeatPeriod in 0 6; do 
+  output="$PWD/data/minRepeatPeriod=${minRepeatPeriod}"
   mkdir --parents ${output}
+
+  cp ${root}/config.core.json ${output}/config.json
+  ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatPeriod ${minRepeatPeriod}
 
   ln -s ${root}/experiments/repeats.${genome_build}.tab.gz ${output} 
 
   sbatch \
-    --job-name="minRepeatLength=${minRepeatLength}" \
+    --job-name="minRepeatPeriod=${minRepeatPeriod}" \
     --output="${output}/slurm.%j.log" \
-    ${root}/experiments/minRepeatLength/run_trfermikit_and_evaluate_calls.sh ${root} ${output} ${minRepeatLength}
+    ${root}/experiments/minRepeatPeriod/run_trfermikit_and_evaluate_calls.sh ${root} ${output}
 done

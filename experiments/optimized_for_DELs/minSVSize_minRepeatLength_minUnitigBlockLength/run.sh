@@ -27,7 +27,7 @@ for minSVSize in 500 100 50; do
       d3="minUnitigBlockLength=${minUnitigBlockLength}"
 
       experiment="${d1}_${d2}_${d3}"
-      output="${root}/experiments/minSVSize_minRepeatLength_minUnitigBlockLength/data/${experiment}"
+      output="$PWD/data/${experiment}"
       mkdir --parents ${output}
 
       cp ${root}/config.core.json ${output}/config.json
