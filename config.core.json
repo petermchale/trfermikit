@@ -6,7 +6,7 @@
     "maxRegionLength": "100000",
     "minRepeatPeriod": "6"
   },
-  "makeCalls": { 
+  "makeCalls": {
     "singleBaseMatchReward": "10",
     "singleBaseMismatchPenalty": "12",
     "gapOpenPenalties": "6,26",
