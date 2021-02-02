@@ -81,7 +81,7 @@ Options are:
 ## How fast is it?
 
 If one confines the search to tandem repeats with total lengths larger than 100bp 
-(where one finds most tandem-repeat-associated DELs > 50bp),
+(where one finds most tandem-repeat-associated DELs larger than 50bp),
 
 ```
 trfermikit --min-repeat-length 100 ...
