@@ -34,7 +34,7 @@ gap_open_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCall
 gap_extension_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapExtensionPenalties)
 minimum_unitig_mapping_quality=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls minUnitigMappingQuality)
 
-# get short reads that were originally aligned to given regions
+# we will get short reads that were originally aligned to the following regions
 regions="${output}/regions"
 
 # fetch regions by sweeping through cram (expected to be faster when number of regions > ~10,000) 
@@ -53,6 +53,8 @@ regions="${output}/regions"
   ${root}/bin/samtools fastq |
   ${root}/bin/bgzip --stdout \
   > ${regions}.fq.gz 
+# NOTE: the above code pulls down unmapped reads with RNAME and POS contained in ${regions}.bed.gz,
+# as can be checked by running "samtools view -h ${alignments}.cram ${region} | samtools view -f 4"
 
 # generate Makefile for unitig assembly
 # https://github.com/lh3/fermikit
