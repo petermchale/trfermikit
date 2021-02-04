@@ -77,6 +77,8 @@ Options are:
 --functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those tandem repeats that lie in these regions 
 | --min-repeat-length | integer [default value: 0] | Only consider tandem repeats whose total number of bps is larger than this number 
 
+## Output 
+
 Tandem-repeat regions used to discover SVs appear in the results directory in indexed bed format at
 ```
 regions.bed.gz
