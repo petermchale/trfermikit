@@ -90,7 +90,7 @@ Tandem-repeat regions used to discover SVs appear in the results directory in in
 regions.bed.gz
 ```
 
-`trfermikit`s parameter configuration appears in the results directory at `config.json`.
+`trfermikit`'s parameter configuration appears in the results directory at `config.json`.
 
 
 
