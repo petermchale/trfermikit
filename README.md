@@ -77,11 +77,19 @@ Options are:
 --functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those tandem repeats that lie in these regions 
 | --min-repeat-length | integer [default value: 0] | Only consider tandem repeats whose total number of bps is larger than this number 
 
-SVs found are output in indexed vcf format at 
+Tandem repeats will be downloaded to the results directory under
+```
+repeats.${genome_build}.tab.gz
+```
+where `${genome_build}` is either `hg38` or `hg19`. 
+
+Discovered SVs are output in indexed vcf format to the results directory at
 ```
 fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned.vcf.gz
 ```
 where `${svtype}` is either `DEL` or `INS`. 
+
+
 
 ## How fast is it?
 
