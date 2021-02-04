@@ -81,6 +81,7 @@ SVs found are output in indexed vcf format at
 ```
 fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned.vcf.gz
 ```
+where `${svtype}` is either `DEL` or `INS`. 
 
 ## How fast is it?
 
