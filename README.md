@@ -77,11 +77,10 @@ Options are:
 --functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those tandem repeats that lie in these regions 
 | --min-repeat-length | integer [default value: 0] | Only consider tandem repeats whose total number of bps is larger than this number 
 
-Tandem repeats will be downloaded to the results directory under
+Tandem-repeat regions used to discover SVs appear in the results directory in indexed bed format at
 ```
-repeats.${genome_build}.tab.gz
+regions.bed.gz
 ```
-where `${genome_build}` is either `hg38` or `hg19`. 
 
 Discovered SVs are output in indexed vcf format to the results directory at
 ```
