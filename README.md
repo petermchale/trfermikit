@@ -79,16 +79,18 @@ Options are:
 
 ## Output 
 
-Tandem-repeat regions used to discover SVs appear in the results directory in indexed bed format at
-```
-regions.bed.gz
-```
-
 Discovered SVs are output in indexed vcf format to the results directory at
 ```
 fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned.vcf.gz
 ```
 where `${svtype}` is either `DEL` or `INS`. 
+
+Tandem-repeat regions used to discover SVs appear in the results directory in indexed bed format at
+```
+regions.bed.gz
+```
+
+`trfermikit`s parameter configuration appears in the results directory at `config.json`.
 
 
 
