@@ -14,21 +14,21 @@ to capture SVs in tandem repeats where
 the repeat unit is smaller than 6bps,
 known in the community as Short Tandem Repeats 
 (STRs),
-we designed `trfermikit` to pick up SVs that `manta` missed
+we designed trfermikit to pick up SVs that trfermikit missed
 in tandem repeats with repeat units 
 larger than 6bps, known as 
 Variable Number Tandem Repeats (VNTRs). 
 
 ## Impact 
 
-We assessed the performance of `trfermikit` and `manta`, in both cases relative to a long-read benchmark callset, on VNTRs. 
-The [results](experiments/optimized_for_DELs/minSVSize_minRepeatLength_minUnitigBlockLength/images/fractionsOfMantaFN_trfermikitPrecisions/minSVSize-DEL.svg) show that `trfermikit` complements `manta`. 
+We assessed the performance of trfermikit and trfermikit, in both cases relative to a long-read benchmark callset, on VNTRs. 
+The [results](experiments/optimized_for_DELs/minSVSize_minRepeatLength_minUnitigBlockLength/images/fractionsOfMantaFN_trfermikitPrecisions/minSVSize-DEL.svg) show that trfermikit complements trfermikit. 
 
 ## How does it work?
 
-`trfermikit` is based upon the [fermikit](https://pubmed.ncbi.nlm.nih.gov/26220959/) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome, and then calls variants from the alignment.
+trfermikit is based upon the [fermikit](https://pubmed.ncbi.nlm.nih.gov/26220959/) pipeline for deep Illumina resequencing data, which assembles reads into unitigs, maps them to the reference genome, and then calls variants from the alignment.
 
-`trfermikit` biases the `minimap2` alignment step of the fermikit pipeline towards revealing deletions
+trfermikit biases the `minimap2` alignment step of the fermikit pipeline towards revealing deletions
 by:
 * increasing the reward for single-base matches
 * increasing the penalty for single-base mismatches 
@@ -37,13 +37,13 @@ by:
 This recovers a lot of events that a more stringent caller would throw out. 
 
 Yet, some of those additional captured events are false discoveries. 
-`trfermikit` mitigates this by throwing out calls that:
+trfermikit mitigates this by throwing out calls that:
 * are supported by "dirty" fermikit unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero)
 * occur in “clusters”
 
 ## Quickstart
 
-An example of how to use `trfermikit` can be found [here](experiments/optimized_for_DELs/minRepeatPeriod/run_trfermikit_and_evaluate_calls.sh). 
+An example of how to use trfermikit can be found [here](experiments/optimized_for_DELs/minRepeatPeriod/run_trfermikit_and_evaluate_calls.sh). 
 
 ## Installation
 
