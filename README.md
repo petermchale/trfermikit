@@ -59,14 +59,24 @@ Assuming that the path to this directory on your filesystem is
 ```
 PATH="${root}:$PATH"
 
-trfermikit [OPTIONS] \
-  --output <path to results directory> \
-  --reference <path to reference fasta (without the ".fa" suffix)> \
-  --alignments <path to short-read alignments (without the ".cram" suffix"; index assumed to be present)> \
-  --threads <number of threads>
+trfermikit [OPTIONAL ARGUMENTS] [REQUIRED ARGUMENTS]
 ```
 
-Options are: 
+Required arguments are: 
+```
+--output PATH 
+      PATH specifies the path to the directory where the results will be stored 
+--reference PATH 
+      PATH specifies the path to the reference fasta (without the ".fa" suffix)      
+--alignments PATH 
+      PATH specifies the path to a set of short-read alignments 
+      (without the ".cram" suffix").
+      The cram index is assumed to be present at the same PATH 
+--threads INT 
+      INT specifies the number of threads to be used. 
+```
+
+Optional arguments are: 
 ``` 
 --hg19 
       Use hg19 build of the human reference genome. 
