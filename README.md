@@ -17,7 +17,7 @@ known in the community as Short Tandem Repeats
 we designed trfermikit to pick up SVs that manta missed
 in tandem repeats with repeat units 
 larger than 6bps, known as 
-Variable Number Tandem Repeats (VNTRs). 
+**Variable Number Tandem Repeats (VNTRs).**
 
 ## Impact 
 
