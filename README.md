@@ -118,14 +118,9 @@ The parameter configuration used to make the discoveries appear in the results d
 
 ## How fast is it?
 
-If one confines the search to tandem repeats with total lengths larger than 100bp 
-(where one finds most tandem-repeat-associated DELs larger than 50bp),
-
-```
-trfermikit --min-repeat-length 100 ...
-```
-
-then the pipeline takes about 2 hours for a 70X genome.
+By default, the pipeline takes about 2 hours (assuming a 70X genome), 
+mainly because the search is confined to tandem repeats with total lengths larger than 100bp. 
+Such tandem repeats harbor most of the tandem-repeat-associated DELs larger than 50bp. 
 
 
 ## TODO
