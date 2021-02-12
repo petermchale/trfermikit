@@ -58,6 +58,7 @@ Assuming that the path to this directory is
 
 ```
 PATH="${root}:$PATH"
+
 trfermikit [OPTIONS] \
   --genome-build <"hg38" or "hg19"> \
   --output <path to results directory> \
