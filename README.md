@@ -75,7 +75,6 @@ Options are:
       Restrict examination to those tandem repeats 
       that lie in the regions indicated by PATH
       (without the ".bed.gz" suffix). 
-      [default value: None]
 --min-repeat-length INT
       Only consider tandem repeats 
       whose total number of bps is larger than INT 
