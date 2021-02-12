@@ -105,7 +105,7 @@ Discovered SVs are output in indexed vcf format to the results directory at
 fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned.vcf.gz
 ```
 where `${svtype}` is either `DEL` or `INS`. As indicated in [Impact](#Impact), 
-you'll only be interested in the `DEL` call set. 
+**you'll only be interested in the `DEL` call set.**
 
 Tandem-repeat regions used to discover SVs appear in the results directory in indexed bed format at
 ```
