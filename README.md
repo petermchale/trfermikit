@@ -81,8 +81,7 @@ Optional arguments are:
       Use hg19 build of the human reference genome. 
       If this flag is not specified, trfermikit uses build hg38.
 --functional-regions PATH 
-      Restrict examination to those tandem repeats 
-      that lie in the regions indicated by PATH
+      Restrict examination to those tandem repeats that lie in the regions indicated by PATH
       (without the ".bed.gz" suffix). 
       [default value: None]
 --min-repeat-length INT
