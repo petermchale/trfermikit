@@ -4,7 +4,11 @@
     "minCoverage": "10",
     "maxCoverage": "200",
     "maxRegionLength": "100000",
-    "minRepeatPeriod": "6"
+    "minRepeatPeriod": "6",
+    "minRepeatLength": "100",
+    "functionalRegions": "none",
+    "genomeBuild": "hg38",
+    "overlappedFunctionalRegions": "false"
   },
   "makeCalls": {
     "singleBaseMatchReward": "10",

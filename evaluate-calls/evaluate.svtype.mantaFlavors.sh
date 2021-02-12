@@ -33,39 +33,42 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 #######################################################
 
+# https://stackoverflow.com/a/43476575/6674256
+export PYTHONPATH="${root}/utilities"
+
+#######################################################
+
 truvari_manta="truvari-${svtype}-pacbio-manta"
 
-pacbio_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/calls/ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/genotype/nstd152/${sample}.BIP-unified.filtered"
-manta_calls="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/manta/standard_run/results/${population}/${sample}/results/variants/diploidSV"
+manta_calls_enhanced="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/manta/enhanced_sensitivity/results/${population}/${sample}/results/variants/diploidSV"
+manta_calls_super_enhanced="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/manta/super_enhanced_sensitivity/results/${population}/${sample}/results/variants/diploidSV"
 
 pacbio_calls_decomposed_normalized_svtype="${output}/pacbioCalls.decomposed.normalized.${svtype}"
-manta_calls_decomposed_normalized_svtype="${output}/mantaCalls.decomposed.normalized.${svtype}"
+manta_calls_enhanced_decomposed_normalized_svtype="${output}/mantaCalls.enhanced.decomposed.normalized.${svtype}"
+manta_calls_super_enhanced_decomposed_normalized_svtype="${output}/mantaCalls.superEnhanced.decomposed.normalized.${svtype}"
 
 parameters="${output}/config"
 
 #######################################################
 
-bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
-    --svtype ${svtype} \
-    --calls ${pacbio_calls} \
-    --reference ${reference} \
-    --threads ${number_threads} \
-    --parameters ${parameters} \
-    --root ${root} \
-  | bash ${root}/utilities/sort_compress_index_calls.sh \
-    --calls ${pacbio_calls_decomposed_normalized_svtype} \
-    --root ${root}
+decompose_normalize_findSVs () { 
+  local input_="$1" 
+  local output_="$2" 
+ 
+  bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
+      --svtype ${svtype} \
+      --calls ${input_} \
+      --reference ${reference} \
+      --threads ${number_threads} \
+      --parameters ${parameters} \
+      --root ${root} \
+    | bash ${root}/utilities/sort_compress_index_calls.sh \
+      --calls ${output_} \
+      --root ${root}
+}
 
-bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
-    --svtype ${svtype} \
-    --calls ${manta_calls} \
-    --reference ${reference} \
-    --threads ${number_threads} \
-    --parameters ${parameters} \
-    --root ${root} \
-  | bash ${root}/utilities/sort_compress_index_calls.sh \
-    --calls ${manta_calls_decomposed_normalized_svtype} \
-    --root ${root}
+decompose_normalize_findSVs ${manta_calls_enhanced} ${manta_calls_enhanced_decomposed_normalized_svtype} 
+decompose_normalize_findSVs ${manta_calls_super_enhanced} ${manta_calls_super_enhanced_decomposed_normalized_svtype} 
 
 pacbio_covered_regions () { 
   local pacbio_covered_regions_on_h0_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/${sample}.h0.covered.sorted"
@@ -102,18 +105,9 @@ run_truvari () {
 } 
 
 run_truvari \
-  "${tr_fermikit_calls}" \
-  "${output}/${truvari_trfermikit}"
- 
-run_truvari \
-  "${tr_fermikit_calls}.unitigSupport" \
-  "${output}/${truvari_trfermikit}.unitigSupport"
+  "${manta_calls_enhanced_decomposed_normalized_svtype}" \
+  "${output}/${truvari_manta}.enhanced"
 
 run_truvari \
-  "${tr_fermikit_calls}.unitigSupport.thinned" \
-  "${output}/${truvari_trfermikit}.unitigSupport.thinned"
-
-run_truvari \
-  "${manta_calls_decomposed_normalized_svtype}" \
-  "${output}/${truvari_manta}"
-
+  "${manta_calls_super_enhanced_decomposed_normalized_svtype}" \
+  "${output}/${truvari_manta}.superEnhanced"
