@@ -66,12 +66,13 @@ trfermikit [OPTIONS] \
   --threads <number of threads>
 ```
 
-Options are: 
-``` 
 <style>
 .red {color: red}
 </style>
 <p class="red">red text</p>
+
+Options are: 
+``` 
 --hg19 
       Use hg19 build of the human reference genome. If this flag is not specified, trfermikit uses build hg38.
 --functional-regions PATH 
