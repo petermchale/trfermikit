@@ -53,7 +53,7 @@ Only installation on Linux x86_64 is currently supported.
 
 ## Usage 
 
-Assuming that the path to this directory is 
+Assuming that the path to this directory of your filesystem is 
 `${root}`, usage is: 
 
 ```
