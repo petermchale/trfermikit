@@ -35,9 +35,8 @@ by:
 * increasing the penalty for single-base mismatches 
 * decreasing the gap-open penalties (there are two because the cost function of gap length is piecewise linear)
 * decreasing the gap-extension penalties 
-This recovers a lot of events that a more stringent caller would throw out. 
 
-Yet, some of those additional captured events are false discoveries. 
+This recovers a lot of events that a more stringent caller would throw out at the cost of an elevated number of false discoveries. 
 trfermikit mitigates this by throwing out calls that:
 * are supported by "dirty" fermikit unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero)
 * occur in “clusters”
