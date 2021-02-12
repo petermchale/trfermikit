@@ -128,6 +128,5 @@ tandem-repeat-associated DELs larger than 50bp.
 ## TODO
 
 * Create a docker container and nextflow workflow (with nextflow processes for "make-regions", "make-calls" and "filter-calls") and register both at [dockstore](https://dockstore.org/).
-* Make `--genome-build` and `--threads` optional, with default values of "hg38" and "1", respectively 
 * Support bams
 
