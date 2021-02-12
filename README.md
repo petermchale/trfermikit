@@ -119,7 +119,8 @@ The parameter configuration used to make the discoveries appear in the results d
 ## How fast is it?
 
 By default, the pipeline takes about 2 hours (assuming a 70X genome), 
-mainly because the search is confined to tandem repeats with total lengths larger than 100bp. 
+mainly because the search is confined to tandem repeats with total lengths larger than 100bp
+(see the `min-repeat-length` option). 
 Such tandem repeats harbor most of the tandem-repeat-associated DELs larger than 50bp. 
 
 
