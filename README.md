@@ -69,8 +69,7 @@ Required arguments are:
 --reference PATH 
       PATH specifies the path to the reference fasta (without the ".fa" suffix).     
 --alignments PATH 
-      PATH specifies the path to a set of short-read alignments 
-      (without the ".cram" suffix").
+      PATH specifies the path to a set of short-read alignments (without the ".cram" suffix").
       The cram index is assumed to be present at the same PATH.
 --threads INT 
       INT specifies the number of threads to be used. 
