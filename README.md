@@ -59,7 +59,7 @@ Assuming that the path to this directory on your filesystem is
 ```
 PATH="${root}:$PATH"
 
-trfermikit [OPTIONAL ARGUMENTS] [REQUIRED ARGUMENTS]
+trfermikit [OPTIONAL_ARGUMENTS] REQUIRED_ARGUMENTS
 ```
 
 Required arguments are: 
