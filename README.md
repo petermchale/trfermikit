@@ -24,9 +24,12 @@ Variable Number Tandem Repeats (VNTRs).
 We assessed the performance of trfermikit and manta, in both cases relative to a long-read benchmark callset, on VNTRs. 
 We found that for DELs: [(a)](experiments/paper_figures/TPRs_FDRs/DEL.svg) trfermikit has better sensitivity-FDR trade-offs than manta
 and [(b)](experiments/paper_figures/manta_complementarity/DEL-manta.svg) trfermikit is complementary to manta. In the figures, the red circle indicates the default operating point of trfermikit.
-(When considering INSs, trfermikit: [(a)](experiments/paper_figures/TPRs_FDRs/INS.svg) has similar 
+
+When considering INSs, trfermikit: [(a)](experiments/paper_figures/TPRs_FDRs/INS.svg) has similar 
 sensitivity-FDR trade-offs to manta and 
-[(b)](experiments/paper_figures/manta_complementarity/INS-manta.svg) does not significantly complement manta.)
+[(b)](experiments/paper_figures/manta_complementarity/INS-manta.svg) does not significantly complement manta. 
+
+**Thus trfermikit is a tool to discover DELs missed by manta in VNTRs.**
 
 
 ## How does it work?
