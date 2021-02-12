@@ -67,7 +67,11 @@ trfermikit [OPTIONS] \
 ```
 
 Options are: 
-``` .code { white-space : pre-wrap !important;}
+``` 
+<style>
+.red {color: red}
+</style>
+<p class="red">red text</p>
 --hg19 
       Use hg19 build of the human reference genome. If this flag is not specified, trfermikit uses build hg38.
 --functional-regions PATH 
