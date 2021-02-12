@@ -17,7 +17,7 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 PATH="${root}:$PATH"
 
 output="results"
-reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
+reference="reference"
 
 population="CHS"
 sample="HG00514"
