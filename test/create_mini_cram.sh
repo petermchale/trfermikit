@@ -18,7 +18,7 @@ population="CHS"
 sample="HG00514"
 alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
 
-region="chr1:500000-1000000" 
+region="chr1:800000-900000" 
 
 samtools view -C --reference ${reference}.fa ${alignments}.cram ${region} > alignments.cram
 samtools index alignments.cram

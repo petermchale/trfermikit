@@ -17,15 +17,20 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 PATH="${root}:$PATH"
 
 output="results"
-reference="reference"
-
-population="CHS"
-sample="HG00514"
-alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
-
+reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 number_threads="16"
+alignments="alignments" 
+
+rm -rf ${output} 
+mkdir --parents ${output}
+
+genome_build="hg38" 
+
+ln -s ${PWD}/repeats.${genome_build}.tab.gz ${output} 
 
 trfermikit \
+  --min-repeat-length 100 \
+  --genome-build ${genome_build} \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
