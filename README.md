@@ -62,7 +62,8 @@ PATH="${root}:$PATH"
 trfermikit [OPTIONS] \
   --output <path to results directory> \
   --reference <path to reference fasta (without the ".fa" suffix)> \
-  --alignments <path to short-read alignments (without the ".cram" suffix"; index assumed to be present)> 
+  --alignments <path to short-read alignments (without the ".cram" suffix"; index assumed to be present)> \
+  --threads <number of threads>
 ```
 
 Options are: 
@@ -74,7 +75,6 @@ Options are:
 | --- | --- | --- |
 --functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those tandem repeats that lie in these regions 
 | --min-repeat-length | integer [default value: 0] | Only consider tandem repeats whose total number of bps is larger than this number 
-| --threads | integer [default value: 1] | Number of threads 
 
 
 
