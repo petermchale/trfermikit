@@ -60,19 +60,23 @@ Assuming that the path to this directory is
 PATH="${root}:$PATH"
 
 trfermikit [OPTIONS] \
-  --genome-build <"hg38" or "hg19"> \
   --output <path to results directory> \
   --reference <path to reference fasta (without the ".fa" suffix)> \
-  --threads <number of threads> \
-  --svtype <"DEL" or "INS"> \
   --alignments <path to short-read alignments (without the ".cram" suffix"; index assumed to be present)> 
 ```
 
 Options are: 
+| Flag | Description 
+| --- | --- | 
+--hg19 | Use hg19 build of the human reference genome. If this flag is not specified, trfermikit uses build hg38 
+
 | Key | Value | Description |
 | --- | --- | --- |
 --functional-regions | path to a set of regions (without the ".bed.gz" suffix) | Restrict examination to those tandem repeats that lie in these regions 
 | --min-repeat-length | integer [default value: 0] | Only consider tandem repeats whose total number of bps is larger than this number 
+| --threads | integer [default value: 1] | Number of threads 
+
+
 
 ## Output 
 
