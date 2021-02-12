@@ -14,7 +14,7 @@ to capture SVs in tandem repeats where
 the repeat unit is smaller than 6bps,
 known in the community as Short Tandem Repeats 
 (STRs),
-we designed trfermikit to pick up SVs that trfermikit missed
+we designed trfermikit to pick up SVs that manta missed
 in tandem repeats with repeat units 
 larger than 6bps, known as 
 Variable Number Tandem Repeats (VNTRs). 
