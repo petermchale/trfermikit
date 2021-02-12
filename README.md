@@ -69,7 +69,9 @@ trfermikit [OPTIONS] \
 <style>
 .red {color: red}
 </style>
+<html>
 <p class="red">red text</p>
+</html>
 
 Options are: 
 ``` 
