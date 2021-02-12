@@ -22,7 +22,7 @@ Variable Number Tandem Repeats (VNTRs).
 ## Impact 
 
 We assessed the performance of trfermikit and manta, in both cases relative to a long-read benchmark callset, on VNTRs. 
-The results show that [(a)](experiments/paper_figures/TPRs_FDRs/DEL.svg) trfermikit has better sensitivity-precision trade-offs than manta
+The results show that [(a)](experiments/paper_figures/TPRs_FDRs/DEL.svg) trfermikit has better sensitivity-FDR trade-offs than manta
 and [(b)](experiments/paper_figures/manta_complementarity/DEL-manta.svg) trfermikit is complementary to manta. 
 
 ## How does it work?
