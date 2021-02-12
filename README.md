@@ -19,7 +19,7 @@ in tandem repeats with repeat units
 larger than 6bps, known as 
 **Variable Number Tandem Repeats (VNTRs).**
 
-## Impact 
+## <a name="Impact"></a> Impact 
 
 We assessed the performance of trfermikit and manta, in both cases relative to a long-read benchmark callset, on VNTRs. 
 We found that for DELs: [(a)](experiments/paper_figures/TPRs_FDRs/DEL.svg) trfermikit has better sensitivity-FDR trade-offs than manta
@@ -104,7 +104,8 @@ Discovered SVs are output in indexed vcf format to the results directory at
 ```
 fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned.vcf.gz
 ```
-where `${svtype}` is either `DEL` or `INS`. 
+where `${svtype}` is either `DEL` or `INS`. As indicated in [Impact](#Impact), 
+you'll only be interested in the `DEL` vcf. 
 
 Tandem-repeat regions used to discover SVs appear in the results directory in indexed bed format at
 ```
