@@ -73,8 +73,8 @@ Options are:
       If this flag is not specified, trfermikit uses build hg38.
 --functional-regions PATH 
       Restrict examination to those tandem repeats 
-      that lie in the regions indicated by PATH, 
-      which is a path to a set of regions (without the ".bed.gz" suffix). 
+      that lie in the regions indicated by PATH
+      (without the ".bed.gz" suffix). 
       [default value: None]
 --min-repeat-length INT
       Only consider tandem repeats 
