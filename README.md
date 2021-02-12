@@ -66,10 +66,10 @@ trfermikit [OPTIONS] \
   --threads <number of threads>
 ```
 
+<html>
 <style>
 .red {color: red}
 </style>
-<html>
 <p class="red">red text</p>
 </html>
 
