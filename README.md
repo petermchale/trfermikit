@@ -41,10 +41,6 @@ trfermikit mitigates this by throwing out calls that:
 * are supported by "dirty" fermikit unitigs (essentially, those that have lots of small blocks when aligned to the reference or those whose mapping quality is zero)
 * occur in “clusters”
 
-## Quickstart
-
-An example of how to use trfermikit can be found [here](experiments/optimized_for_DELs/minRepeatPeriod/run_trfermikit_and_evaluate_calls.sh). 
-
 ## Installation
 
 ```
