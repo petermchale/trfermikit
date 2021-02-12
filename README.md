@@ -67,7 +67,7 @@ trfermikit [OPTIONS] \
 ```
 
 Options are: 
-```
+```wrap
 --hg19 
       Use hg19 build of the human reference genome. If this flag is not specified, trfermikit uses build hg38.
 --functional-regions PATH 
