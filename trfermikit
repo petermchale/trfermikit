@@ -23,7 +23,7 @@ while [[ "$1" =~ ^- ]]; do
   shift
 done
 
-echo "functional_regions = ${functional_regions}" 
+echo "min_repeat_length = ${min_repeat_length}" 
 exit 1 
 
 set -o errexit
