@@ -46,3 +46,4 @@ observed_call=$(zgrep -v ^# ${calls}.vcf.gz)
 echo -e "expected call:\n${expected_call}" > expected_vs_observed.txt
 echo -e "observed call:\n${observed_call}" >> expected_vs_observed.txt
 
+cat expected_vs_observed.txt
