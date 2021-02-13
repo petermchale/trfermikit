@@ -23,9 +23,6 @@ while [[ "$1" =~ ^- ]]; do
   shift
 done
 
-echo "genome_build = ${genome_build}" 
-exit 1 
-
 set -o errexit
 set -o pipefail
 # set -o noclobber
@@ -45,15 +42,13 @@ if [[ ! -f ${output}/config.json ]]; then
   cp ${root}/config.json ${output}/config.json
 fi 
 
-${root}/utilities/update_config.sh ${root} ${output} makeRegions genomeBuild ${genome_build}
-
-${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
-
-${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
-
 ${root}/utilities/update_config.sh ${root} ${output} general reference ${reference}
 ${root}/utilities/update_config.sh ${root} ${output} general numberThreads ${number_threads}
 ${root}/utilities/update_config.sh ${root} ${output} general alignments ${alignments}
+
+${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
+${root}/utilities/update_config.sh ${root} ${output} makeRegions genomeBuild ${genome_build}
+${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
 
 set -o nounset
 

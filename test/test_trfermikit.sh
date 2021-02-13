@@ -31,7 +31,6 @@ fi
 
 trfermikit \
   --output ${output} \
-  --min-repeat-length 0 \
   --reference ${reference} \
   --threads ${number_threads} \
   --alignments ${alignments} 
