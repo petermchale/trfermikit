@@ -21,18 +21,28 @@ reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GR
 number_threads="16"
 alignments="alignments" 
 
-rm -rf ${output} 
-mkdir --parents ${output}
+#rm -rf ${output} 
+#mkdir --parents ${output}
 
 genome_build="hg38" 
 
-ln -s ${PWD}/repeats.${genome_build}.tab.gz ${output} 
+if [[ -e repeats.${genome_build}.tab.gz ]]; then
+  ln -s ${PWD}/repeats.${genome_build}.tab.gz ${output} 
+fi
 
-trfermikit \
-  --min-repeat-length 100 \
-  --genome-build ${genome_build} \
-  --output ${output} \
-  --reference ${reference} \
-  --threads ${number_threads} \
-  --alignments ${alignments} 
+#trfermikit \
+#  --min-repeat-length 100 \
+#  --genome-build ${genome_build} \
+#  --output ${output} \
+#  --reference ${reference} \
+#  --threads ${number_threads} \
+#  --alignments ${alignments} 
+
+calls="${output}/fermikit.raw.decomposed.normalized.DEL.unitigSupport.thinned" 
+
+expected_call="chr1    820928  .       CTTGTCCAGCAGGTCCACCCTGTCTACACTACCTGCCTGCAAAGCAGATCCACCCTGTCTACACTACCTGG C       43      .       Confidence=26.25        GT:AD   1/0:14,43" 
+observed_call=$(zgrep -v ^# ${calls}.vcf.gz)
+
+echo -e "expected call:\n${expected_call}" > expected_vs_observed.txt
+echo -e "observed call:\n${observed_call}" >> expected_vs_observed.txt
 
