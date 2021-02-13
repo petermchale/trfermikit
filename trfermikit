@@ -3,21 +3,27 @@
 # https://stackoverflow.com/a/246128/6674256
 root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+genome_build="hg38"
+
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --genome-build ) shift; [[ ! $1 =~ ^- ]] && genome_build=$1;;
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
+    --hg19 ) genome_build="hg19";;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
+
+echo "threads = ${number_threads"
+echo "genome_build = ${genome_build}" 
+exit 1 
 
 set -o errexit
 set -o pipefail

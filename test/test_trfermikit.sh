@@ -24,15 +24,12 @@ alignments="alignments"
 rm -rf ${output} 
 mkdir --parents ${output}
 
-genome_build="hg38" 
-
-if [[ -e repeats.${genome_build}.tab.gz ]]; then
-  ln -s ${PWD}/repeats.${genome_build}.tab.gz ${output} 
+repeats="repeats.hg38"
+if [[ -e ${repeats}.tab.gz ]]; then
+  ln -s ${PWD}/${repeats}.tab.gz ${output} 
 fi
 
 trfermikit \
-  --min-repeat-length 100 \
-  --genome-build ${genome_build} \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
