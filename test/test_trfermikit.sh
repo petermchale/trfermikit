@@ -32,6 +32,7 @@ fi
 trfermikit \
   --output ${output} \
   --hg19 \
+  --functional-regions "peter" \
   --reference ${reference} \
   --threads ${number_threads} \
   --alignments ${alignments} 
