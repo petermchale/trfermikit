@@ -3,7 +3,7 @@
 # https://stackoverflow.com/a/246128/6674256
 root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-genome_build="hg38"
+genome_build=$(${root}/utilities/read_config.sh ${root} ${root} makeRegions genomeBuild)
 
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
@@ -21,7 +21,6 @@ while [[ "$1" =~ ^- ]]; do
   shift
 done
 
-echo "threads = ${number_threads}"
 echo "genome_build = ${genome_build}" 
 exit 1 
 
@@ -41,7 +40,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 mkdir --parents ${output} 
 if [[ ! -f ${output}/config.json ]]; then 
-  cp ${root}/config.core.json ${output}/config.json
+  cp ${root}/config.default.json ${output}/config.json
 fi 
 
 min_repeat_length=${min_repeat_length:-"0"}
