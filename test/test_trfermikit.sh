@@ -21,8 +21,8 @@ reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GR
 number_threads="16"
 alignments="alignments" 
 
-#rm -rf ${output} 
-#mkdir --parents ${output}
+rm -rf ${output} 
+mkdir --parents ${output}
 
 genome_build="hg38" 
 
@@ -30,13 +30,13 @@ if [[ -e repeats.${genome_build}.tab.gz ]]; then
   ln -s ${PWD}/repeats.${genome_build}.tab.gz ${output} 
 fi
 
-#trfermikit \
-#  --min-repeat-length 100 \
-#  --genome-build ${genome_build} \
-#  --output ${output} \
-#  --reference ${reference} \
-#  --threads ${number_threads} \
-#  --alignments ${alignments} 
+trfermikit \
+  --min-repeat-length 100 \
+  --genome-build ${genome_build} \
+  --output ${output} \
+  --reference ${reference} \
+  --threads ${number_threads} \
+  --alignments ${alignments} 
 
 calls="${output}/fermikit.raw.decomposed.normalized.DEL.unitigSupport.thinned" 
 
