@@ -32,6 +32,7 @@ fi
 trfermikit \
   --output ${output} \
   --reference ${reference} \
+  --hg19 \
   --threads ${number_threads} \
   --alignments ${alignments} 
 
