@@ -21,7 +21,7 @@ while [[ "$1" =~ ^- ]]; do
   shift
 done
 
-echo "threads = ${number_threads"
+echo "threads = ${number_threads}"
 echo "genome_build = ${genome_build}" 
 exit 1 
 
