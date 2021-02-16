@@ -5,9 +5,6 @@
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --repeats ) shift; [[ ! $1 =~ ^- ]] && repeats=$1;;
-    --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
-    --min-repeat-period ) shift; [[ ! $1 =~ ^- ]] && min_repeat_period=$1;;
-    --max-region-length ) shift; [[ ! $1 =~ ^- ]] && max_region_length=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
@@ -28,6 +25,18 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+read_config () { 
+  local key1_=$1 
+  local key2_=$2
+  ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
+}
+
+min_repeat_length=$(read_config makeRegions minRepeatLength)
+max_region_length=$(read_config makeRegions maxRegionLength)
+min_repeat_period=$(read_config makeRegions minRepeatPeriod)
+
+exit 1
 
 zgrep --invert-match ^"#" ${repeats}.tab.gz |
   python ${root}/make-regions/classify_tandem_repeats_by_length.py \

@@ -33,7 +33,6 @@ read_config () {
 }
 
 functional_regions=$(read_config makeRegions functionalRegions)
-min_repeat_length=$(read_config makeRegions minRepeatLength)
 genome_build=$(read_config makeRegions genomeBuild)
 
 reference=$(read_config general reference)
@@ -43,8 +42,6 @@ alignments=$(read_config general alignments)
 slop=$(read_config makeRegions slop)
 min_coverage=$(read_config makeRegions minCoverage)
 max_coverage=$(read_config makeRegions maxCoverage)
-max_region_length=$(read_config makeRegions maxRegionLength)
-min_repeat_period=$(read_config makeRegions minRepeatPeriod)
 
 if [[ "${functional_regions}" == "none" ]]; then
   overlapped_functional_regions=false
@@ -66,9 +63,6 @@ fi
 filter_repeats_by_length_and_function () {
   bash ${root}/make-regions/filter_by_length.sh \
     --repeats ${repeats} \
-    --min-repeat-length ${min_repeat_length} \
-    --min-repeat-period ${min_repeat_period} \
-    --max-region-length ${max_region_length} \
     --root ${root} \
   | 
   # https://unix.stackexchange.com/a/38311/406037 : 
