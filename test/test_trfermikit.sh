@@ -31,6 +31,7 @@ fi
 
 trfermikit \
   --hg19 \
+  --functional-regions "path_to_functional_regions" \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
