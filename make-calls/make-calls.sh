@@ -41,8 +41,6 @@ gap_open_penalties=$(read_config makeCalls gapOpenPenalties)
 gap_extension_penalties=$(read_config makeCalls gapExtensionPenalties)
 minimum_unitig_mapping_quality=$(read_config makeCalls minUnitigMappingQuality)
 
-exit 1 
-
 # we will get short reads that were originally aligned to the following regions
 regions="${output}/regions"
 
@@ -85,12 +83,15 @@ ${root}/make-calls/fermi.kit/fermi2.pl unitig \
 make -f ${fermikit_prefix}.mak || true
 
 filtered_fastq_empty () {
-  echo $(${root}/bin/jq --raw-output '.filteredFastqEmpty' ${assembly_diagnostics})
+  # echo $(${root}/bin/jq --raw-output '.filteredFastqEmpty' ${assembly_diagnostics})
+  ${root}/bin/jq --raw-output '.filteredFastqEmpty' ${assembly_diagnostics}
 }
 
 if [[ $(filtered_fastq_empty) == "true" ]]; then 
   exit 1
 fi
+
+exit 1
 
 # execute shell commands that align unitigs (with minimap2) and call variants
 # ... "-m" means "use minimap2" 
