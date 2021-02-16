@@ -63,8 +63,6 @@ update_config makeRegions functionalRegions ${functional_regions}
 update_config makeRegions minRepeatLength ${min_repeat_length}
 update_config makeRegions genomeBuild ${genome_build}
 
-exit 1 
-
 set -o nounset
 
 if [[ ! -f ${alignments}.cram.crai ]]; then 
@@ -90,9 +88,6 @@ BASH_ENV=${root}/utilities/debug.sh \
 BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/make-calls/make-calls.sh \
       --output ${output} \
-      --alignments ${alignments} \
-      --threads ${number_threads} \
-      --reference ${reference} \
       --root ${root} \
     > ${output}/make-calls.log 2>&1
 

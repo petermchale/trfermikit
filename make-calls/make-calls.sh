@@ -5,9 +5,6 @@
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
-    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
-    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
@@ -27,6 +24,18 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }' 
+
+read_config () { 
+  local key1_=$1 
+  local key2_=$2
+  ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
+}
+
+reference=$(read_config general reference)
+number_threads=$(read_config general numberThreads)
+alignments=$(read_config general alignments) 
+
+exit 1 
 
 single_base_match_reward=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMatchReward)
 single_base_mismatch_penalty=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMismatchPenalty)
