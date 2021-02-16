@@ -36,10 +36,11 @@ read_config () {
   local key2_=$2
   ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
 }
-genome_build=$(read_config makeRegions genomeBuild)
-exit 1 
 
-slop=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions slop)
+genome_build=$(read_config makeRegions genomeBuild)
+
+slop=$(read_config makeRegions slop)
+exit 1 
 min_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minCoverage)
 max_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxCoverage)
 max_region_length=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxRegionLength)
