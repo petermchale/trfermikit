@@ -30,6 +30,7 @@ if [[ -e ${repeats}.tab.gz ]]; then
 fi
 
 trfermikit \
+  --hg19 \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
