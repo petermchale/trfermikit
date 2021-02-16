@@ -37,8 +37,6 @@ min_repeat_length=$(read_config makeRegions minRepeatLength)
 max_region_length=$(read_config makeRegions maxRegionLength)
 min_repeat_period=$(read_config makeRegions minRepeatPeriod)
 
-exit 1
-
 zgrep --invert-match ^"#" ${repeats}.tab.gz |
   python ${root}/make-regions/classify_tandem_repeats_by_length.py \
     --min-repeat-length ${min_repeat_length} \

@@ -71,7 +71,6 @@ filter_repeats_by_length_and_function () {
     cat
   else 
     bash ${root}/make-regions/filter_by_function.sh \
-      --functional-regions ${functional_regions} \
       --root ${root} \
       --output ${output}
   fi 

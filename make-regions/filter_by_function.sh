@@ -4,7 +4,6 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
@@ -27,11 +26,17 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
+read_config () { 
+  local key1_=$1 
+  local key2_=$2
+  ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
+}
+
+functional_regions=$(read_config makeRegions functionalRegions)
+minRepeatFunctionalOverlap=$(read_config makeRegions minRepeatFunctionalOverlap)
+exit 1
+
 bash ${root}/utilities/info.sh "$(${root}/bin/bedtools --version)"
-
-minRepeatFunctionalOverlap="1"
-
-${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatFunctionalOverlap ${minRepeatFunctionalOverlap}
 
 # https://github.com/arq5x/bedtools2/issues/834
 ${root}/bin/bedtools intersect -a stdin -b <(zgrep --invert-match ^"#" ${functional_regions}.bed.gz) -wa -u -f ${minRepeatFunctionalOverlap}
