@@ -40,11 +40,11 @@ read_config () {
 genome_build=$(read_config makeRegions genomeBuild)
 
 slop=$(read_config makeRegions slop)
+min_coverage=$(read_config makeRegions minCoverage)
+max_coverage=$(read_config makeRegions maxCoverage)
+max_region_length=$(read_config makeRegions maxRegionLength)
+min_repeat_period=$(read_config makeRegions minRepeatPeriod)
 exit 1 
-min_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minCoverage)
-max_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxCoverage)
-max_region_length=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions maxRegionLength)
-min_repeat_period=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minRepeatPeriod)
 
 if [[ "${functional_regions}" == "none" ]]; then
   overlapped_functional_regions=false
