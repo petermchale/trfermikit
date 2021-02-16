@@ -34,7 +34,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 read_config () { 
   local key1_=$1 
   local key2_=$2
-  ${root}/utilities/read_config.sh ${root} ${output} key1_ key2_
+  ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
 }
 genome_build=$(read_config makeRegions genomeBuild)
 exit 1 
