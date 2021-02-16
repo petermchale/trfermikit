@@ -63,6 +63,7 @@ fi
 filter_repeats_by_length_and_function () {
   bash ${root}/make-regions/filter_by_length.sh \
     --repeats ${repeats} \
+    --output ${output} \
     --root ${root} \
   | 
   # https://unix.stackexchange.com/a/38311/406037 : 
