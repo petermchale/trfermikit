@@ -4,11 +4,10 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
+    --parameters ) shift; [[ ! $1 =~ ^- ]] && parameters=$1;;
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
-    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
-    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --parameters ) shift; [[ ! $1 =~ ^- ]] && parameters=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
@@ -28,6 +27,17 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+read_config () { 
+  local key1_=$1 
+  local key2_=$2
+  ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
+}
+
+reference=$(read_config general reference)
+number_threads=$(read_config general numberThreads)
+
+exit 1 
 
 # There will be N ALTs if there are N overlapping high-base-quality unitigs/reads, 
 # each with different gaps, say.

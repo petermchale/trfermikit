@@ -6,8 +6,6 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
-    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
-    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
@@ -33,17 +31,14 @@ calls="${output}/fermikit.raw"
 unitigs="${output}/fermikit.srt"
 regions="${output}/regions"
 
-max_intra_cluster_distance=$(${root}/utilities/read_config.sh ${root} ${output} filterCalls maxIntraClusterDistance)
-
 parameters="${output}/config"
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
 bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${calls} \
-    --reference ${reference} \
-    --threads ${number_threads} \
     --parameters ${parameters} \
+    --output ${output} \
     --root ${root} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls ${calls_decomposed_normalized_svtype} \

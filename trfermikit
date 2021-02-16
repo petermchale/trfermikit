@@ -98,8 +98,6 @@ filter_calls () {
     bash ${root}/filter-calls/filter-calls.sh \
         --output ${output} \
         --svtype ${svtype} \
-        --reference ${reference} \
-        --threads ${number_threads} \
         --root ${root} \
     2> ${output}/filter-calls-${svtype}.log 
 }
