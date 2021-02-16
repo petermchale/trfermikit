@@ -31,7 +31,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-genome_build=$(${root}/utilities/read_config.sh ${root} ${root} makeRegions genomeBuild)
+genome_build=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions genomeBuild)
 exit 1 
 
 slop=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions slop)
