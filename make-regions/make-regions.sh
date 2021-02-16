@@ -5,12 +5,11 @@
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
-    --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
-    --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
+    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
+
     --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
     --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
     --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
-    --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -37,6 +36,9 @@ read_config () {
   ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
 }
 
+functional_regions=$(read_config makeRegions functionalRegions)
+min_repeat_length=$(read_config makeRegions minRepeatLength)
+exit 1 
 genome_build=$(read_config makeRegions genomeBuild)
 
 slop=$(read_config makeRegions slop)
@@ -44,7 +46,6 @@ min_coverage=$(read_config makeRegions minCoverage)
 max_coverage=$(read_config makeRegions maxCoverage)
 max_region_length=$(read_config makeRegions maxRegionLength)
 min_repeat_period=$(read_config makeRegions minRepeatPeriod)
-exit 1 
 
 if [[ "${functional_regions}" == "none" ]]; then
   overlapped_functional_regions=false
