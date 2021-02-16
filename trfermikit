@@ -13,8 +13,6 @@ functional_regions=$(read_config makeRegions functionalRegions)
 min_repeat_length=$(read_config makeRegions minRepeatLength)
 genome_build=$(read_config makeRegions genomeBuild)
 
-exit 1 
-
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
