@@ -30,7 +30,6 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 calls="${output}/fermikit.raw"
 unitigs="${output}/fermikit.srt"
 regions="${output}/regions"
-
 parameters="${output}/config"
 
 calls_decomposed_normalized_svtype="${calls}.decomposed.normalized.${svtype}"
@@ -57,8 +56,8 @@ python ${root}/filter-calls/filterByUnitigSupport_annotate.py \
 calls_thinned="${calls_unitigSupport}.thinned"
 bash ${root}/filter-calls/sparsify_clusters.sh \
     --calls ${calls_unitigSupport} \
+    --output ${output} \
     --root ${root} \
-    --max-intra-cluster-distance ${max_intra_cluster_distance} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls "${calls_thinned}" \
     --root ${root}

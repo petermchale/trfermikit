@@ -37,8 +37,6 @@ read_config () {
 reference=$(read_config general reference)
 number_threads=$(read_config general numberThreads)
 
-exit 1 
-
 # There will be N ALTs if there are N overlapping high-base-quality unitigs/reads, 
 # each with different gaps, say.
 # For a diploid sample, however, at most two of these ALTs may appear in the genotype. 

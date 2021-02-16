@@ -5,8 +5,8 @@
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
-    --max-intra-cluster-distance ) shift; [[ ! $1 =~ ^- ]] && max_intra_cluster_distance=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -25,6 +25,16 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+read_config () { 
+  local key1_=$1 
+  local key2_=$2
+  ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
+}
+
+max_intra_cluster_distance=$(read_config filterCalls maxIntraClusterDistance)
+
+exit 1 
 
 sparsify_clusters () {
   local calls_=$1
