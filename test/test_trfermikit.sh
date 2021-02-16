@@ -30,8 +30,7 @@ if [[ -e ${repeats}.tab.gz ]]; then
 fi
 
 trfermikit \
-  --hg19 \
-  --functional-regions "path_to_functional_regions" \
+  --min-repeat-length 10 \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
