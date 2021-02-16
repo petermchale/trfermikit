@@ -39,7 +39,6 @@ genome_build=$(read_config makeRegions genomeBuild)
 reference=$(read_config general reference)
 number_threads=$(read_config general numberThreads)
 alignments=$(read_config general alignments) 
-exit 1
 
 slop=$(read_config makeRegions slop)
 min_coverage=$(read_config makeRegions minCoverage)
@@ -57,7 +56,6 @@ ${root}/utilities/update_config.sh ${root} ${output} makeRegions overlappedFunct
 repeats="${output}/repeats.${genome_build}"
 if [[ ! -f ${repeats}.tab.gz ]]; then 
   bash ${root}/make-regions/download_simple_repeats.sh \
-    --genome-build ${genome_build} \
     --root ${root} \
     --output ${output} \
     --repeats ${repeats}
