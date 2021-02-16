@@ -34,7 +34,6 @@ read_config () {
 
 functional_regions=$(read_config makeRegions functionalRegions)
 minRepeatFunctionalOverlap=$(read_config makeRegions minRepeatFunctionalOverlap)
-exit 1
 
 bash ${root}/utilities/info.sh "$(${root}/bin/bedtools --version)"
 

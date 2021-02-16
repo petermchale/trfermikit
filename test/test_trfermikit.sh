@@ -30,7 +30,6 @@ if [[ -e ${repeats}.tab.gz ]]; then
 fi
 
 trfermikit \
-  --functional-regions "peterpath" \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \

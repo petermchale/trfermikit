@@ -3,9 +3,17 @@
 # https://stackoverflow.com/a/246128/6674256
 root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-functional_regions=$(${root}/utilities/read_config.sh ${root} ${root} makeRegions functionalRegions)
-min_repeat_length=$(${root}/utilities/read_config.sh ${root} ${root} makeRegions minRepeatLength)
-genome_build=$(${root}/utilities/read_config.sh ${root} ${root} makeRegions genomeBuild)
+read_config () { 
+  local key1_=$1 
+  local key2_=$2
+  ${root}/utilities/read_config.sh ${root} ${root} ${key1_} ${key2_}
+}
+
+functional_regions=$(read_config makeRegions functionalRegions)
+min_repeat_length=$(read_config makeRegions minRepeatLength)
+genome_build=$(read_config makeRegions genomeBuild)
+
+exit 1 
 
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
@@ -42,13 +50,22 @@ if [[ ! -f ${output}/config.json ]]; then
   cp ${root}/config.json ${output}/config.json
 fi 
 
-${root}/utilities/update_config.sh ${root} ${output} general reference ${reference}
-${root}/utilities/update_config.sh ${root} ${output} general numberThreads ${number_threads}
-${root}/utilities/update_config.sh ${root} ${output} general alignments ${alignments}
+update_config () { 
+  local key1_=$1 
+  local key2_=$2 
+  local value_=$3 
+  ${root}/utilities/update_config.sh ${root} ${output} ${key1_} ${key2_} ${value_}
+}
 
-${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
-${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
-${root}/utilities/update_config.sh ${root} ${output} makeRegions genomeBuild ${genome_build}
+update_config general reference ${reference}
+update_config general numberThreads ${number_threads}
+update_config general alignments ${alignments}
+
+update_config makeRegions functionalRegions ${functional_regions}
+update_config makeRegions minRepeatLength ${min_repeat_length}
+update_config makeRegions genomeBuild ${genome_build}
+
+exit 1 
 
 set -o nounset
 
