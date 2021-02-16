@@ -34,8 +34,6 @@ read_config () {
 
 max_intra_cluster_distance=$(read_config filterCalls maxIntraClusterDistance)
 
-exit 1 
-
 sparsify_clusters () {
   local calls_=$1
   local cluster_column=11
