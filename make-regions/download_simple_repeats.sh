@@ -34,7 +34,6 @@ read_config () {
 genome_build=$(read_config makeRegions genomeBuild)
 database="${genome_build}"
 table=$(read_config makeRegions ucscTable)
-exit 1 
 
 chromosome="chrom"
 start_coordinate="chromStart"
