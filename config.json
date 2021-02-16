@@ -8,7 +8,8 @@
     "minRepeatLength": "100",
     "functionalRegions": "none",
     "genomeBuild": "hg38",
-    "overlappedFunctionalRegions": "false"
+    "overlappedFunctionalRegions": "false",
+    "ucscTable": "simpleRepeat"
   },
   "makeCalls": {
     "singleBaseMatchReward": "10",
