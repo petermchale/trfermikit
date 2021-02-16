@@ -35,13 +35,13 @@ reference=$(read_config general reference)
 number_threads=$(read_config general numberThreads)
 alignments=$(read_config general alignments) 
 
-exit 1 
+single_base_match_reward=$(read_config makeCalls singleBaseMatchReward)
+single_base_mismatch_penalty=$(read_config makeCalls singleBaseMismatchPenalty)
+gap_open_penalties=$(read_config makeCalls gapOpenPenalties)
+gap_extension_penalties=$(read_config makeCalls gapExtensionPenalties)
+minimum_unitig_mapping_quality=$(read_config makeCalls minUnitigMappingQuality)
 
-single_base_match_reward=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMatchReward)
-single_base_mismatch_penalty=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls singleBaseMismatchPenalty)
-gap_open_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapOpenPenalties)
-gap_extension_penalties=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls gapExtensionPenalties)
-minimum_unitig_mapping_quality=$(${root}/utilities/read_config.sh ${root} ${output} makeCalls minUnitigMappingQuality)
+exit 1 
 
 # we will get short reads that were originally aligned to the following regions
 regions="${output}/regions"
