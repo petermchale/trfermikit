@@ -32,11 +32,8 @@ read_config () {
 }
 
 genome_build=$(read_config makeRegions genomeBuild)
-
-table="simpleRepeat"
 database="${genome_build}"
-
-${root}/utilities/update_config.sh ${root} ${output} makeRegions ucscTable ${table}
+table=$(read_config makeRegions ucscTable)
 exit 1 
 
 chromosome="chrom"
