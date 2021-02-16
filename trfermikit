@@ -47,8 +47,8 @@ ${root}/utilities/update_config.sh ${root} ${output} general numberThreads ${num
 ${root}/utilities/update_config.sh ${root} ${output} general alignments ${alignments}
 
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions functionalRegions ${functional_regions}
-${root}/utilities/update_config.sh ${root} ${output} makeRegions genomeBuild ${genome_build}
 ${root}/utilities/update_config.sh ${root} ${output} makeRegions minRepeatLength ${min_repeat_length}
+${root}/utilities/update_config.sh ${root} ${output} makeRegions genomeBuild ${genome_build}
 
 set -o nounset
 
@@ -68,7 +68,6 @@ rm --force ${output}/fermikit.*
 
 BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/make-regions/make-regions.sh \
-      --genome-build ${genome_build} \
       --output ${output} \
       --min-repeat-length ${min_repeat_length} \
       --alignments ${alignments} \

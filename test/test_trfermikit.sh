@@ -30,7 +30,6 @@ if [[ -e ${repeats}.tab.gz ]]; then
 fi
 
 trfermikit \
-  --min-repeat-length 10 \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \

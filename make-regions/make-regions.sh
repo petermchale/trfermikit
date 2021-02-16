@@ -4,7 +4,6 @@
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
-    --genome-build ) shift; [[ ! $1 =~ ^- ]] && genome_build=$1;;
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --functional-regions ) shift; [[ ! $1 =~ ^- ]] && functional_regions=$1;;
     --min-repeat-length ) shift; [[ ! $1 =~ ^- ]] && min_repeat_length=$1;;
@@ -31,6 +30,9 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+genome_build=$(${root}/utilities/read_config.sh ${root} ${root} makeRegions genomeBuild)
+exit 1 
 
 slop=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions slop)
 min_coverage=$(${root}/utilities/read_config.sh ${root} ${output} makeRegions minCoverage)
