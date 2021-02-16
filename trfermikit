@@ -69,11 +69,6 @@ BASH_ENV=${root}/utilities/debug.sh \
   bash ${root}/make-regions/make-regions.sh \
       --output ${output} \
       --root ${root} \
-
-      --alignments ${alignments} \
-      --threads ${number_threads} \
-      --functional-regions ${functional_regions} \
-      --reference ${reference} \
     2> ${output}/make-regions.log 
 
 BASH_ENV=${root}/utilities/debug.sh \

@@ -6,10 +6,6 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
-
-    --alignments ) shift; [[ ! $1 =~ ^- ]] && alignments=$1;;
-    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
@@ -38,8 +34,12 @@ read_config () {
 
 functional_regions=$(read_config makeRegions functionalRegions)
 min_repeat_length=$(read_config makeRegions minRepeatLength)
-exit 1 
 genome_build=$(read_config makeRegions genomeBuild)
+
+reference=$(read_config general reference)
+number_threads=$(read_config general numberThreads)
+alignments=$(read_config general alignments) 
+exit 1
 
 slop=$(read_config makeRegions slop)
 min_coverage=$(read_config makeRegions minCoverage)
