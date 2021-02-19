@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+RED='\033[0;31m'
+NO_COLOR='\033[0m'
+
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
@@ -9,7 +12,7 @@ while [[ "$1" =~ ^- ]]; do
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
-    *) echo "$0: $1 is an invalid flag"; exit 1;;
+    *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
   esac 
   shift
 done
