@@ -27,6 +27,7 @@ rm -rf ${output}
 mkdir --parents ${output}
 
 trfermikit \
+  --peter x \
   --output ${output} \
   --reference ${reference} \
   --threads ${number_threads} \
