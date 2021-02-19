@@ -57,6 +57,7 @@ bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --calls ${pacbio_calls} \
     --parameters ${parameters} \
     --root ${root} \
+    --output ${output} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls ${pacbio_calls_decomposed_normalized_svtype} \
     --root ${root}
@@ -66,6 +67,7 @@ bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --calls ${manta_calls} \
     --parameters ${parameters} \
     --root ${root} \
+    --output ${output} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
     --calls ${manta_calls_decomposed_normalized_svtype} \
     --root ${root}
