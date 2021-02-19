@@ -44,8 +44,6 @@ trfermikit \
 
 bash ${root}/evaluate-calls/evaluate.sh \
     --output ${output} \
-    --threads ${number_threads} \
-    --reference ${reference} \
     --population ${population} \
     --sample ${sample} \
     --root ${root} \
