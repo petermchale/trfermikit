@@ -9,7 +9,7 @@ while [[ "$1" =~ ^- ]]; do
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --calls ) shift; [[ ! $1 =~ ^- ]] && calls=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
-    *) bash error.sh "$0: $1 is an invalid flag"; exit 1;;
+    *) echo "$0: $1 is an invalid flag"; exit 1;;
   esac 
   shift
 done
