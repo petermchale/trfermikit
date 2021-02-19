@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+export RED='\033[0;31m'
+export NO_COLOR='\033[0m'
+
 # https://stackoverflow.com/a/246128/6674256
 root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -76,9 +79,6 @@ bash ${root}/utilities/prepare_reference.sh \
 
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
-
-export RED='\033[0;31m'
-export NO_COLOR='\033[0m'
 
 rm --force ${output}/fermikit.*
 
