@@ -55,8 +55,6 @@ parameters="${output}/config"
 bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
     --svtype ${svtype} \
     --calls ${pacbio_calls} \
-    --reference ${reference} \
-    --threads ${number_threads} \
     --parameters ${parameters} \
     --root ${root} \
   | bash ${root}/utilities/sort_compress_index_calls.sh \
