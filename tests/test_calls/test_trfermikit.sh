@@ -19,7 +19,7 @@ PATH="${root}:$PATH"
 output="results"
 reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 number_threads="16"
-alignments="alignments" 
+alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments" 
 
 rm -rf ${output} 
 mkdir --parents ${output}

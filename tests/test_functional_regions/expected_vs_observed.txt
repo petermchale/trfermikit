@@ -1,0 +1,5 @@
+expected regions:
+chr1	853165	854156
+
+observed regions:
+chr1	853165	854156
