@@ -10,7 +10,7 @@ while [[ "$1" =~ ^- ]]; do
     --population ) shift; [[ ! $1 =~ ^- ]] && population=$1;;
     --sample ) shift; [[ ! $1 =~ ^- ]] && sample=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
-    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
   esac 
   shift
 done
@@ -30,6 +30,7 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
+echo ${RED}
 
 evaluate_calls () {
   local svtype=$1

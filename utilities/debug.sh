@@ -11,7 +11,8 @@
 # fi
 
 log_error () { 
-  bash ${root}/utilities/error.sh "${BASH_COMMAND} failed with error code $?"
+  echo -e "${RED} ${BASH_COMMAND} failed with error code $? ${NO_COLOR}" >&2
 }
+
 trap log_error ERR
 

@@ -6,7 +6,7 @@ while [[ "$1" =~ ^- ]]; do
   case $1 in
     --regions ) shift; [[ ! $1 =~ ^- ]] && regions=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
-    *) bash ${root}/utilities/error.sh "$0: $1 is an invalid flag"; exit 1;;
+    *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
   esac 
   shift
 done

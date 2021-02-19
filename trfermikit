@@ -77,6 +77,9 @@ bash ${root}/utilities/prepare_reference.sh \
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
 
+export RED='\033[0;31m'
+export NO_COLOR='\033[0m'
+
 rm --force ${output}/fermikit.*
 
 BASH_ENV=${root}/utilities/debug.sh \
