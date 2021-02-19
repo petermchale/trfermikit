@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export CYAN='\033[0;36m'
 export RED='\033[0;31m'
 export NO_COLOR='\033[0m'
 
