@@ -23,14 +23,14 @@ reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GR
 number_threads="16"
 alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments" 
 
-# rm -rf ${output} 
-# mkdir --parents ${output}
-# 
-# trfermikit \
-#   --output ${output} \
-#   --reference ${reference} \
-#   --threads ${number_threads} \
-#   --alignments ${alignments} 
+rm -rf ${output} 
+mkdir --parents ${output}
+
+trfermikit \
+  --output ${output} \
+  --reference ${reference} \
+  --threads ${number_threads} \
+  --alignments ${alignments} 
 
 calls="${output}/fermikit.raw.decomposed.normalized.DEL.unitigSupport.thinned" 
 

@@ -1,3 +1,5 @@
+***************************
+[0;36mtest_functional_regions: [0m
 expected regions:
 chr1	853165	854156
 

@@ -1,0 +1,17 @@
++ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
++ (test_trfermikit.sh @ 16): test_directory=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions
++ (test_trfermikit.sh @ 18): root=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ (test_trfermikit.sh @ 19): PATH=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit:/uufs/chpc.utah.edu/common/HIPAA/u6018199/.conda/envs/trfermikit/bin:/uufs/chpc.utah.edu/sys/installdir/anaconda/2019.07/condabin:/uufs/chpc.utah.edu/common/HIPAA/u6018199/bin:/uufs/chpc.utah.edu/common/PE/proj_UCGD/apps/redwood.bridges/ucgd_utils/master/perl/script:/uufs/chpc.utah.edu/common/HIPAA/u6018199/.perl5/5.16.3/bin:/uufs/chpc.utah.edu/common/PE/proj_UCGD/apps/redwood.bridges/local-lib/5.16.3/bin:/uufs/chpc.utah.edu/sys/installdir/intel/compilers_and_libraries_2018.1.163/linux/bin/intel64:/uufs/chpc.utah.edu/sys/installdir/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/bin:/usr/lib64/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/uufs/chpc.utah.edu/sys/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/uufs/redwood.bridges/sys/installdir/slurm/std/bin:/opt/dell/srvadmin/bin:/uufs/chpc.utah.edu/common/HIPAA/u6018199/R/x86_64-redhat-linux-gnu-library/3.5/fragCounter/extdata:/uufs/chpc.utah.edu/common/HIPAA/u6018199/.local/bin
++ (test_trfermikit.sh @ 21): output=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results
++ (test_trfermikit.sh @ 22): reference=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla
++ (test_trfermikit.sh @ 23): number_threads=16
++ (test_trfermikit.sh @ 24): alignments=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments
++ (test_trfermikit.sh @ 25): functional_regions=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99.exon__five_prime_utr__three_prime_utr
++ (test_trfermikit.sh @ 37): regions=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/regions
++ (test_trfermikit.sh @ 39): expected_regions='chr1\t853165\t854156\n'
+++ (test_trfermikit.sh @ 40): zcat /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/regions.bed.gz
++ (test_trfermikit.sh @ 40): observed_regions='chr1	853165	854156'
++ (test_trfermikit.sh @ 42): echo '***************************'
++ (test_trfermikit.sh @ 43): echo -e '\033[0;36mtest_functional_regions: \033[0m'
++ (test_trfermikit.sh @ 44): echo -e 'expected regions:\nchr1\t853165\t854156\n'
++ (test_trfermikit.sh @ 45): echo -e 'observed regions:\nchr1	853165	854156'

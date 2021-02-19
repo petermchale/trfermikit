@@ -25,3 +25,6 @@ run_test () {
 }
 
 run_test calls 
+run_test functional_regions 
+
+cat test_calls/expected_vs_observed.txt test_functional_regions/expected_vs_observed.txt | less -R 
