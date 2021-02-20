@@ -7,6 +7,95 @@
 + (test_trfermikit.sh @ 23): number_threads=16
 + (test_trfermikit.sh @ 24): alignments=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments
 + (test_trfermikit.sh @ 25): functional_regions=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99.exon__five_prime_utr__three_prime_utr
++ (test_trfermikit.sh @ 27): rm -rf /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results
++ (test_trfermikit.sh @ 28): mkdir --parents /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results
++ (test_trfermikit.sh @ 31): trfermikit --output /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results --reference /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla --threads 16 --alignments /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments --functional-regions /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99.exon__five_prime_utr__three_prime_utr
++ root=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ output=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ key1=makeRegions
++ key2=functionalRegions
+++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --raw-output --arg key1 makeRegions --arg key2 functionalRegions '.[$key1][$key2]' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/config.json
++ echo none
++ root=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ output=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ key1=makeRegions
++ key2=minRepeatLength
+++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --raw-output --arg key1 makeRegions --arg key2 minRepeatLength '.[$key1][$key2]' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/config.json
++ echo 100
++ root=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ output=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ key1=makeRegions
++ key2=genomeBuild
+++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --raw-output --arg key1 makeRegions --arg key2 genomeBuild '.[$key1][$key2]' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/config.json
++ echo hg38
++ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
++ (trfermikit @ 50): mkdir --parents /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results
++ (trfermikit @ 51): [[ ! -f /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json ]]
++ (trfermikit @ 52): cp /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/config.json /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json
++ (trfermikit @ 62): update_config general reference /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla
++ (trfermikit @ 56): update_config(): local key1_=general
++ (trfermikit @ 57): update_config(): local key2_=reference
++ (trfermikit @ 58): update_config(): local value_=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla
++ (trfermikit @ 59): update_config(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/update_config.sh /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results general reference /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla
++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --arg key1 general --arg key2 reference --arg value /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla '.[$key1][$key2] = $value' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json
++ set +o xtrace
++ (trfermikit @ 63): update_config general numberThreads 16
++ (trfermikit @ 56): update_config(): local key1_=general
++ (trfermikit @ 57): update_config(): local key2_=numberThreads
++ (trfermikit @ 58): update_config(): local value_=16
++ (trfermikit @ 59): update_config(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/update_config.sh /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results general numberThreads 16
++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --arg key1 general --arg key2 numberThreads --arg value 16 '.[$key1][$key2] = $value' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json
++ set +o xtrace
++ (trfermikit @ 64): update_config general alignments /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments
++ (trfermikit @ 56): update_config(): local key1_=general
++ (trfermikit @ 57): update_config(): local key2_=alignments
++ (trfermikit @ 58): update_config(): local value_=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments
++ (trfermikit @ 59): update_config(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/update_config.sh /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results general alignments /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments
++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --arg key1 general --arg key2 alignments --arg value /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments '.[$key1][$key2] = $value' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json
++ set +o xtrace
++ (trfermikit @ 66): update_config makeRegions functionalRegions /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99.exon__five_prime_utr__three_prime_utr
++ (trfermikit @ 56): update_config(): local key1_=makeRegions
++ (trfermikit @ 57): update_config(): local key2_=functionalRegions
++ (trfermikit @ 58): update_config(): local value_=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99.exon__five_prime_utr__three_prime_utr
++ (trfermikit @ 59): update_config(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/update_config.sh /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results makeRegions functionalRegions /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99.exon__five_prime_utr__three_prime_utr
++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --arg key1 makeRegions --arg key2 functionalRegions --arg value /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/genes/Homo_sapiens.GRCh38.99.exon__five_prime_utr__three_prime_utr '.[$key1][$key2] = $value' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json
++ set +o xtrace
++ (trfermikit @ 67): update_config makeRegions minRepeatLength 100
++ (trfermikit @ 56): update_config(): local key1_=makeRegions
++ (trfermikit @ 57): update_config(): local key2_=minRepeatLength
++ (trfermikit @ 58): update_config(): local value_=100
++ (trfermikit @ 59): update_config(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/update_config.sh /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results makeRegions minRepeatLength 100
++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --arg key1 makeRegions --arg key2 minRepeatLength --arg value 100 '.[$key1][$key2] = $value' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json
++ set +o xtrace
++ (trfermikit @ 68): update_config makeRegions genomeBuild hg38
++ (trfermikit @ 56): update_config(): local key1_=makeRegions
++ (trfermikit @ 57): update_config(): local key2_=genomeBuild
++ (trfermikit @ 58): update_config(): local value_=hg38
++ (trfermikit @ 59): update_config(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/update_config.sh /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results makeRegions genomeBuild hg38
++ /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/jq --arg key1 makeRegions --arg key2 genomeBuild --arg value hg38 '.[$key1][$key2] = $value' /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/config.json
++ set +o xtrace
++ (trfermikit @ 70): set -o nounset
++ (trfermikit @ 72): [[ ! -f /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/alignments.cram.crai ]]
++ (trfermikit @ 77): bash /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/prepare_reference.sh --reference /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla --root /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
++ (prepare_reference.sh @ 27): [[ ! -f /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai ]]
++ (prepare_reference.sh @ 31): [[ ! -f /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla.genome ]]
++ (prepare_reference.sh @ 36): [[ ! -f /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla.mmi ]]
++ (trfermikit @ 82): export PYTHONPATH=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities
++ (trfermikit @ 82): PYTHONPATH=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities
++ (trfermikit @ 84): rm --force '/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/fermikit.*'
++ (trfermikit @ 86): BASH_ENV=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/debug.sh
++ (trfermikit @ 86): bash /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/make-regions/make-regions.sh --output /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results --root /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ (trfermikit @ 92): BASH_ENV=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/debug.sh
++ (trfermikit @ 92): bash /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/make-calls/make-calls.sh --output /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results --root /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ (trfermikit @ 109): filter_calls DEL
++ (trfermikit @ 99): filter_calls(): local svtype=DEL
++ (trfermikit @ 101): filter_calls(): BASH_ENV=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/debug.sh
++ (trfermikit @ 101): filter_calls(): bash /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/filter-calls/filter-calls.sh --output /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results --svtype DEL --root /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ (trfermikit @ 110): filter_calls INS
++ (trfermikit @ 99): filter_calls(): local svtype=INS
++ (trfermikit @ 101): filter_calls(): BASH_ENV=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/debug.sh
++ (trfermikit @ 101): filter_calls(): bash /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/filter-calls/filter-calls.sh --output /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results --svtype INS --root /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
 + (test_trfermikit.sh @ 37): regions=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/regions
 + (test_trfermikit.sh @ 39): expected_regions='chr1\t853165\t854156\n'
 ++ (test_trfermikit.sh @ 40): zcat /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/tests/test_functional_regions/results/regions.bed.gz

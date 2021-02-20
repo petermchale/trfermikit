@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+export CYAN='\033[0;36m'
+export RED='\033[0;31m'
+export NO_COLOR='\033[0m'
+
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
@@ -27,8 +31,6 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-
-echo "RED is: ${RED}"
 
 evaluate_calls () {
   local svtype=$1

@@ -12,9 +12,9 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-# export RED='\033[0;31m'
-# export CYAN='\033[0;36m'
-# export NO_COLOR='\033[0m'
+export RED='\033[0;31m'
+export CYAN='\033[0;36m'
+export NO_COLOR='\033[0m'
 
 run_test () {
   local test_=$1
