@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+export CYAN='\033[0;36m'
+export RED='\033[0;31m'
+export NO_COLOR='\033[0m'
+
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
-    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --population ) shift; [[ ! $1 =~ ^- ]] && population=$1;;
     --sample ) shift; [[ ! $1 =~ ^- ]] && sample=$1;;
     --root ) shift; [[ ! $1 =~ ^- ]] && root=$1;;
@@ -34,8 +36,6 @@ evaluate_calls () {
   local svtype=$1
   bash ${root}/evaluate-calls/evaluate.svtype.mantaFlavors.sh \
       --output ${output} \
-      --threads ${number_threads} \
-      --reference ${reference} \
       --population ${population} \
       --sample ${sample} \
       --svtype ${svtype} \

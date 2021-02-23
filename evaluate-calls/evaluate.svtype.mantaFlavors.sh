@@ -5,8 +5,6 @@
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
-    --threads ) shift; [[ ! $1 =~ ^- ]] && number_threads=$1;;
-    --reference ) shift; [[ ! $1 =~ ^- ]] && reference=$1;;
     --population ) shift; [[ ! $1 =~ ^- ]] && population=$1;;
     --sample ) shift; [[ ! $1 =~ ^- ]] && sample=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
@@ -30,6 +28,16 @@ set -o xtrace
 # ${FOO[0]}   element #0 of the FOO array
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+
+#######################################################
+
+read_config () { 
+  local key1_=$1 
+  local key2_=$2
+  ${root}/utilities/read_config.sh ${root} ${output} ${key1_} ${key2_}
+}
+
+reference=$(read_config general reference)
 
 #######################################################
 
@@ -58,10 +66,9 @@ decompose_normalize_findSVs () {
   bash ${root}/filter-calls/decompose_normalize_findSVs.sh \
       --svtype ${svtype} \
       --calls ${input_} \
-      --reference ${reference} \
-      --threads ${number_threads} \
       --parameters ${parameters} \
       --root ${root} \
+      --output ${output} \
     | bash ${root}/utilities/sort_compress_index_calls.sh \
       --calls ${output_} \
       --root ${root}
