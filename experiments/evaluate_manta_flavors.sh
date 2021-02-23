@@ -13,23 +13,34 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
+export CYAN='\033[0;36m'
+export RED='\033[0;31m'
+export NO_COLOR='\033[0m'
+
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
 
 experiments () {
+#  ls -d \
+#    INS/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/* \
+#    optimized_for_DELs/minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/*
   ls -d \
-    INS/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/* \
-    optimized_for_DELs/minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/*
+    exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/* \
+    exons_UTRs/minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/* \
+    genes/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/* \
+    genes/minCoverage_gapOpenPenalties_minUnitigMappingQuality_minUnitigBlockLength/data/* 
 } 
 
 job_count=0
 
 for experiment in $(experiments); do 
-  sbatch \
-    --job-name="${experiment}" \
-    --output="${experiment}/slurm.mantaFlavors.%j.log" \
-    evaluate_manta_flavors_core.sh ${experiment} ${root} 
+  bash ${root}/utilities/info.sh "experiment: $experiment"
+#  sbatch \
+#    --job-name="${experiment}" \
+#    --output="${experiment}/slurm.mantaFlavors.%j.log" \
+#    evaluate_manta_flavors_core.sh ${experiment} ${root} 
 
-  # bash evaluate_manta_flavors_core.sh ${experiment} ${root} 
+  bash evaluate_manta_flavors_core.sh ${experiment} ${root} 
+  exit 1 
 
   ((job_count++))
 done
