@@ -1,0 +1,11 @@
+***************************
+[0;36mtest_that_soft_clipping_is_ignored: [0m
+
+[0;36mhtsbox-pileup calls in region where unitigs are soft-clipped:[0m
+chr9	125985062	.	C	T	1	.	.	GT:AD	1/1:0,1
+chr9	125985207	.	T	C	1	.	.	GT:AD	1/1:0,1
+[0;36mpacbio INSs in region:[0m
+chr9	125985180	.	C	CCAACTTcaccaccaccatcatcctcactatcaccacctacttctgtcaccaccaccaccatcaccatcaccaccaccgccaccaccagcaccatcaccatcaccccatcaacaccatcaccactatcatcattaccatcaT	30.0	PASS	END=125985180;SVTYPE=INS;SVLEN=141;CIPOS=0,0;CIEND=0,0;SVCLASS=STR;CALLSET=pacbio;UNION=PacBio	GT	1/1
+chr9	125985189	.	C	CcatcaccactatcatcattaccatcatcataatcaCcatcaccaccatcaccatcatcgccactatcaccaccatcaccatcatcaccactaccaccaccatcactatcatcattatcctcactactatcatcaccatcaccatcgccaccaccatcaccatcaccactatcatcattaccatcatcatcaccatcaccaccatcaccatcatcac	30.0	PASS	END=125985189;SVTYPE=INS;SVLEN=216;CIPOS=0,0;CIEND=0,0;SVCLASS=TandemRepeat;CALLSET=pacbio;UNION=PacBio,Illumina	GT	1/1
+[0;36mmanta INSs in region:[0m
+chr9	125985168	MantaINS:0:1299:1299:0:0:0	C	CCACCACCATCACCAACTTCACCACCACCATCATCCTCACTATCACCACCTACTTCTGTCACCACCACCACCATCACCATCACCACCACCGCCACAACCAGCACCATCACCATCACCCCATCAACACCATCACCACTATCATCATTACCATCATCATCATCACCATCACCACTATCATCATTACCATCATCATAATCACCATCACCACCATCACCATCATCGCCACTATCACCACCATCACCATCATCACCACTACCACCACCATCACTATCATCATTATCCTCACTACTATCATCACCATCACCATCGCCACCACCATCACCATCACCACTATCATCATTACCATCATCATCACCAT	999	PASS	END=125985168;SVTYPE=INS;SVLEN=357;CIGAR=1M357I;CIPOS=0,14;HOMLEN=14;HOMSEQ=CACCACCATCACCA	GT:FT:GQ:PL:PR:SR	1/1:PASS:174:999,177,0:4,24:0,56

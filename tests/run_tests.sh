@@ -24,7 +24,12 @@ run_test () {
     2> ${test_directory_}/test_trfermikit.log
 }
 
-run_test calls 
-run_test functional_regions 
+#run_test calls 
+#run_test functional_regions 
 
-cat test_calls/expected_vs_observed.txt test_functional_regions/expected_vs_observed.txt | less -R 
+bash test_that_soft_clipping_is_ignored/run_test.sh > test_that_soft_clipping_is_ignored/expected_vs_observed.txt 2>&1
+
+cat test_calls/expected_vs_observed.txt \
+    test_functional_regions/expected_vs_observed.txt \
+    test_that_soft_clipping_is_ignored/expected_vs_observed.txt \
+  | less -R 
