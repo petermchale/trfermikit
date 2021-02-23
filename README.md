@@ -121,7 +121,7 @@ The parameter configuration used to make the discoveries appear in the results d
 By default, the pipeline takes about 2 hours (assuming a 70X genome), 
 mainly because the search is confined to tandem repeats with total lengths larger than 100bp
 (see the `min-repeat-length` option). 
-Long-read sequencing data tell  us that such tandem repeats harbor most of the 
+[Long-read sequencing data](images/How_fast_is_trfermikit.png) tell  us that such tandem repeats harbor most of the 
 tandem-repeat-associated DELs larger than 50bp. 
 
 
