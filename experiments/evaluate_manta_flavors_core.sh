@@ -32,8 +32,6 @@ number_threads="16"
 
 bash ${root}/evaluate-calls/evaluate.mantaFlavors.sh \
     --output ${experiment} \
-    --threads ${number_threads} \
-    --reference ${reference} \
     --population ${population} \
     --sample ${sample} \
     --root ${root} \
