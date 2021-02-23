@@ -34,13 +34,13 @@ job_count=0
 
 for experiment in $(experiments); do 
   bash ${root}/utilities/info.sh "experiment: $experiment"
-#  sbatch \
-#    --job-name="${experiment}" \
-#    --output="${experiment}/slurm.mantaFlavors.%j.log" \
-#    evaluate_manta_flavors_core.sh ${experiment} ${root} 
 
-  bash evaluate_manta_flavors_core.sh ${experiment} ${root} 
-  exit 1 
+  sbatch \
+    --job-name="${experiment}" \
+    --output="${experiment}/slurm.mantaFlavors.%j.log" \
+    evaluate_manta_flavors_core.sh ${experiment} ${root} 
+
+  # bash evaluate_manta_flavors_core.sh ${experiment} ${root} 
 
   ((job_count++))
 done
