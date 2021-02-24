@@ -60,8 +60,11 @@ regions="${output}/regions"
   ${root}/bin/samtools fastq |
   ${root}/bin/bgzip --stdout \
   > ${regions}.fq.gz 
+
 # NOTE: the above code pulls down unmapped reads with RNAME and POS contained in ${regions}.bed.gz,
 # as can be checked by running "samtools view -h ${alignments}.cram ${region} | samtools view -f 4"
+# This happens because the SAM spec dictates that unmapped reads take the RNAME and POS of their mapped mate: 
+# Section 2.4.1 of https://samtools.github.io/hts-specs/SAMv1.pdf
 
 # generate Makefile for unitig assembly
 # https://github.com/lh3/fermikit
