@@ -38,6 +38,8 @@ if [[ ${calls_name} == "pacbio" ]]; then
   calls="${output}/pacbioCalls.decomposed.normalized.${svtype}"
 elif [[ ${calls_name} == "trfermikit" ]]; then 
   calls="${output}/fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned"
+elif [[ ${calls_name} == "trfermikit_TP" ]]; then 
+  calls="${output}/truvari-${svtype}-pacbio-trfermikit.unitigSupport.thinned/tp-call"
 elif [[ ${calls_name} == "manta" ]]; then 
   calls="${output}/mantaCalls.decomposed.normalized.${svtype}"
 else
@@ -55,8 +57,18 @@ pacbio_covered_regions () {
     sort --version-sort -k1,1 -k2,2
 } 
 
+calls_file () {
+  if [[ -f ${calls}.vcf.gz ]]; then 
+    echo ${calls}.vcf.gz
+  elif [[ -f ${calls}.vcf ]]; then
+    echo ${calls}.vcf
+  else 
+    echo -e "${RED}Neither ${calls}.vcf.gz nor ${calls}.vcf exists!${NO_COLOR}" >&2
+  fi 
+}
+
 ${root}/bin/bedtools intersect \
-    -a ${calls}.vcf.gz \
+    -a $(calls_file) \
     -b <(pacbio_covered_regions) \
     -wa -u -f 1 -header \
   | python ${root}/utilities/compute_sv_lengths.py --calls stdin 
