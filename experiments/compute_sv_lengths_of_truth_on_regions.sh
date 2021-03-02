@@ -42,6 +42,6 @@ pacbio_covered_regions () {
 ${root}/bin/bedtools intersect \
     -a ${pacbio_calls_decomposed_normalized_svtype}.vcf.gz \
     -b <(pacbio_covered_regions) \
-    -wa -u -f 1 \
+    -wa -u -f 1 -header \
   | python ${root}/utilities/compute_sv_lengths.py --calls stdin 
 
