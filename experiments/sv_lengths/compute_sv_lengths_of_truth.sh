@@ -20,9 +20,9 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 for regions in all_regions regions_intersecting_genes regions_intersecting_exons_and_UTRs; do
   if [[ ${regions} == "all_regions" ]]; then 
     directory="INS"
-  elif [[ ${regions} == "regions_intersecting_genes"]]
+  elif [[ ${regions} == "regions_intersecting_genes"]]; then
     directory="genes"
-  elif [[ ${regions} == "regions_intersecting_exons_and_UTRs"]]
+  elif [[ ${regions} == "regions_intersecting_exons_and_UTRs"]]; then
     directory="exons_UTRs"
   else
     echo -e "${RED}${regions} is invalid${NO_COLOR}" >&2
