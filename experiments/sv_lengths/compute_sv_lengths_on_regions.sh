@@ -5,14 +5,12 @@
 while [[ "$1" =~ ^- ]]; do 
   case $1 in
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
+    --calls-name ) shift; [[ ! $1 =~ ^- ]] && calls_name=$1;;
+    --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
   esac 
   shift
 done
-
-export CYAN='\033[0;36m'
-export RED='\033[0;31m'
-export NO_COLOR='\033[0m'
 
 set -o errexit
 set -o pipefail
@@ -34,10 +32,17 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
 
-svtype="DEL"
 sample="HG00514"
 
-pacbio_calls_decomposed_normalized_svtype="${output}/pacbioCalls.decomposed.normalized.${svtype}"
+if [[ ${calls_name} == "pacbio" ]]; then 
+  calls="${output}/pacbioCalls.decomposed.normalized.${svtype}"
+elif [[ ${calls_name} == "trfermikit" ]]; then 
+  calls="${output}/fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned"
+elif [[ ${calls_name} == "manta" ]]; then 
+  calls="${output}/mantaCalls.decomposed.normalized.${svtype}"
+else
+  echo -e "${RED}${calls_name} is invalid${NO_COLOR}" >&2
+fi
 
 pacbio_covered_regions () { 
   local pacbio_covered_regions_on_h0_="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/${sample}.h0.covered.sorted"
@@ -51,7 +56,7 @@ pacbio_covered_regions () {
 } 
 
 ${root}/bin/bedtools intersect \
-    -a ${pacbio_calls_decomposed_normalized_svtype}.vcf.gz \
+    -a ${calls}.vcf.gz \
     -b <(pacbio_covered_regions) \
     -wa -u -f 1 -header \
   | python ${root}/utilities/compute_sv_lengths.py --calls stdin 
