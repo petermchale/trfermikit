@@ -40,6 +40,10 @@ elif [[ ${calls_name} == "trfermikit" ]]; then
   calls="${output}/fermikit.raw.decomposed.normalized.${svtype}.unitigSupport.thinned"
 elif [[ ${calls_name} == "trfermikit_TP" ]]; then 
   calls="${output}/truvari-${svtype}-pacbio-trfermikit.unitigSupport.thinned/tp-call"
+elif [[ ${calls_name} == "trfermikit_FP" ]]; then 
+  calls="${output}/truvari-${svtype}-pacbio-trfermikit.unitigSupport.thinned/fp"
+elif [[ ${calls_name} == "trfermikit_FN" ]]; then 
+  calls="${output}/truvari-${svtype}-pacbio-trfermikit.unitigSupport.thinned/fn"
 elif [[ ${calls_name} == "manta" ]]; then 
   calls="${output}/mantaCalls.decomposed.normalized.${svtype}"
 else
