@@ -19,7 +19,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 svtype="DEL"
 
-for calls_name in pacbio trfermikit trfermikit-TP manta; do
+for calls_name in pacbio trfermikit trfermikit_TP manta; do
   for regions in all_regions regions_intersecting_genes regions_intersecting_exons_and_UTRs; do
     if [[ ${regions} == "all_regions" ]]; then 
       directory="INS"
