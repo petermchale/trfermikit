@@ -1,3 +1,15 @@
+#!/usr/bin/env bash
+
+# https://devhints.io/bash#miscellaneous
+# put option-fetching before "set -o nounset" so that we can detect flags without arguments
+while [[ "$1" =~ ^- ]]; do 
+  case $1 in
+    --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
+    *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
+  esac 
+  shift
+done
+
 export CYAN='\033[0;36m'
 export RED='\033[0;31m'
 export NO_COLOR='\033[0m'
@@ -22,8 +34,6 @@ root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
 
-# output="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/genes/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12"
-output="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12"
 svtype="DEL"
 sample="HG00514"
 
