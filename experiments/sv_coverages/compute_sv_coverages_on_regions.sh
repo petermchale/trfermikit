@@ -78,7 +78,7 @@ sv_regions () {
       -b <(pacbio_covered_regions) \
       -wa -u -f 1 -header \
     | python ${root}/utilities/compute_sv_coordinates.py --calls stdin 
-    # | ${root}/bin/bedtools slop -i stdin -g ${reference}.genome -b 250
+    | ${root}/bin/bedtools slop -i stdin -g ${reference}.genome -b 200
 }
 
 sv_regions
