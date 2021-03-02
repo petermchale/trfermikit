@@ -2,6 +2,25 @@ from color_text import error, info
 import sys 
 import color_traceback
 
+def coordinates(variant): 
+  REF = variant.REF
+  if len(variant.ALT) > 1:
+    error('There is more than one ALT allele!')
+    error('Please decompose the variant:') 
+    info(str(variant)) 
+    sys.exit(1)
+  ALT = variant.ALT[0]
+  if get_svtype(variant) == 'DEL' and len(ALT) > 1: 
+    error('The ALT allele has more than one base')
+    error('Please normalize (trim and left-align) the variant:')
+    info(str(variant))
+    sys.exit(1)
+  call_start = variant.POS
+  call_end = variant.INFO.get('END')
+  if not call_end:
+    call_end = variant.POS + len(REF) - 1 # VCF 4.2
+  return call_start, call_end
+
 def get_sv_length(variant): 
   if variant.INFO.get('SVLEN'): 
     # pacbio and manta vcf:
