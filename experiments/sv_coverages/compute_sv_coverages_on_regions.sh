@@ -28,6 +28,7 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 root="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit"
+reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla"
 
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
@@ -75,7 +76,8 @@ sv_regions () {
   ${root}/bin/bedtools intersect \
       -a $(calls_file) \
       -b <(pacbio_covered_regions) \
-      -wa -u -f 1 -header 
+      -wa -u -f 1 -header \
+    | ${root}/bin/bedtools slop -i stdin -g ${reference}.genome -b 250
 }
 
 sv_regions
