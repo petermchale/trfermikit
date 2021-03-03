@@ -20,4 +20,4 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 sbatch \
   --job-name="short-reads" \
   --output="slurm.%j.log" \
-  compute_sv_coverages.sh --alignments-name "short reads"
+  compute_sv_coverages.sh --alignments-name "short_reads"
