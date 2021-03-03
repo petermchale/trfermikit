@@ -45,10 +45,10 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
     job="sv_coverages.${alignments_name}.${regions}.${svtype}.${calls_name}"
     mkdir --parents ${job}
 
-    # sbatch \
-    #   --job-name="${job}" \
-    #   --output="${job_path}/${job}.log" \
-    bash compute_sv_coverages_on_regions.sh \
+    sbatch \
+      --job-name="${job}" \
+      --output="${job}/${job}.log" \
+      compute_sv_coverages_on_regions.sh \
         --output ${output} \
         --svtype ${svtype} \
         --calls-name ${calls_name} \
