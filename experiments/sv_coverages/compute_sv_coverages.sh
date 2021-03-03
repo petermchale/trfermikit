@@ -18,6 +18,7 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 svtype="DEL"
+alignments_name="unitigs"
 
 for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
   for regions in regions_intersecting_exons_and_UTRs regions_intersecting_genes all_regions; do
@@ -34,7 +35,8 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
     bash compute_sv_coverages_on_regions.sh \
         --output ${output} \
         --svtype ${svtype} \
-        --calls-name ${calls_name} 
+        --calls-name ${calls_name} \
+        --alignments-name ${alignments_name} \
       > sv_coverages.${regions}.${svtype}.${calls_name}.csv
     ls -lt tmp* 
     exit 1

@@ -7,6 +7,7 @@ while [[ "$1" =~ ^- ]]; do
     --output ) shift; [[ ! $1 =~ ^- ]] && output=$1;;
     --calls-name ) shift; [[ ! $1 =~ ^- ]] && calls_name=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
+    --alignments-name ) shift; [[ ! $1 =~ ^- ]] && alignments_name=$1;;
     *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
   esac 
   shift
@@ -35,7 +36,14 @@ export PYTHONPATH="${root}/utilities"
 
 population="CHS"
 sample="HG00514"
-alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
+
+if [[ ${alignments_name} == "short_reads" ]]; then 
+  alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage.cram"
+elif [[ ${alignments_name} == "unitigs" ]]; then
+  alignments="${output}/fermikit.srt.bam"
+else
+  echo -e "${RED}${alignments_name} is invalid${NO_COLOR}" >&2
+fi 
 
 if [[ ${calls_name} == "pacbio" ]]; then 
   calls="${output}/pacbioCalls.decomposed.normalized.${svtype}"
@@ -97,7 +105,7 @@ ${root}/bin/mosdepth \
   --by <(sv_regions) \
   --fasta ${reference}.fa \
   ${mosdepth_prefix} \
-  ${alignments}.cram
+  ${alignments}
 
 zcat ${mosdepth_prefix}.regions.bed.gz \
   | awk --assign OFS=',' '{ print $1, $2, $3, $4 }'
