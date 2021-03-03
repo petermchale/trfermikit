@@ -99,7 +99,11 @@ ${root}/bin/mosdepth \
   ${mosdepth_prefix} \
   ${alignments}.cram
 
-zcat ${mosdepth_prefix}.regions.bed.gz 
+zcat ${mosdepth_prefix}.regions.bed.gz \
+  | awk --assign OFS=',' '{ print $1, $2, $3, $4 }'
+
+
+
 
 
 

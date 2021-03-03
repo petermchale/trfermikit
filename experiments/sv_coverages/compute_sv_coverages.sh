@@ -36,6 +36,7 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
         --svtype ${svtype} \
         --calls-name ${calls_name} 
       > sv_coverages.${regions}.${svtype}.${calls_name}.csv
+    ls -lt tmp* 
     exit 1
   done
 done 
