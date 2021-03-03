@@ -46,10 +46,10 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
     job_path="$PWD/${job}"
     mkdir --parents ${job_path}
 
-    sbatch \
-      --job-name="${job}" \
-      --output="${job_path}/${job}.log" \
-      compute_sv_coverages_on_regions.sh \
+    # sbatch \
+    #   --job-name="${job}" \
+    #   --output="${job_path}/${job}.log" \
+    bash compute_sv_coverages_on_regions.sh \
         --output ${output} \
         --svtype ${svtype} \
         --calls-name ${calls_name} \
