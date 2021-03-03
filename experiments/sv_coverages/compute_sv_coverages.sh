@@ -1,10 +1,3 @@
-#!/usr/bin/env bash
-#SBATCH --time=0:30:00
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=40g # sacct -o reqmem,maxrss,averss,elapsed -j JOBID
-#SBATCH --account=ucgd-rw
-#SBATCH --partition=ucgd-rw
-
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
 while [[ "$1" =~ ^- ]]; do 
@@ -48,11 +41,19 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
       echo -e "${RED}${regions} is invalid${NO_COLOR}" >&2
     fi
     output="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/${directory}/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12"
-    bash compute_sv_coverages_on_regions.sh \
+
+    job="sv_coverages.${alignments_name}.${regions}.${svtype}.${calls_name}"
+    job_path="$PWD/${job}"
+    mkdir --parents ${job_path}
+
+    sbatch \
+      --job-name="${job}" \
+      --output="${job_path}/${job}.log" \
+      compute_sv_coverages_on_regions.sh \
         --output ${output} \
         --svtype ${svtype} \
         --calls-name ${calls_name} \
         --alignments-name ${alignments_name} \
-      > sv_coverages.${regions}.${svtype}.${calls_name}.${alignments_name}.csv
+        --job-path ${job_path}
   done
 done 

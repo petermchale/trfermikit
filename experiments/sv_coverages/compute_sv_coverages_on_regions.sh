@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#SBATCH --time=1:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=40g # sacct -o reqmem,maxrss,averss,elapsed -j JOBID
+#SBATCH --account=ucgd-rw
+#SBATCH --partition=ucgd-rw
 
 # https://devhints.io/bash#miscellaneous
 # put option-fetching before "set -o nounset" so that we can detect flags without arguments
@@ -8,6 +13,7 @@ while [[ "$1" =~ ^- ]]; do
     --calls-name ) shift; [[ ! $1 =~ ^- ]] && calls_name=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --alignments-name ) shift; [[ ! $1 =~ ^- ]] && alignments_name=$1;;
+    --job-path ) shift; [[ ! $1 =~ ^- ]] && job_path=$1;;
     *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
   esac 
   shift
@@ -91,7 +97,7 @@ sv_regions () {
     | ${root}/bin/bedtools slop -i stdin -g ${reference}.genome -b 200
 }
 
-scratch=$(mktemp --tmpdir=${PWD} --directory)
+scratch=$(mktemp --tmpdir=${job_path} --directory)
 clean_up () {
   rm --recursive --force "${scratch}"
 }
@@ -108,7 +114,8 @@ ${root}/bin/mosdepth \
   ${alignments}
 
 zcat ${mosdepth_prefix}.regions.bed.gz \
-  | awk --assign OFS=',' '{ print $1, $2, $3, $4 }'
+  | awk --assign OFS=',' '{ print $1, $2, $3, $4 }' \
+  > ${job_path}.csv
 
 
 
