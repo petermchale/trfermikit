@@ -17,6 +17,6 @@ set -o xtrace
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
-# bash compute_sv_coverages.sh --alignments-name "short_reads"
-bash compute_sv_coverages.sh --alignments-name "unitigs"
+bash compute_sv_coverages.sh --alignments-name "short_reads"
+# bash compute_sv_coverages.sh --alignments-name "unitigs"
   
