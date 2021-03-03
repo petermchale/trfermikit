@@ -37,8 +37,7 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
         --svtype ${svtype} \
         --calls-name ${calls_name} \
         --alignments-name ${alignments_name} \
-      > sv_coverages.${regions}.${svtype}.${calls_name}.csv
-    ls -lt tmp* 
+      > sv_coverages.${regions}.${svtype}.${calls_name}.${alignments_name}.csv
     exit 1
   done
 done 
