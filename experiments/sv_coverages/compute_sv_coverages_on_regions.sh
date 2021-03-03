@@ -13,7 +13,7 @@ while [[ "$1" =~ ^- ]]; do
     --calls-name ) shift; [[ ! $1 =~ ^- ]] && calls_name=$1;;
     --svtype ) shift; [[ ! $1 =~ ^- ]] && svtype=$1;;
     --alignments-name ) shift; [[ ! $1 =~ ^- ]] && alignments_name=$1;;
-    --job-path ) shift; [[ ! $1 =~ ^- ]] && job_path=$1;;
+    --job ) shift; [[ ! $1 =~ ^- ]] && job=$1;;
     *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
   esac 
   shift
@@ -97,7 +97,7 @@ sv_regions () {
     | ${root}/bin/bedtools slop -i stdin -g ${reference}.genome -b 200
 }
 
-scratch=$(mktemp --tmpdir=${job_path} --directory)
+scratch=$(mktemp --tmpdir=${job} --directory)
 clean_up () {
   rm --recursive --force "${scratch}"
 }
@@ -115,7 +115,7 @@ ${root}/bin/mosdepth \
 
 zcat ${mosdepth_prefix}.regions.bed.gz \
   | awk --assign OFS=',' '{ print $1, $2, $3, $4 }' \
-  > ${job_path}.csv
+  > ${job}/${job}.csv
 
 
 

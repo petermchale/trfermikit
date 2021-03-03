@@ -43,8 +43,7 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
     output="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/${directory}/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12"
 
     job="sv_coverages.${alignments_name}.${regions}.${svtype}.${calls_name}"
-    job_path="$PWD/${job}"
-    mkdir --parents ${job_path}
+    mkdir --parents ${job}
 
     # sbatch \
     #   --job-name="${job}" \
@@ -54,6 +53,6 @@ for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
         --svtype ${svtype} \
         --calls-name ${calls_name} \
         --alignments-name ${alignments_name} \
-        --job-path ${job_path}
+        --job ${job}
   done
 done 
