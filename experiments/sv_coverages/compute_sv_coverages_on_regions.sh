@@ -33,7 +33,9 @@ reference="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GR
 # https://stackoverflow.com/a/43476575/6674256
 export PYTHONPATH="${root}/utilities"
 
+population="CHS"
 sample="HG00514"
+alignments="/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/${population}/${sample}/high_cov_alignment/${sample}.alt_bwamem_GRCh38DH.20150715.${population}.high_coverage"
 
 if [[ ${calls_name} == "pacbio" ]]; then 
   calls="${output}/pacbioCalls.decomposed.normalized.${svtype}"
@@ -81,6 +83,24 @@ sv_regions () {
     | ${root}/bin/bedtools slop -i stdin -g ${reference}.genome -b 200
 }
 
-sv_regions
+scratch=$(mktemp --tmpdir=${PWD} --directory)
+clean_up () {
+  rm --recursive --force "${scratch}"
+}
+trap clean_up EXIT
+
+mosdepth_prefix="${scratch}/mosdepth.coverage"
+${root}/bin/mosdepth \
+  --no-per-base \
+  --fast-mode \
+  --threads 16 \
+  --by <(sv_regions) \
+  --fasta ${reference}.fa \
+  ${mosdepth_prefix} \
+  ${alignments}.cram
+
+zcat ${mosdepth_prefix}.regions.bed.gz 
+
+
 
 
