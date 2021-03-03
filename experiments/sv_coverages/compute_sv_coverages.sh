@@ -1,3 +1,20 @@
+#!/usr/bin/env bash
+#SBATCH --time=0:30:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=40g # sacct -o reqmem,maxrss,averss,elapsed -j JOBID
+#SBATCH --account=ucgd-rw
+#SBATCH --partition=ucgd-rw
+
+# https://devhints.io/bash#miscellaneous
+# put option-fetching before "set -o nounset" so that we can detect flags without arguments
+while [[ "$1" =~ ^- ]]; do 
+  case $1 in
+    --alignments-name ) shift; [[ ! $1 =~ ^- ]] && alignments_name=$1;;
+    *) echo -e "${RED}$0: $1 is an invalid flag${NO_COLOR}" >&2; exit 1;;
+  esac 
+  shift
+done
+
 export CYAN='\033[0;36m'
 export RED='\033[0;31m'
 export NO_COLOR='\033[0m'
@@ -18,7 +35,6 @@ set -o xtrace
 PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 svtype="DEL"
-alignments_name="unitigs"
 
 for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
   for regions in regions_intersecting_exons_and_UTRs regions_intersecting_genes all_regions; do
