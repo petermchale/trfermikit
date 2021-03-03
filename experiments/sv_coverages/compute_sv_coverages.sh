@@ -20,7 +20,7 @@ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 svtype="DEL"
 
 for calls_name in trfermikit_TP trfermikit_FP trfermikit_FN; do
-  for regions in all_regions regions_intersecting_genes regions_intersecting_exons_and_UTRs; do
+  for regions in regions_intersecting_exons_and_UTRs regions_intersecting_genes all_regions; do
     if [[ ${regions} == "all_regions" ]]; then 
       directory="INS"
     elif [[ ${regions} == "regions_intersecting_genes" ]]; then
