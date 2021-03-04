@@ -1,0 +1,39 @@
++ PS4='+ (${BASH_SOURCE[0]##*/} @ ${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
++ (slurm_script @ 37): root=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit
++ (slurm_script @ 38): reference=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla
++ (slurm_script @ 41): export PYTHONPATH=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities
++ (slurm_script @ 41): PYTHONPATH=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities
++ (slurm_script @ 43): population=CHS
++ (slurm_script @ 44): sample=HG00514
++ (slurm_script @ 46): [[ short_reads == \s\h\o\r\t\_\r\e\a\d\s ]]
++ (slurm_script @ 47): alignments=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/CHS/HG00514/high_cov_alignment/HG00514.alt_bwamem_GRCh38DH.20150715.CHS.high_coverage.cram
++ (slurm_script @ 54): [[ trfermikit_FN == \p\a\c\b\i\o ]]
++ (slurm_script @ 56): [[ trfermikit_FN == \t\r\f\e\r\m\i\k\i\t ]]
++ (slurm_script @ 58): [[ trfermikit_FN == \t\r\f\e\r\m\i\k\i\t\_\T\P ]]
++ (slurm_script @ 60): [[ trfermikit_FN == \t\r\f\e\r\m\i\k\i\t\_\F\P ]]
++ (slurm_script @ 62): [[ trfermikit_FN == \t\r\f\e\r\m\i\k\i\t\_\F\N ]]
++ (slurm_script @ 63): calls=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12/truvari-DEL-pacbio-trfermikit.unitigSupport.thinned/fn
+++ (slurm_script @ 100): mktemp --tmpdir=sv_coverages.short_reads.regions_intersecting_exons_and_UTRs.DEL.trfermikit_FN --directory
++ (slurm_script @ 100): scratch=sv_coverages.short_reads.regions_intersecting_exons_and_UTRs.DEL.trfermikit_FN/tmp.nKRajlvZMa
++ (slurm_script @ 104): trap clean_up EXIT
++ (slurm_script @ 106): mosdepth_prefix=sv_coverages.short_reads.regions_intersecting_exons_and_UTRs.DEL.trfermikit_FN/tmp.nKRajlvZMa/mosdepth.coverage
++ (slurm_script @ 108): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/mosdepth --no-per-base --fast-mode --threads 16 --by /dev/fd/63 --fasta /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla.fa sv_coverages.short_reads.regions_intersecting_exons_and_UTRs.DEL.trfermikit_FN/tmp.nKRajlvZMa/mosdepth.coverage /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/illumina_crams/ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/hgsv_sv_discovery/data/CHS/HG00514/high_cov_alignment/HG00514.alt_bwamem_GRCh38DH.20150715.CHS.high_coverage.cram
+++ (slurm_script @ 108): sv_regions
+++ (slurm_script @ 96): sv_regions(): python /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/utilities/compute_sv_coordinates.py --calls stdin
+++ (slurm_script @ 97): sv_regions(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/bedtools slop -i stdin -g /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/reference/GRCh38_full_analysis_set_plus_decoy_hla.genome -b 200
++++ (slurm_script @ 92): sv_regions(): calls_file
++++ (slurm_script @ 82): calls_file(): [[ -f /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12/truvari-DEL-pacbio-trfermikit.unitigSupport.thinned/fn.vcf.gz ]]
++++ (slurm_script @ 84): calls_file(): [[ -f /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12/truvari-DEL-pacbio-trfermikit.unitigSupport.thinned/fn.vcf ]]
++++ (slurm_script @ 85): calls_file(): echo /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12/truvari-DEL-pacbio-trfermikit.unitigSupport.thinned/fn.vcf
+++ (slurm_script @ 92): sv_regions(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/bedtools intersect -a /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12/truvari-DEL-pacbio-trfermikit.unitigSupport.thinned/fn.vcf -b /dev/fd/63 -wa -u -f 1 -header
++++ (slurm_script @ 92): sv_regions(): pacbio_covered_regions
++++ (slurm_script @ 71): pacbio_covered_regions(): local pacbio_covered_regions_on_h0_=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/HG00514.h0.covered.sorted
++++ (slurm_script @ 72): pacbio_covered_regions(): local pacbio_covered_regions_on_h1_=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/HG00514.h1.covered.sorted
++++ (slurm_script @ 74): pacbio_covered_regions(): local regions_=/scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12/regions
++++ (slurm_script @ 76): pacbio_covered_regions(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/bedtools intersect -a /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/experiments/exons_UTRs/singleBaseMatchReward_singleBaseMismatchPenalty_gapOpenPenalties_gapExtensionPenalties/data/gapExtensionPenalties=1,0_gapOpenPenalties=16,41_singleBaseMatchReward=10_singleBaseMismatchPenalty=12/regions.bed.gz -b /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/HG00514.h0.covered.sorted.bed -wa -u -f 1
++++ (slurm_script @ 77): pacbio_covered_regions(): /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/analysis/locally_assemble_short_reads/trfermikit/bin/bedtools intersect -a stdin -b /scratch/ucgd/lustre-work/quinlan/u6018199/chaisson_2019/pacbio_local_assemblies/HG00514.h1.covered.sorted.bed -wa -u -f 1
++++ (slurm_script @ 78): pacbio_covered_regions(): sort --version-sort -k1,1 -k2,2
++ (slurm_script @ 117): awk --assign OFS=, '{ print $1, $2, $3, $4 }'
++ (slurm_script @ 116): zcat sv_coverages.short_reads.regions_intersecting_exons_and_UTRs.DEL.trfermikit_FN/tmp.nKRajlvZMa/mosdepth.coverage.regions.bed.gz
++ (slurm_script @ 1): clean_up
++ (slurm_script @ 102): clean_up(): rm --recursive --force sv_coverages.short_reads.regions_intersecting_exons_and_UTRs.DEL.trfermikit_FN/tmp.nKRajlvZMa
