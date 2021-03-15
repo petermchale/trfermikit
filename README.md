@@ -22,12 +22,12 @@ larger than 6bps, known as
 ## <a name="Impact"></a> Impact 
 
 We assessed the performance of trfermikit and manta, in both cases relative to a long-read benchmark callset, on VNTRs. 
-We found that for DELs: [(a)](experiments/paper_figures/TPRs_FDRs/DEL.pdf) trfermikit has better sensitivity-FDR trade-offs than manta
-and [(b)](experiments/paper_figures/manta_complementarity/DEL-manta.pdf) trfermikit is complementary to manta. In the figures, the red circle indicates the default operating point of trfermikit.
+We found that for DELs: [(a)](experiments/paper_figures/TPRs_FDRs/DEL-all_regions.pdf) trfermikit has better sensitivity-FDR trade-offs than manta
+and [(b)](experiments/paper_figures/manta_complementarity/DEL-manta-all_regions.pdf) trfermikit is complementary to manta. In the figures, the red circle indicates the default operating point of trfermikit.
 
-When considering INSs, trfermikit: [(a)](experiments/paper_figures/TPRs_FDRs/INS.pdf) has similar 
+When considering INSs, trfermikit: [(a)](experiments/paper_figures/TPRs_FDRs/INS-all_regions.pdf) has similar 
 sensitivity-FDR trade-offs to manta and 
-[(b)](experiments/paper_figures/manta_complementarity/INS-manta.pdf) does not significantly complement manta. 
+[(b)](experiments/paper_figures/manta_complementarity/INS-manta-all_regions.pdf) does not significantly complement manta. 
 
 **Thus trfermikit is a tool to discover DELs missed by manta in VNTRs.**
 
