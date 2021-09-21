@@ -62,7 +62,7 @@ Only installation on Linux x86_64 is currently supported.
 ## Usage 
 
 Assuming that the path to this directory on your filesystem is 
-`${root}`, usage is: 
+`${root}`, and that the `trfermikit` conda environment has been activated, usage is: 
 
 ```
 PATH="${root}:$PATH"
