@@ -16,5 +16,3 @@ libexec
 *.pyc
 __pycache__
 *.tab.gz
-
-personal.access.token.txt
