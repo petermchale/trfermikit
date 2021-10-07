@@ -2,8 +2,8 @@ import sys
 from cyvcf2 import VCF
 import json 
 
-def count_TP_FP_FN(directory_combined_caller, directory_individual_caller):
-  vcf = VCF(f'{directory_combined_caller}/combined.sorted.vcf.gz')
+def count_TP_FP_FN(directory_combined_caller, type_combined_caller, directory_individual_caller):
+  vcf = VCF(f'{directory_combined_caller}/{type_combined_caller}.sorted.vcf.gz')
 
   TP = 0
   FP = 0
@@ -29,5 +29,6 @@ def count_TP_FP_FN(directory_combined_caller, directory_individual_caller):
 if __name__ == '__main__':
   count_TP_FP_FN(
     directory_combined_caller=sys.argv[1],
-    directory_individual_caller=sys.argv[2]
+    type_combined_caller=sys.argv[2],
+    directory_individual_caller=sys.argv[3]
   )

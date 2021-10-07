@@ -30,7 +30,7 @@ create-callset () {
     2> /dev/null 
 }
 
-manta_intersect_trfermikit () {
+manta-intersect-trfermikit () {
   ${root}/bin/bedtools intersect -header -u -f ${overlap_fraction} -r \
       -a ${VNTR_category_manta}/callset.sorted.vcf.gz \
       -b ${VNTR_category_trfermikit}/callset.sorted.vcf.gz \
@@ -40,7 +40,7 @@ manta_intersect_trfermikit () {
     2> /dev/null 
 }
 
-manta_less_trfermikit () { 
+manta-less-trfermikit () { 
   $root/bin/bedtools subtract -header -A -f ${overlap_fraction} -r \
       -a ${VNTR_category_manta}/callset.sorted.vcf.gz \
       -b ${VNTR_category_trfermikit}/callset.sorted.vcf.gz \
@@ -50,7 +50,7 @@ manta_less_trfermikit () {
     2> /dev/null 
 }
 
-trfermikit_less_manta () { 
+trfermikit-less-manta () { 
   $root/bin/bedtools subtract -header -A -f ${overlap_fraction} -r \
       -a ${VNTR_category_trfermikit}/callset.sorted.vcf.gz \
       -b ${VNTR_category_manta}/callset.sorted.vcf.gz \
@@ -61,20 +61,21 @@ trfermikit_less_manta () {
     2> /dev/null 
 }
 
-combine-callsets () { 
-  manta_intersect_trfermikit
-  manta_less_trfermikit
-  trfermikit_less_manta
-
+manta-union-trfermikit () { 
   ${root}/bin/bcftools concat --allow-overlaps \
       ${VNTR_category_combined}/manta-intersect-trfermikit.sorted.vcf.gz \
       ${VNTR_category_combined}/manta-less-trfermikit.sorted.vcf.gz \
       ${VNTR_category_combined}/trfermikit-less-manta.sorted.vcf.gz \
     2> /dev/null \
     | ${root}/utilities/sort_compress_index_calls.sh \
-      --calls ${VNTR_category_combined}/combined.sorted \
+      --calls ${VNTR_category_union}/manta-union-trfermikit.sorted \
       --root ${root} \
     2> /dev/null 
+
+  # TODO: remove 
+  rm --force ${VNTR_category_combined}/combined.sorted.vcf.gz*
+  rm --force ${VNTR_category_combined}/counts.json
+  
 }
 
 # use a glob pattern to locate the sample directories:  
@@ -87,13 +88,24 @@ for path in */data/*; do
     VNTR_category_manta="${path}/truvari-${svtype}-${region_size_range}-pacbio-manta"
     VNTR_category_trfermikit="${path}/truvari-${svtype}-${region_size_range}-pacbio-trfermikit.unitigSupport.thinned"
     VNTR_category_combined="${path}/truvari-${svtype}-${region_size_range}-pacbio-combined"
-
-    mkdir --parents ${VNTR_category_combined}
+    VNTR_category_union="${path}/truvari-${svtype}-${region_size_range}-pacbio-union"
+    VNTR_category_intersection="${path}/truvari-${svtype}-${region_size_range}-pacbio-intersection"
 
     create-callset ${VNTR_category_manta}
     create-callset ${VNTR_category_trfermikit} 
-    combine-callsets 
-    python count-TP-FP-FN.py ${VNTR_category_combined} ${VNTR_category_manta}
+
+    mkdir --parents ${VNTR_category_combined}
+    manta-intersect-trfermikit
+    manta-less-trfermikit
+    trfermikit-less-manta
+
+    mkdir --parents ${VNTR_category_union}
+    manta-union-trfermikit
+    python count-TP-FP-FN.py ${VNTR_category_union} "manta-union-trfermikit" ${VNTR_category_manta}
+
+    mkdir --parents ${VNTR_category_intersection}
+    cp ${VNTR_category_combined}/manta-intersect-trfermikit.sorted.vcf.gz* ${VNTR_category_intersection}
+    python count-TP-FP-FN.py ${VNTR_category_intersection} "manta-intersect-trfermikit" ${VNTR_category_manta}
   done
 done 
 
