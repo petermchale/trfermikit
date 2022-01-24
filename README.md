@@ -1,4 +1,4 @@
-## Paper 
+## trfermikit 
 
 If you use trfermikit, please cite the paper: 
 https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btab805/6448210
